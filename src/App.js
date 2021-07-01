@@ -9,6 +9,12 @@ function App() {
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
 
+  const loadHandpose = async () => {
+    const net = await handpose.load()
+    console.log('Handpose model loaded.')
+  }
+
+  loadHandpose();
 
   return (
     <div className="App">
