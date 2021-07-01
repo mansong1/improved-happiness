@@ -45,7 +45,7 @@ function App() {
         console.log(hand);
 
         // Draw mesh
-        const ctx = canvasRef.current.getContext("3d");
+        const ctx = canvasRef.current.getContext("2d");
         drawHand(hand, ctx);
       }
   };
