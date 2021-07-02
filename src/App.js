@@ -6,10 +6,17 @@ import Webcam from "react-webcam";
 import './App.css';
 import { drawHand } from "./utilities";
 
+
+import victory from "./gestures/victory.png";
+import thumbsUp from "./gestures/thumbsUp.png";
+
 function App() {
 
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
+
+  const [emoji, setEmoji] = useState(null)
+  const images = {thumbsUp:thumbsUp, victory:victory};
 
   const loadHandpose = async () => {
     const net = await handpose.load();
@@ -27,7 +34,6 @@ function App() {
         webcamRef.current !== null && 
         webcamRef.current.video.readyState === 4  // Check we are receiving data
       ){
-        
           // Get video properties
          const video = webcamRef.current.video;
          const videoWidth = video.videoWidth;
@@ -44,6 +50,28 @@ function App() {
         // Make Detections
         const hand = await net.estimateHands(video);
         console.log(hand);
+
+        if(hand.length > 0){
+          const GE = new fp.GestureEstimator([
+            fp.Gestures.VictoryGesture,
+            fp.Gestures.ThumbsUpGesture,
+          ]);
+
+          const gesture = await GE.estimate(hand[0].landmarks, 4);
+          console.log(gesture.gestures);
+
+          if(gesture.gestures !== undefined && gesture.gestures.length > 0){
+            const confidence = gesture.gestures.map(
+              (prediction)=>prediction.confidence
+            );
+            const maxConfidence = confidence.indexOf(
+              Math.max.apply(null, confidence)
+            );
+
+            setEmoji(gesture.gestures[maxConfidence].name);
+            console.log(emoji);
+          }
+        }
 
         // Draw mesh
         const ctx = canvasRef.current.getContext("2d");
