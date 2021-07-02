@@ -1,4 +1,5 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
+
 import * as tf from "@tensorflow/tfjs";
 import * as fp from "fingerpose";
 import * as handpose from "@tensorflow-models/handpose";
@@ -15,11 +16,11 @@ function App() {
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
   const config = {
-    video: { width: 900, height: 700, fps: 30 }
+    video: { width: 900, height: 720 }
   };
 
   const [emoji, setEmoji] = useState(null)
-  const images = {thumbs_up:thumbs_up, victory:victory};
+  const images = { thumbs_up: thumbs_up, victory: victory };
 
   const loadHandpose = async () => {
     const net = await handpose.load();
@@ -28,12 +29,12 @@ function App() {
     // Loop and detect hands
     setInterval(() => {
       detect(net);
-    }, 100)
+    }, 10)
   };
   
   const detect = async (net) => {
     if (
-        typeof webcamRef.current !=='undefined' && 
+        typeof webcamRef.current !== "undefined" && 
         webcamRef.current !== null && 
         webcamRef.current.video.readyState === 4  // Check we are receiving data
       ){
@@ -52,7 +53,7 @@ function App() {
 
         // Make Detections
         const hand = await net.estimateHands(video);
-        console.log(hand);
+        //console.log(hand);
 
         if(hand.length > 0){
           const GE = new fp.GestureEstimator([
@@ -62,7 +63,7 @@ function App() {
           
           // using a minimum confidence of 7.5 (out of 10)
           const gesture = await GE.estimate(hand[0].landmarks, 7.5);
-          console.log(gesture.gestures);
+          //console.log(gesture.gestures);
 
           if(gesture.gestures !== undefined && gesture.gestures.length > 0){
             const confidence = gesture.gestures.map(
@@ -83,25 +84,26 @@ function App() {
       }
   };
 
-  loadHandpose();
+  useEffect(() => {loadHandpose()}, []);
 
   return (
     <div className="App">
       <header className="App-header">
-        <Webcam ref={webcamRef} 
+        <Webcam
+          ref={webcamRef}
           style={{
             position: "absolute",
             marginLeft: "auto",
             marginRight: "auto",
-            left:0,
-            right:0,
+            left: 0,
+            right: 0,
             textAlign: "center",
-            zIndex: 9,
+            zindex: 9,
             width: config.video.width,
             height: config.video.height,
           }}
         />
-      
+
         <canvas
           ref={canvasRef}
           style={{
@@ -111,7 +113,7 @@ function App() {
             left: 0,
             right: 0,
             textAlign: "center",
-            zIndex: 9,
+            zindex: 9,
             width: config.video.width,
             height: config.video.height,
           }}
@@ -123,8 +125,8 @@ function App() {
               position: "absolute",
               marginLeft: "auto",
               marginRight: "auto",
-              left: 400,
-              bottom: 500,
+              left: 800,
+              bottom: 650,
               right: 0,
               textAlign: "center",
               height: 100,
@@ -133,6 +135,7 @@ function App() {
         ) : (
           ""
         )}
+
       </header>
     </div>
   );
