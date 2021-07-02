@@ -14,6 +14,9 @@ function App() {
 
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
+  const config = {
+    video: { width: 900, height: 700, fps: 30 }
+  };
 
   const [emoji, setEmoji] = useState(null)
   const images = {thumbs_up:thumbs_up, victory:victory};
@@ -56,8 +59,9 @@ function App() {
             fp.Gestures.VictoryGesture,
             fp.Gestures.ThumbsUpGesture,
           ]);
-
-          const gesture = await GE.estimate(hand[0].landmarks, 4);
+          
+          // using a minimum confidence of 7.5 (out of 10)
+          const gesture = await GE.estimate(hand[0].landmarks, 7.5);
           console.log(gesture.gestures);
 
           if(gesture.gestures !== undefined && gesture.gestures.length > 0){
@@ -93,8 +97,8 @@ function App() {
             right:0,
             textAlign: "center",
             zIndex: 9,
-            width: 640,
-            height: 480,
+            width: config.video.width,
+            height: config.video.height,
           }}
         />
       
@@ -108,8 +112,8 @@ function App() {
             right: 0,
             textAlign: "center",
             zIndex: 9,
-            width: 640,
-            height: 480,
+            width: config.video.width,
+            height: config.video.height,
           }}
         />
         {emoji !== null ? (
