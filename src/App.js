@@ -8,7 +8,7 @@ import { drawHand } from "./utilities";
 
 
 import victory from "./gestures/victory.png";
-import thumbsUp from "./gestures/thumbsUp.png";
+import thumbs_up from "./gestures/thumbs_up.png";
 
 function App() {
 
@@ -16,7 +16,7 @@ function App() {
   const canvasRef = useRef(null);
 
   const [emoji, setEmoji] = useState(null)
-  const images = {thumbsUp:thumbsUp, victory:victory};
+  const images = {thumbs_up:thumbs_up, victory:victory};
 
   const loadHandpose = async () => {
     const net = await handpose.load();
@@ -93,8 +93,8 @@ function App() {
             right:0,
             textAlign: "center",
             zIndex: 9,
-            width: 800,
-            height: 600,
+            width: 640,
+            height: 480,
           }}
         />
       
@@ -108,10 +108,27 @@ function App() {
             right: 0,
             textAlign: "center",
             zIndex: 9,
-            width: 800,
-            height: 600,
+            width: 640,
+            height: 480,
           }}
         />
+        {emoji !== null ? (
+          <img
+            src={images[emoji]}
+            style={{
+              position: "absolute",
+              marginLeft: "auto",
+              marginRight: "auto",
+              left: 400,
+              bottom: 500,
+              right: 0,
+              textAlign: "center",
+              height: 100,
+            }}
+          />
+        ) : (
+          ""
+        )}
       </header>
     </div>
   );
