@@ -10,6 +10,7 @@ import { drawHand } from "./utilities";
 
 import victory from "./emojis/victory.png";
 import thumbs_up from "./emojis/thumbs_up.png";
+import thumbs_down from "./emojis/thumbs_down.png";
 
 function App() {
 
