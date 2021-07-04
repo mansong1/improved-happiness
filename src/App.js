@@ -20,7 +20,10 @@ function App() {
   };
 
   const [emoji, setEmoji] = useState(null)
-  const images = { thumbs_up: thumbs_up, victory: victory };
+  const images = {  thumbs_up: thumbs_up, 
+                    victory: victory, 
+                    thumbs_down: thumbs_down, 
+                  };
 
   const loadHandpose = async () => {
     const net = await handpose.load();
