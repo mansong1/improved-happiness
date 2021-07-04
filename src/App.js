@@ -8,8 +8,8 @@ import './App.css';
 import { drawHand } from "./utilities";
 
 
-import victory from "./gestures/victory.png";
-import thumbs_up from "./gestures/thumbs_up.png";
+import victory from "./emojis/victory.png";
+import thumbs_up from "./emojis/thumbs_up.png";
 
 function App() {
 
