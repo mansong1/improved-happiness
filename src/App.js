@@ -72,6 +72,9 @@ function App() {
             fp.Gestures.VictoryGesture,
             fp.Gestures.ThumbsUpGesture,
             customgestures.ThumbsDownGesture,
+            customgestures.OkayGesture,
+            customgestures.HelloGesture,
+            customgestures.IndexGesture,
           ]);
           
           // using a minimum confidence of 7.5 (out of 10)
