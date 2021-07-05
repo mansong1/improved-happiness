@@ -62,7 +62,7 @@ function App() {
           ]);
           
           // using a minimum confidence of 7.5 (out of 10)
-          const gesture = await GE.estimate(hand[0].landmarks, 7.5);
+          const gesture = await GE.estimate(hand[0].landmarks, 8);
           //console.log(gesture.gestures);
 
           if(gesture.gestures !== undefined && gesture.gestures.length > 0){
@@ -121,6 +121,7 @@ function App() {
         {emoji !== null ? (
           <img
             src={images[emoji]}
+            alt=""
             style={{
               position: "absolute",
               marginLeft: "auto",
