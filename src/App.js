@@ -7,9 +7,9 @@ import Webcam from "react-webcam";
 import './App.css';
 import { drawHand } from "./utilities";
 
-
-import victory from "./gestures/victory.png";
-import thumbs_up from "./gestures/thumbs_up.png";
+import victory from "./emojis/victory.png";
+import thumbs_up from "./emojis/thumbs_up.png";
+import thumbs_down from "./emojis/thumbs_down.png";
 
 function App() {
 
@@ -20,7 +20,10 @@ function App() {
   };
 
   const [emoji, setEmoji] = useState(null)
-  const images = { thumbs_up: thumbs_up, victory: victory };
+  const images = {  thumbs_up: thumbs_up, 
+                    victory: victory, 
+                    thumbs_down: thumbs_down, 
+                  };
 
   const loadHandpose = async () => {
     const net = await handpose.load();
@@ -59,6 +62,7 @@ function App() {
           const GE = new fp.GestureEstimator([
             fp.Gestures.VictoryGesture,
             fp.Gestures.ThumbsUpGesture,
+            fp.Gestures.ThumbsDownGesture,
           ]);
           
           // using a minimum confidence of 7.5 (out of 10)
