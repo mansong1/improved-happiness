@@ -79,7 +79,7 @@ function App() {
           
           // using a minimum confidence of 7.5 (out of 10)
           const gesture = await GE.estimate(hand[0].landmarks, 7.5);
-          //console.log(gesture.gestures);
+          console.log(gesture.gestures);
 
           if(gesture.gestures !== undefined && gesture.gestures.length > 0){
             const confidence = gesture.gestures.map(
@@ -142,7 +142,7 @@ function App() {
               position: "absolute",
               marginLeft: "auto",
               marginRight: "auto",
-              left: 800,
+              left: 750,
               bottom: 650,
               right: 0,
               textAlign: "center",
