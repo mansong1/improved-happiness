@@ -8,6 +8,9 @@ import './App.css';
 import { drawHand } from "./utilities";
 import * as customgestures from "./gestures"
 
+import okay from "./assets/okay.png";
+import hello from "./assets/hello.png";
+import index from "./assets/index.png";
 import victory from "./assets/victory.png";
 import thumbs_up from "./assets/thumbs_up.png";
 import thumbs_down from "./assets/thumbs_down.png";
@@ -21,9 +24,14 @@ function App() {
   };
 
   const [emoji, setEmoji] = useState(null)
-  const images = {  thumbs_up: thumbs_up, 
-                    victory: victory, 
-                    thumbs_down: thumbs_down, 
+
+  const images = {
+                    okay: okay,
+                    hello: hello,
+                    index: index,
+                    victory: victory,
+                    thumbs_up: thumbs_up,
+                    thumbs_down: thumbs_down,
                   };
 
   const loadHandpose = async () => {
