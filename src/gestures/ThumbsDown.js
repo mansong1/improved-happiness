@@ -1,6 +1,6 @@
 import {Finger, FingerCurl, FingerDirection, GestureDescription} from 'fingerpose'; 
 
-const thumbsUpDescription = new GestureDescription('thumbs_down');
+const thumbsDownGesture = new fp.GestureDescription('thumbs_down');
 
 // expect thumb to be stretched out and pointing down
 thumbsDownGesture.addCurl(fp.Finger.Thumb, fp.FingerCurl.NoCurl, 1.0);
@@ -12,9 +12,9 @@ thumbsDownGesture.addDirection(fp.Finger.Thumb, fp.FingerDirection.DiagonalDownR
 // - curled
 // - horizontal left or right
 for(let finger of [Finger.Index, Finger.Middle, Finger.Ring, Finger.Pinky]) {
-    thumbsUpDescription.addCurl(finger, FingerCurl.FullCurl, 1.0);
-    thumbsUpDescription.addDirection(finger, FingerDirection.HorizontalLeft, 1.0);
-    thumbsUpDescription.addDirection(finger, FingerDirection.HorizontalRight, 1.0);
+  thumbsDownGesture.addCurl(finger, FingerCurl.FullCurl, 1.0);
+  thumbsDownGesture.addDirection(finger, FingerDirection.HorizontalLeft, 1.0);
+  thumbsDownGesture.addDirection(finger, FingerDirection.HorizontalRight, 1.0);
   }
 
 export default thumbsDownGesture;
