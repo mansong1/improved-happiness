@@ -10,7 +10,7 @@ import * as customgestures from "./gestures"
 
 import okay from "./assets/okay.png";
 import hello from "./assets/hello.png";
-import index from "./assets/index.png";
+import index_up from "./assets/index_up.png";
 import victory from "./assets/victory.png";
 import thumbs_up from "./assets/thumbs_up.png";
 import thumbs_down from "./assets/thumbs_down.png";
@@ -28,7 +28,7 @@ function App() {
   const images = {
                     okay: okay,
                     hello: hello,
-                    index: index,
+                    index_up: index_up,
                     victory: victory,
                     thumbs_up: thumbs_up,
                     thumbs_down: thumbs_down,
@@ -74,7 +74,7 @@ function App() {
             customgestures.ThumbsDownGesture,
             customgestures.OkayGesture,
             customgestures.HelloGesture,
-            customgestures.IndexGesture,
+            customgestures.IndexFingerUpGesture,
           ]);
           
           // using a minimum confidence of 7.5 (out of 10)
