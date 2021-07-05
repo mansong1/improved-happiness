@@ -8,9 +8,9 @@ import './App.css';
 import { drawHand } from "./utilities";
 import * as customgestures from "./gestures"
 
-import victory from "./emojis/victory.png";
-import thumbs_up from "./emojis/thumbs_up.png";
-import thumbs_down from "./emojis/thumbs_down.png";
+import victory from "./assets/victory.png";
+import thumbs_up from "./assets/thumbs_up.png";
+import thumbs_down from "./assets/thumbs_down.png";
 
 function App() {
 
