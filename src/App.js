@@ -62,11 +62,10 @@ function App() {
           const GE = new fp.GestureEstimator([
             fp.Gestures.VictoryGesture,
             fp.Gestures.ThumbsUpGesture,
-            fp.Gestures.ThumbsDownGesture,
           ]);
           
           // using a minimum confidence of 7.5 (out of 10)
-          const gesture = await GE.estimate(hand[0].landmarks, 8);
+          const gesture = await GE.estimate(hand[0].landmarks, 7.5);
           //console.log(gesture.gestures);
 
           if(gesture.gestures !== undefined && gesture.gestures.length > 0){
