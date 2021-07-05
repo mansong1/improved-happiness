@@ -6,6 +6,7 @@ import * as handpose from "@tensorflow-models/handpose";
 import Webcam from "react-webcam";
 import './App.css';
 import { drawHand } from "./utilities";
+import * as customgestures from "./gestures"
 
 import victory from "./emojis/victory.png";
 import thumbs_up from "./emojis/thumbs_up.png";
@@ -62,6 +63,7 @@ function App() {
           const GE = new fp.GestureEstimator([
             fp.Gestures.VictoryGesture,
             fp.Gestures.ThumbsUpGesture,
+            customgestures.ThumbsDownGesture,
           ]);
           
           // using a minimum confidence of 7.5 (out of 10)
