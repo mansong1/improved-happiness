@@ -73,3 +73,4 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 ## Libraries
 
 `npm install @tensorflow/tfjs @tensorflow-models/handpose react-webcam`
+`npm install fingerpose`
