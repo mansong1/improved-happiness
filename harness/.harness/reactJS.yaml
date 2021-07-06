@@ -1,0 +1,98 @@
+pipeline:
+    name: reactJS
+    identifier: reactJS
+    projectIdentifier: mansongdemo
+    orgIdentifier: default
+    description: "Pipeline to build and deploy gesture recognition reactjs application "
+    tags:
+        reactjs: ""
+        node: ""
+        tensorflowjs: ""
+    properties:
+        ci:
+            codebase:
+                connectorRef: mansonggithub
+                repoName: improved-happiness
+                build: <+input>
+    stages:
+        - stage:
+              name: Build and Push
+              identifier: Build_and_Push
+              description: ""
+              type: CI
+              spec:
+                  cloneCodebase: true
+                  execution:
+                      steps:
+                          - step:
+                                type: Run
+                                name: Set tag
+                                identifier: Set_tag
+                                spec:
+                                    connectorRef: mansongdockerhub
+                                    image: alpine/git:latest
+                                    command: export version=${git rev-parse --short HEAD}
+                                    privileged: true
+                                description: Set tag for docker container
+                          - parallel:
+                                - step:
+                                      type: Run
+                                      name: Test
+                                      identifier: Test
+                                      spec:
+                                          connectorRef: mansongdockerhub
+                                          image: node:latest
+                                          command: yarn test:ci || true
+                                          privileged: false
+                                - step:
+                                      type: Run
+                                      name: Linting
+                                      identifier: Linting
+                                      spec:
+                                          connectorRef: mansongdockerhub
+                                          image: node:latest
+                                          command: yarn lint:ci || true
+                                          privileged: false
+                                          reports:
+                                              type: JUnit
+                                              spec:
+                                                  paths:
+                                                      - testResults/lint.xml
+                          - step:
+                                type: Run
+                                name: Compile Assets
+                                identifier: Compile_Assets
+                                spec:
+                                    connectorRef: mansongdockerhub
+                                    image: node:latest
+                                    command: |-
+                                        cp .env.local.example .env.local
+                                        yarn build:ci
+
+                                        ls -la .next
+                                    privileged: false
+                          - step:
+                                type: BuildAndPushDockerRegistry
+                                name: Build and Push Image
+                                identifier: Build_and_Push_Image
+                                spec:
+                                    connectorRef: mansongdockerhub
+                                    repo: gesturerecognition
+                                    tags:
+                                        - <+VERSION.output.outputVariables.version>
+                                    dockerfile: Dockerfile
+                                    optimize: true
+                          - step:
+                                type: Plugin
+                                name: Slack
+                                identifier: Slack
+                                spec:
+                                    connectorRef: mansongdockerhub
+                                    image: plugins/slack
+                                    privileged: false
+                  serviceDependencies: []
+                  infrastructure:
+                      type: KubernetesDirect
+                      spec:
+                          connectorRef: minikube
+                          namespace: harness-delegate
