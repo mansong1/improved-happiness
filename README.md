@@ -74,3 +74,8 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 `npm install @tensorflow/tfjs @tensorflow-models/handpose react-webcam`
 `npm install fingerpose`
+
+
+## What is a Harness Folder?
+
+Harness folder allows to save the Harness configurations like pipelines, connectors, delegates, trigger, etc alongside with the code in your git repository. 
