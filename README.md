@@ -78,4 +78,6 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 ## What is a Harness Folder?
 
-Harness folder allows to save the Harness configurations like pipelines, connectors, delegates, trigger, etc alongside with the code in your git repository. 
+Harness folder allows to save the Harness configurations like pipelines, connectors, delegates, trigger, etc alongside with the code in your git repository.
+
+Harness can either communicate directly via the manger to the Git source or via a delegate.
