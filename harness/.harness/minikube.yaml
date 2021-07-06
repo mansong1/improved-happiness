@@ -1,0 +1,12 @@
+connector:
+  name: mansong-minikube
+  identifier: mansongminikube
+  description:
+  orgIdentifier: default
+  projectIdentifier: mansongdemo
+  type: K8sCluster
+  spec:
+    credential:
+      type: InheritFromDelegate
+    delegateSelectors:
+    - mansong-minikube
