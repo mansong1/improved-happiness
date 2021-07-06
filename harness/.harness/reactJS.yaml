@@ -16,9 +16,8 @@ pipeline:
                 build: <+input>
     stages:
         - stage:
-              name: Build and Push
+              name: Build
               identifier: Build_and_Push
-              description: ""
               type: CI
               spec:
                   cloneCodebase: true
