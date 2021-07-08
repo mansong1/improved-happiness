@@ -15,7 +15,11 @@ import victory from "./assets/victory.png";
 import thumbs_up from "./assets/thumbs_up.png";
 import thumbs_down from "./assets/thumbs_down.png";
 
+//Import Harness Feature Flag Client SDK
+
 function App() {
+
+  const apiKey = '639c7909-0a17-4997-b978-209dad2a2136';
 
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
