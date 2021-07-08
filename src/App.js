@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 
+// eslint-disable-next-line
 import * as tf from "@tensorflow/tfjs";
 import * as fp from "fingerpose";
 import * as handpose from "@tensorflow-models/handpose";
@@ -17,9 +18,8 @@ import thumbs_down from "./assets/thumbs_down.png";
 
 //Import Harness Feature Flag Client SDK
 
-function App() {
 
-  const apiKey = '639c7909-0a17-4997-b978-209dad2a2136';
+function App() {
 
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
@@ -36,7 +36,7 @@ function App() {
                     victory: victory,
                     thumbs_up: thumbs_up,
                     thumbs_down: thumbs_down,
-                  };
+                };
 
   const loadHandpose = async () => {
     const net = await handpose.load();
