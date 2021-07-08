@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@harnessio/ff-javascript-client-sdk": "^1.4.4",
     "@tensorflow-models/handpose": "^0.0.7",
     "@tensorflow/tfjs": "^3.7.0",
     "@testing-library/jest-dom": "^5.14.1",
