@@ -21,22 +21,37 @@ import { initialize, Event } from '@harnessio/ff-javascript-client-sdk'
 
 function App() {
 
+  const [featureFlags, setFeatureFlags] = useState({})
+
   const apiKey = "c4230a4e-9861-47e0-8d84-6199edc805a5";
 
   const cf = initialize(apiKey, {
-    identifier: 'Harness',      // Target identifier
+    identifier: 'Harness',            // Target identifier
     name: 'Harness',                  // Optional target name
-    attributes: {                            // Optional target attributes
+    attributes: {                     // Optional target attributes
       email: 'martin.ansong@harness.io'
     }
   }, {
+    debug: false,
     baseUrl: ' https://config.feature-flags.uat.harness.io/api/1.0',
     eventUrl: 'https://events.feature-flags.uat.harness.io/api/1.0',
   });
 
   cf.on(Event.READY, flags => {
     console.log('Harness Server communication is established');
+    setFeatureFlags(flags);
   })
+
+  cf.on(Event.CHANGED, flagInfo => {
+    if (flagInfo.deleted) {
+      setFeatureFlags(currentFeatureFlags => {
+        delete currentFeatureFlags[flagInfo.flag]
+        return { ...currentFeatureFlags }
+      })
+    } else {
+      setFeatureFlags(currentFeatureFlags => ({ ...currentFeatureFlags, [flagInfo.flag]: flagInfo.value }))
+    }
+  });
 
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
