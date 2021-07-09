@@ -17,9 +17,26 @@ import thumbs_up from "./assets/thumbs_up.png";
 import thumbs_down from "./assets/thumbs_down.png";
 
 //Import Harness Feature Flag Client SDK
-
+import { initialize, Event } from '@harnessio/ff-javascript-client-sdk'
 
 function App() {
+
+  const apiKey = "c4230a4e-9861-47e0-8d84-6199edc805a5";
+
+  const cf = initialize(apiKey, {
+    identifier: 'Harness',      // Target identifier
+    name: 'Harness',                  // Optional target name
+    attributes: {                            // Optional target attributes
+      email: 'martin.ansong@harness.io'
+    }
+  }, {
+    baseUrl: ' https://config.feature-flags.uat.harness.io/api/1.0',
+    eventUrl: 'https://events.feature-flags.uat.harness.io/api/1.0',
+  });
+
+  cf.on(Event.READY, flags => {
+    console.log('Harness Server communication is established');
+  })
 
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
