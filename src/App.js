@@ -28,7 +28,7 @@ function App() {
     }, {
       debug: false,
       baseUrl: ' https://config.feature-flags.uat.harness.io/api/1.0',
-      eventUrl: 'https://events.feature-flags.uat.harness.io/api/1.0',
+      eventUrl: 'https://event.feature-flags.uat.harness.io/api/1.0',
     });
 
     cf.on(Event.READY, flags => {
