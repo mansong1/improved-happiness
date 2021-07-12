@@ -9,15 +9,8 @@ import './App.css';
 import { drawHand } from "./utilities";
 import * as customgestures from "./gestures"
 
-import okay from "./assets/okay.png";
-import hello from "./assets/hello.png";
-import index_up from "./assets/index_up.png";
-import victory from "./assets/victory.png";
-import thumbs_up from "./assets/thumbs_up.png";
-import thumbs_down from "./assets/thumbs_down.png";
-
 //Import Harness Feature Flag Client SDK
-import { initialize, Event } from '@harnessio/ff-javascript-client-sdk'
+import { initialize, Event } from '@harnessio/ff-javascript-client-sdk';
 
 function App() {
 
@@ -58,7 +51,10 @@ function App() {
       cf.close()
     }
   }, [])
-  
+
+  //console.log(featureFlags);
+
+  //console.log(Object.values(featureFlags).includes("index_up"));
 
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
@@ -66,16 +62,7 @@ function App() {
     video: { width: 900, height: 720 }
   };
 
-  const [emoji, setEmoji] = useState(null)
-
-  const images = {
-                    okay: okay,
-                    hello: hello,
-                    index_up: index_up,
-                    victory: victory,
-                    thumbs_up: thumbs_up,
-                    thumbs_down: thumbs_down,
-                };
+  const [emoji, setEmoji] = useState(null);
 
   const loadHandpose = async () => {
     const net = await handpose.load();
@@ -177,9 +164,9 @@ function App() {
             height: config.video.height,
           }}
         />
-        {emoji !== null ? (
+        {emoji !== null && Object.values(featureFlags).includes(emoji) ? (
           <img
-            src={images[emoji]}
+            src={`/assets/${emoji}.png`}
             alt=""
             style={{
               position: "absolute",
