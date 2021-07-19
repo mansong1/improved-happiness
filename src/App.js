@@ -147,6 +147,7 @@ function App() {
             zindex: 9,
             width: config.video.width,
             height: config.video.height,
+            padding: "20px",
           }}
         />
 
@@ -162,6 +163,9 @@ function App() {
             zindex: 9,
             width: config.video.width,
             height: config.video.height,
+            border: "2px solid #fff",
+            borderRadius: "10px",
+            filter: "drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.6))",
           }}
         />
         {emoji !== null && Object.values(featureFlags).includes(emoji) ? (
