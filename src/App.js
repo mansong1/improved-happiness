@@ -59,7 +59,7 @@ function App() {
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
   const config = {
-    video: { width: 900, height: 720 }
+    video: { width: 960, height: 720 }
   };
 
   const [emoji, setEmoji] = useState(null);
@@ -147,7 +147,9 @@ function App() {
             zindex: 9,
             width: config.video.width,
             height: config.video.height,
-            padding: "20px",
+            border: "2px solid #111",
+            borderRadius: "10px",
+            filter: "drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.6))",
           }}
         />
 
@@ -163,7 +165,7 @@ function App() {
             zindex: 9,
             width: config.video.width,
             height: config.video.height,
-            border: "5px solid #000000",
+            border: "2px solid #111",
             borderRadius: "10px",
             filter: "drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.6))",
           }}
