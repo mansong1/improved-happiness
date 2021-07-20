@@ -1,9 +1,11 @@
 :root {
+  --bg-image: url("./images/light.png"); 
   --bg-color: #fff;
   --text-color: #000;
 }
 
 [data-theme="dark"] {
+  --bg-image: url("./images/dark.png");
   --bg-color: #282c34;
   --text-color: #fff;
 }
@@ -24,7 +26,13 @@
 }
 
 .App-header {
-  background-color: var(--bg-color) ;
+  background-image: var(--bg-image);
+  background-position: left;
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
