@@ -1,7 +1,9 @@
 FROM node:16.5 AS build
 WORKDIR /app
+COPY package.json /app/package.json
+RUN npm install --silent && npm run build
 COPY . ./
-RUN npm install && npm run build
+
 
 FROM nginx:alpine
 RUN rm -rf /usr/share/nginx/html/*
