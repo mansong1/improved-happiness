@@ -16,19 +16,18 @@ function App() {
 
   const [featureFlags, setFeatureFlags] = useState({})
 
-  const apiKey = "c4230a4e-9861-47e0-8d84-6199edc805a5";
+  const apiKey = "9e007f95-a6a1-4ee9-a52c-561302e18590";
 
   useEffect(() => {
     const cf = initialize(apiKey, {
       identifier: 'Harness',              // Target identifier
       name: 'Harness',                    // Optional target name
       attributes: {                       // Optional target attributes
-        email: 'martin.ansong@harness.io'
+        lastUpdated: Date.now(),
+        host: window.location.ref,
       }
     }, {
       debug: false,
-      baseUrl:  'https://config.feature-flags.uat.harness.io/api/1.0',
-      eventUrl: 'https://event.feature-flags.uat.harness.io/api/1.0',
     });
 
     cf.on(Event.READY, flags => {
@@ -52,7 +51,7 @@ function App() {
     }
   }, [])
 
-  //console.log(featureFlags);
+  console.log(featureFlags);
 
   //console.log(Object.values(featureFlags).includes("index_up"));
 
@@ -135,7 +134,7 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header" data-theme={featureFlags.Dark_Theme ? "dark" : "light"}>
+      <header className="App-header" data-theme={featureFlags.Dark_Mode ? "dark" : "light"}>
         <Webcam
           ref={webcamRef}
           style={{
