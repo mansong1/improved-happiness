@@ -20,9 +20,9 @@ function App() {
 
   useEffect(() => {
     const cf = initialize(apiKey, {
-      identifier: 'Harness',            // Target identifier
-      name: 'Harness',                  // Optional target name
-      attributes: {                     // Optional target attributes
+      identifier: 'Harness',              // Target identifier
+      name: 'Harness',                    // Optional target name
+      attributes: {                       // Optional target attributes
         email: 'martin.ansong@harness.io'
       }
     }, {
@@ -130,6 +130,7 @@ function App() {
       }
   };
 
+  // eslint-disable-next-line
   useEffect(() => {loadHandpose()}, []);
 
   return (
