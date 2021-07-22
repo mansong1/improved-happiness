@@ -16,7 +16,7 @@ function App() {
 
   const [featureFlags, setFeatureFlags] = useState({})
 
-  const apiKey = "9e007f95-a6a1-4ee9-a52c-561302e18590";
+  const apiKey = process.env.REACT_APP_API_KEY;
 
   useEffect(() => {
     const cf = initialize(apiKey, {
