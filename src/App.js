@@ -20,14 +20,16 @@ function App() {
 
   useEffect(() => {
     const cf = initialize(apiKey, {
-      identifier: 'Harness',              // Target identifier
-      name: 'Harness',                    // Optional target name
-      attributes: {                       // Optional target attributes
+      identifier: process.env.REACT_APP_HARNESS_IDENTIFIER, //'Harness',
+      name: process.env.REACT_APP_HARNESS_TARGET_NAME,      //'Harness',
+      attributes: {                                         // Optional target attributes
         lastUpdated: Date.now(),
-        host: window.location.ref,
+        host: window.location.hostname,
+        email: process.env.REACT_APP_HARNESS_EMAIL_ATTR, // Email attribute
+        browser: navigator.appName,
       }
     }, {
-      debug: false,
+      debug: process.env.REACT_APP_HARNESS_DEBUG, // debug mode boolean
     });
 
     cf.on(Event.READY, flags => {
@@ -52,8 +54,6 @@ function App() {
   }, [])
 
   //console.log(featureFlags);
-
-  //console.log(Object.values(featureFlags).includes("index_up"));
 
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
@@ -134,7 +134,7 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header" data-theme={featureFlags.Dark_Mode ? "dark" : "light"}>
+      <header className="App-header" data-theme={featureFlags.Dark_Mode ? "dark" : "light"}> // tenary operator - if true then dark theme else light theme
         <Webcam
           ref={webcamRef}
           style={{
