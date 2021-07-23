@@ -20,13 +20,14 @@ function App() {
   
   const { detect } = require('detect-browser');
   const browser = detect();
+  const date = new Date();
 
   useEffect(() => {
     const cf = initialize(apiKey, {
       identifier: process.env.REACT_APP_HARNESS_IDENTIFIER, //'Harness',
       name: process.env.REACT_APP_HARNESS_TARGET_NAME,      //'Harness',
       attributes: {                                         // Optional target attributes
-        lastUpdated: Date.getDate(),
+        lastUpdated: date.toUTCString(),
         host: window.location.hostname,
         email: process.env.REACT_APP_HARNESS_EMAIL_ATTR,    // Email attribute
         browserName: browser.name,
