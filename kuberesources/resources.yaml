@@ -29,11 +29,16 @@ spec:
           ports:
             - containerPort: 80
           volumeMounts:
-            - mountPath: /etc/nginx
+            - mountPath: /etc/nginx/conf.d
               name: nginx-conf
               readOnly: true
-            - mountPath: /var/log/nginx
-              name: log
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 80
+            initialDelaySeconds: 30
+            timeoutSeconds: 5
+            periodSeconds: 10
           env:
             - name: REACT_APP_API_KEY
               valueFrom:
@@ -43,12 +48,10 @@ spec:
       volumes:
       - name: nginx-conf
         configMap:
-          name: nginx-conf # place ConfigMap `nginx-conf` on /etc/nginx
+          name: nginx-conf
           items:
             - key: nginx.conf
               path: nginx.conf
-      - name: log
-        emptyDir: {}
 
 ---
 
