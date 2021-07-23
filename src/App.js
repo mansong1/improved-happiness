@@ -17,16 +17,21 @@ function App() {
   const [featureFlags, setFeatureFlags] = useState({})
 
   const apiKey = process.env.REACT_APP_API_KEY;
+  
+  const { detect } = require('detect-browser');
+  const browser = detect();
 
   useEffect(() => {
     const cf = initialize(apiKey, {
       identifier: process.env.REACT_APP_HARNESS_IDENTIFIER, //'Harness',
       name: process.env.REACT_APP_HARNESS_TARGET_NAME,      //'Harness',
       attributes: {                                         // Optional target attributes
-        lastUpdated: Date.now(),
+        lastUpdated: Date.getDate(),
         host: window.location.hostname,
-        email: process.env.REACT_APP_HARNESS_EMAIL_ATTR, // Email attribute
-        browser: navigator.appName,
+        email: process.env.REACT_APP_HARNESS_EMAIL_ATTR,    // Email attribute
+        browserName: browser.name,
+        browserVersion: browser.version,
+        os: browser.os.name,
       }
     }, {
       debug: process.env.REACT_APP_HARNESS_DEBUG, // debug mode boolean
@@ -53,7 +58,7 @@ function App() {
     }   // eslint-disable-next-line
   }, [])
 
-  //console.log(featureFlags);
+  console.log(featureFlags);
 
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
@@ -69,11 +74,11 @@ function App() {
 
     // Loop and detect hands
     setInterval(() => {
-      detect(net);
+      detectHands(net);
     }, 10)
   };
   
-  const detect = async (net) => {
+  const detectHands = async (net) => {
     if (
         typeof webcamRef.current !== "undefined" && 
         webcamRef.current !== null && 
@@ -92,7 +97,7 @@ function App() {
         canvasRef.current.width = videoWidth;
         canvasRef.current.height = videoHeight;
 
-        // Make Detections
+        // Make Hand Detections
         const hand = await net.estimateHands(video);
         //console.log(hand);
 
