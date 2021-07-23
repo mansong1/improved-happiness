@@ -48,10 +48,10 @@ function App() {
 
     return () => {
       cf.close()
-    }
+    }   // eslint-disable-next-line
   }, [])
 
-  console.log(featureFlags);
+  //console.log(featureFlags);
 
   //console.log(Object.values(featureFlags).includes("index_up"));
 
