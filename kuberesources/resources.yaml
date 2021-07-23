@@ -1,0 +1,50 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: gesturerecognition-secrets
+data:
+  api.key: OWUwMDdmOTUtYTZhMS00ZWU5LWE1MmMtNTYxMzAyZTE4NTkw
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: gesturerecognition
+    labels:
+      app: gesturerecognition
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: gesturerecognition
+  template:
+    metadata:
+      labels:
+        app: gesturerecognition
+    spec:
+      containers:
+        - image: mansong/gesturerecognition:1.0.1
+          name: gesturerecognition
+          ports:
+            - containerPort: 80
+          env:
+            - name: REACT_APP_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: gesturerecognition-secrets
+                  key: api.key
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+    name: gesturerecognition-svc
+spec:
+  type: LoadBalancer
+  selector: 
+    app: gesturerecognition
+  ports:
+    - protocol: TCP
+      port: 80
