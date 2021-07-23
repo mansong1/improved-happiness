@@ -134,7 +134,7 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header" data-theme={featureFlags.Dark_Mode ? "dark" : "light"}> // tenary operator - if true then dark theme else light theme
+      <header className="App-header" data-theme={featureFlags.Dark_Mode ? "dark" : "light"}> 
         <Webcam
           ref={webcamRef}
           style={{
