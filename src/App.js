@@ -67,6 +67,12 @@ function App() {
     video: { width: 960, height: 720 }
   };
 
+  const videoConstraints = {
+    width: config.video.width,
+    height: config.video.height,
+    facingMode: "user"
+  };
+
   const [emoji, setEmoji] = useState(null);
 
   const loadHandpose = async () => {
@@ -142,6 +148,8 @@ function App() {
     <div className="App">
       <header className="App-header" data-theme={featureFlags.Dark_Mode ? "dark" : "light"}> 
         <Webcam
+          audio={false}
+          videoConstraints={videoConstraints}
           ref={webcamRef}
           style={{
             position: "absolute",
