@@ -24,34 +24,56 @@ spec:
         app: gesturerecognition
     spec:
       containers:
-        - image: mansong/gesturerecognition:1.2.0
+        - image: mansong/gesturerecognition:1.2.1
           name: gesturerecognition
           ports:
-            - containerPort: 80
-          volumeMounts:
-            - mountPath: /etc/nginx/conf.d
-              name: nginx-conf
-              readOnly: true
-          livenessProbe:
-            httpGet:
-              path: /health
-              port: 80
-            initialDelaySeconds: 30
-            timeoutSeconds: 5
-            periodSeconds: 10
+            - containerPort: 3000
+          #volumeMounts:
+            # - mountPath: /etc/nginx/conf.d
+            #   name: nginx-conf
+            #   readOnly: true
+          # livenessProbe:
+          #   httpGet:
+          #     path: /health
+          #     port: 80
+            # initialDelaySeconds: 30
+            # timeoutSeconds: 5
+            # periodSeconds: 10
           env:
+            - name: HTTPS
+              value: "true"
             - name: REACT_APP_API_KEY
               valueFrom:
                 secretKeyRef:
                   name: gesturerecognition-secrets
                   key: api.key
-      volumes:
-      - name: nginx-conf
-        configMap:
-          name: nginx-conf
-          items:
-            - key: nginx.conf
-              path: nginx.conf
+            - name: REACT_APP_HARNESS_IDENTIFIER
+              valueFrom:
+                configMapKeyRef:
+                  name: gesturerecognition-conf
+                  key: harness.identifier
+            - name: REACT_APP_HARNESS_TARGET_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: gesturerecognition-conf
+                  key: harness.target
+            - name: REACT_APP_HARNESS_EMAIL_ATTR
+              valueFrom:
+                configMapKeyRef:
+                  name: gesturerecognition-conf
+                  key: harness.email_attr
+            - name: REACT_APP_HARNESS_DEBUG
+              valueFrom:
+                configMapKeyRef:
+                  name: gesturerecognition-conf
+                  key: harness.debug
+      # volumes:
+      # - name: nginx-conf
+      #   configMap:
+      #     name: gesturerecognition-conf
+      #     items:
+      #       - key: default.conf
+      #         path: default.conf
 
 ---
 
@@ -65,4 +87,5 @@ spec:
     app: gesturerecognition
   ports:
     - protocol: TCP
-      port: 80
+      port: 443
+      targetPort: 3000
