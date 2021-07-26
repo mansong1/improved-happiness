@@ -7,7 +7,7 @@ import * as handpose from "@tensorflow-models/handpose";
 import Webcam from "react-webcam";
 import './App.css';
 import { drawHand } from "./utilities";
-import * as customgestures from "./gestures"
+import * as customgestures from "./gestures";
 
 //Import Harness Feature Flag Client SDK
 import { initialize, Event } from '@harnessio/ff-javascript-client-sdk';
