@@ -1,11 +1,14 @@
 # folders to ignore
 build
+kuberesources
 node_modules
 .git
 
 # files to ignore
 Dockerfile
+Dockerfile.*
 .dockerignore
 .gitignore
 README.md
+
 
