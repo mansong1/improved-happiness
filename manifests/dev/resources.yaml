@@ -24,7 +24,7 @@ spec:
         app: gesturerecognition
     spec:
       containers:
-        - image: mansong/gesturerecognition:1.2.1
+        - image: <+artifact.image>
           name: gesturerecognition
           ports:
             - containerPort: 3000
