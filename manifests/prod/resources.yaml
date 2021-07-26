@@ -1,0 +1,91 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: gesturerecognition-secrets
+data:
+  api.key: MGMyZjMyODktNTk1Mi00OTg2LTgxM2ItMzU3ZGEyODk0OWMy
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: gesturerecognition
+    labels:
+      app: gesturerecognition
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: gesturerecognition
+  template:
+    metadata:
+      labels:
+        app: gesturerecognition
+    spec:
+      containers:
+        - image: <+artifact.image>
+          name: gesturerecognition
+          ports:
+            - containerPort: 3000
+          #volumeMounts:
+            # - mountPath: /etc/nginx/conf.d
+            #   name: nginx-conf
+            #   readOnly: true
+          # livenessProbe:
+          #   httpGet:
+          #     path: /health
+          #     port: 80
+            # initialDelaySeconds: 30
+            # timeoutSeconds: 5
+            # periodSeconds: 10
+          env:
+            - name: HTTPS
+              value: "true"
+            - name: REACT_APP_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: gesturerecognition-secrets
+                  key: api.key
+            - name: REACT_APP_HARNESS_IDENTIFIER
+              valueFrom:
+                configMapKeyRef:
+                  name: gesturerecognition-conf
+                  key: harness.identifier
+            - name: REACT_APP_HARNESS_TARGET_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: gesturerecognition-conf
+                  key: harness.target
+            - name: REACT_APP_HARNESS_EMAIL_ATTR
+              valueFrom:
+                configMapKeyRef:
+                  name: gesturerecognition-conf
+                  key: harness.email_attr
+            - name: REACT_APP_HARNESS_DEBUG
+              valueFrom:
+                configMapKeyRef:
+                  name: gesturerecognition-conf
+                  key: harness.debug
+      # volumes:
+      # - name: nginx-conf
+      #   configMap:
+      #     name: gesturerecognition-conf
+      #     items:
+      #       - key: default.conf
+      #         path: default.conf
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+    name: gesturerecognition-svc
+spec:
+  type: LoadBalancer
+  selector: 
+    app: gesturerecognition
+  ports:
+    - protocol: TCP
+      port: 443
+      targetPort: 3000

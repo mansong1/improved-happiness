@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: gesturerecognition-conf
+data:
+  harness.debug: 'false'
+  harness.target: 'Harness'
+  harness.identifier: 'Harness'
+  harness.email_attr: 'martin.ansong@harness.io'
