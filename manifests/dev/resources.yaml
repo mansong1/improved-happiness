@@ -24,10 +24,17 @@ spec:
         app: gesturerecognition
     spec:
       containers:
-        - image: <+artifact.image>
+        - image: mansong/gesturerecognition:<+artifacts.primary.spec.tag>
           name: gesturerecognition
           ports:
             - containerPort: 3000
+          resources:
+            limits:
+              cpu: 1
+              memory: 8Gi
+            requests:
+              cpu: 500m
+              memory: 4Gi
           #volumeMounts:
             # - mountPath: /etc/nginx/conf.d
             #   name: nginx-conf
