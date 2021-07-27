@@ -1,6 +1,7 @@
 module.exports = {
    "parserOptions": {
     "parser": "babel-eslint",
+    "ecmaVersion": "2015",
     "sourceType": "module"
    },
     "settings": {
