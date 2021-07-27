@@ -1,6 +1,10 @@
 module.exports = {
    "parserOptions": {
-    "sourceType": "module"
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
    },
     "settings": {
       "import/resolver": {
