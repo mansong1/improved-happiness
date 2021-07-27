@@ -3,12 +3,14 @@ build
 kuberesources
 node_modules
 .git
+.cache
 
 # files to ignore
 Dockerfile
 Dockerfile.*
 .dockerignore
 .gitignore
+*.md
 README.md
 
 
