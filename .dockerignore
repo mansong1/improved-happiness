@@ -1,5 +1,4 @@
 # folders to ignore
-build
 kuberesources
 node_modules
 .git
