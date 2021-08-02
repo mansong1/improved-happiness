@@ -25,7 +25,7 @@ pipeline:
                   infrastructure:
                       type: KubernetesDirect
                       spec:
-                          connectorRef: mansong_gke
+                          connectorRef: mansonggke
                           namespace: harness-delegate
                           serviceAccountName: default
                   execution:
