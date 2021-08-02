@@ -261,11 +261,11 @@ pipeline:
                       useFromStage:
                           stage: Deploy_To_Development
                   infrastructure:
-                      environmentRef: prod2
+                      environmentRef: prod
                       infrastructureDefinition:
                           type: KubernetesDirect
                           spec:
-                              connectorRef: mansong-gke
+                              connectorRef: mansonggke
                               namespace: production
                               releaseName: gesturerecognition
                       allowSimultaneousDeployments: false
