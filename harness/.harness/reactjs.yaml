@@ -1,0 +1,342 @@
+pipeline:
+    name: reactjs
+    identifier: reactjs
+    projectIdentifier: mansongff
+    orgIdentifier: default
+    tags:
+        node: "16.5"
+        react: 17.0.2
+        tensorflowjs: 3.7.0
+        featureflags: ""
+    properties:
+        ci:
+            codebase:
+                connectorRef: mansonggithub
+                repoName: improved-happiness
+                build: <+input>
+    stages:
+        - stage:
+              name: Build and Publish
+              identifier: Build
+              description: ""
+              type: CI
+              spec:
+                  cloneCodebase: true
+                  infrastructure:
+                      type: KubernetesDirect
+                      spec:
+                          connectorRef: mansong_gke
+                          namespace: harness-delegate
+                          serviceAccountName: default
+                  execution:
+                      steps:
+                          - step:
+                                type: RestoreCacheS3
+                                name: Restore Cache
+                                identifier: Restore_Cache
+                                spec:
+                                    connectorRef: mansongaws
+                                    region: eu-west-2
+                                    bucket: mansong-npm
+                                    key: gesturerecognition
+                                    archiveFormat: Tar
+                                    resources:
+                                        limits:
+                                            memory: 512Mi
+                                            cpu: "0.5"
+                                failureStrategies: []
+                          - parallel:
+                                - step:
+                                      type: Run
+                                      name: Hadolint
+                                      identifier: Hadolint
+                                      spec:
+                                          connectorRef: mansongdockerhub
+                                          image: hadolint/hadolint:latest-alpine
+                                          command: |-
+                                              hadolint Dockerfile.prod
+                                              hadolint Dockerfile.dev
+                                          privileged: false
+                                      failureStrategies: []
+                                - step:
+                                      type: Run
+                                      name: ESlint
+                                      identifier: ESlint
+                                      spec:
+                                          connectorRef: mansongdockerhub
+                                          image: pipelinecomponents/eslint
+                                          command: eslint .
+                                          privileged: false
+                                      failureStrategies: []
+                          - step:
+                                type: Run
+                                name: Install Dependencies
+                                identifier: Install_Dependencies
+                                spec:
+                                    connectorRef: mansongdockerhub
+                                    image: node:16.5.0-alpine3.14
+                                    command: npm install
+                                    privileged: false
+                                    resources:
+                                        limits:
+                                            memory: 1Gi
+                                            cpu: "1"
+                          - step:
+                                type: Run
+                                name: Build
+                                identifier: Build
+                                spec:
+                                    connectorRef: mansongdockerhub
+                                    image: node:16.5.0-alpine3.14
+                                    command: npm run build
+                                    privileged: false
+                                    resources:
+                                        limits:
+                                            memory: 2Gi
+                                            cpu: "1"
+                          - step:
+                                type: SaveCacheS3
+                                name: Rebuild Cache
+                                identifier: Rebuild_Cache
+                                spec:
+                                    connectorRef: mansongaws
+                                    region: eu-west-2
+                                    bucket: mansong-npm
+                                    key: gesturerecognition
+                                    sourcePaths:
+                                        - node_modules
+                                    archiveFormat: Tar
+                                    resources:
+                                        limits:
+                                            memory: 512Mi
+                                            cpu: "0.5"
+                          - step:
+                                type: BuildAndPushDockerRegistry
+                                name: Build and Push Docker Image
+                                identifier: Build_and_Push_Docker_Image
+                                spec:
+                                    connectorRef: mansongdockerhub
+                                    repo: mansong/gesturerecognition
+                                    tags:
+                                        - latest
+                                        - <+pipeline.sequenceId>
+                                    dockerfile: Dockerfile.prod
+                                    context: ./
+                                    optimize: true
+                                    resources:
+                                        limits:
+                                            memory: 2Gi
+                                            cpu: "1"
+                                when:
+                                    stageStatus: Success
+                                failureStrategies: []
+                          - step:
+                                type: Run
+                                name: Scan Docker Image
+                                identifier: Scan_Docker_Image
+                                spec:
+                                    connectorRef: mansongdockerhub
+                                    image: bitnami/trivy:latest
+                                    command: trivy image mansong/gesturerecognition:<+pipeline.sequenceId>
+                                    privileged: false
+                                    imagePullPolicy: IfNotPresent
+                                    shell: Bash
+                                    resources:
+                                        limits:
+                                            memory: 1Gi
+                                            cpu: "1"
+                      rollbackSteps: []
+                  serviceConfig:
+                      serviceDefinition:
+                          type: Kubernetes
+              variables: []
+        - stage:
+              name: Deploy To Development
+              identifier: Deploy_To_Development
+              description: ""
+              type: Deployment
+              spec:
+                  serviceConfig:
+                      serviceDefinition:
+                          type: Kubernetes
+                          spec:
+                              artifacts:
+                                  sidecars: []
+                                  primary:
+                                      type: DockerRegistry
+                                      spec:
+                                          connectorRef: mansongdockerhub
+                                          imagePath: mansong/gesturerecognition
+                                          tagRegex: <+input>
+                              manifestOverrideSets: []
+                              manifests:
+                                  - manifest:
+                                        identifier: staging_manifests
+                                        type: K8sManifest
+                                        spec:
+                                            store:
+                                                type: Github
+                                                spec:
+                                                    connectorRef: mansonggithub
+                                                    gitFetchType: Branch
+                                                    paths:
+                                                        - manifests/dev/configmap.yaml
+                                                        - manifests/dev/resources.yaml
+                                                    repoName: improved-happiness
+                                                    branch: main
+                                            skipResourceVersioning: false
+                              variables: []
+                      serviceRef: gesturerecognitiondev
+                  infrastructure:
+                      environmentRef: dev
+                      infrastructureDefinition:
+                          type: KubernetesDirect
+                          spec:
+                              connectorRef: mansong_gke
+                              namespace: staging
+                              releaseName: gesturerecognition
+                      allowSimultaneousDeployments: true
+                      infrastructureKey: ""
+                  execution:
+                      steps:
+                          - step:
+                                type: K8sRollingDeploy
+                                name: Rollout Deployment
+                                identifier: Rollout_Deployment
+                                spec:
+                                    skipDryRun: false
+                                    delegateSelectors:
+                                        - mansong-cogenial-octo-funicular
+                                        - mansong-cogenial-octo-funicular-sasyuu-0
+                                timeout: 10m
+                                failureStrategies: []
+                      rollbackSteps:
+                          - step:
+                                name: Swap primary with stage service
+                                identifier: rollbackBgSwapServices
+                                type: K8sBGSwapServices
+                                timeout: 10m
+                                spec:
+                                    skipDryRun: false
+              tags: {}
+              failureStrategies:
+                  - onFailure:
+                        errors:
+                            - AllErrors
+                        action:
+                            type: StageRollback
+        - stage:
+              name: Approval
+              identifier: Approval
+              description: ""
+              type: Approval
+              spec:
+                  execution:
+                      steps:
+                          - step:
+                                name: Approval
+                                identifier: approval
+                                type: HarnessApproval
+                                timeout: 1d
+                                spec:
+                                    approvalMessage: |-
+                                        Please review the following information
+                                        and approve the pipeline progression
+                                    includePipelineExecutionHistory: true
+                                    approvers:
+                                        minimumCount: 1
+                                        disallowPipelineExecutor: false
+                                        userGroups:
+                                            - Approvers
+                                    approverInputs: []
+                                failureStrategies: []
+              tags: {}
+        - stage:
+              name: Deploy To Production
+              identifier: Deploy_To_Production
+              description: ""
+              type: Deployment
+              spec:
+                  serviceConfig:
+                      useFromStage:
+                          stage: Deploy_To_Development
+                  infrastructure:
+                      environmentRef: prod2
+                      infrastructureDefinition:
+                          type: KubernetesDirect
+                          spec:
+                              connectorRef: mansong_gke
+                              namespace: production
+                              releaseName: gesturerecognition
+                      allowSimultaneousDeployments: false
+                      infrastructureKey: ""
+                  execution:
+                      steps:
+                          - stepGroup:
+                                name: Canary Deployment
+                                identifier: canaryDepoyment
+                                steps:
+                                    - step:
+                                          name: Canary Deployment
+                                          identifier: canaryDeployment
+                                          type: K8sCanaryDeploy
+                                          timeout: 10m
+                                          spec:
+                                              instanceSelection:
+                                                  type: Count
+                                                  spec:
+                                                      count: 1
+                                              skipDryRun: false
+                                          failureStrategies: []
+                                    - step:
+                                          name: Canary Delete
+                                          identifier: canaryDelete
+                                          type: K8sCanaryDelete
+                                          timeout: 10m
+                                          spec: {}
+                                rollbackSteps:
+                                    - step:
+                                          name: Canary Delete
+                                          identifier: canaryDelete
+                                          type: K8sCanaryDelete
+                                          timeout: 10m
+                                          spec: {}
+                          - stepGroup:
+                                name: Primary Deployment
+                                identifier: primaryDepoyment
+                                steps:
+                                    - step:
+                                          name: Rolling Deployment
+                                          identifier: rollingDeployment
+                                          type: K8sRollingDeploy
+                                          timeout: 10m
+                                          spec:
+                                              skipDryRun: false
+                                    - step:
+                                          type: K8sScale
+                                          name: Scale
+                                          identifier: Scale
+                                          spec:
+                                              workload: Deployment/gesturerecognition
+                                              skipSteadyStateCheck: false
+                                              instanceSelection:
+                                                  type: Count
+                                                  spec:
+                                                      count: 5
+                                          timeout: 10m
+                                          failureStrategies: []
+                                rollbackSteps:
+                                    - step:
+                                          name: Rolling Rollback
+                                          identifier: rollingRollback
+                                          type: K8sRollingRollback
+                                          timeout: 10m
+                                          spec: {}
+                      rollbackSteps: []
+              tags: {}
+              failureStrategies:
+                  - onFailure:
+                        errors:
+                            - AllErrors
+                        action:
+                            type: StageRollback
