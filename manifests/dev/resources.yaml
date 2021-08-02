@@ -27,7 +27,7 @@ spec:
         - image: mansong/gesturerecognition:latest
           name: gesturerecognition
           ports:
-            - containerPort: 3000
+            - containerPort: 80
           resources:
             limits:
               cpu: 1
@@ -35,17 +35,13 @@ spec:
             requests:
               cpu: 500m
               memory: 4Gi
-          #volumeMounts:
-            # - mountPath: /etc/nginx/conf.d
-            #   name: nginx-conf
-            #   readOnly: true
-          # livenessProbe:
-          #   httpGet:
-          #     path: /health
-          #     port: 80
-            # initialDelaySeconds: 30
-            # timeoutSeconds: 5
-            # periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 80
+            initialDelaySeconds: 30
+            timeoutSeconds: 5
+            periodSeconds: 10
           env:
             - name: HTTPS
               value: "true"
