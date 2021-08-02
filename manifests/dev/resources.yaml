@@ -27,7 +27,7 @@ spec:
         - image: mansong/gesturerecognition:latest
           name: gesturerecognition
           ports:
-            - containerPort: 80
+            - containerPort: 443
           resources:
             limits:
               cpu: 1
@@ -38,7 +38,7 @@ spec:
           livenessProbe:
             httpGet:
               path: /health
-              port: 80
+              port: 443
             initialDelaySeconds: 30
             timeoutSeconds: 5
             periodSeconds: 10
@@ -91,4 +91,4 @@ spec:
   ports:
     - protocol: TCP
       port: 443
-      targetPort: 3000
+      targetPort: 443
