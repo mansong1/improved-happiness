@@ -5,8 +5,8 @@ pipeline:
     orgIdentifier: default
     tags:
         node: "16.5"
-        react: "17.0.2"
-        tensorflowjs: "3.7.0"
+        react: 17.0.2
+        tensorflowjs: 3.7.0
         featureflags: ""
     properties:
         ci:
@@ -186,13 +186,13 @@ pipeline:
                                                     branch: main
                                             skipResourceVersioning: false
                               variables: []
-                      serviceRef: gesturerecognitiondev
+                      serviceRef: ffdev
                   infrastructure:
                       environmentRef: dev
                       infrastructureDefinition:
                           type: KubernetesDirect
                           spec:
-                              connectorRef: mansong-gke
+                              connectorRef: mansonggke
                               namespace: staging
                               releaseName: gesturerecognition
                       allowSimultaneousDeployments: true
