@@ -4,10 +4,10 @@ pipeline:
     projectIdentifier: mansonggesture
     orgIdentifier: default
     tags:
-        react: ""
+        node: "16.5"
+        react: "17.0.2"
+        tensorflowjs: "3.7.0"
         featureflags: ""
-        tensorflow: ""
-        tensorflowjs: ""
     properties:
         ci:
             codebase:
