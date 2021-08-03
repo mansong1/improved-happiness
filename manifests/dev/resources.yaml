@@ -25,6 +25,7 @@ spec:
     spec:
       containers:
         - image: mansong/gesturerecognition:latest
+          imagePullPolicy: "Always"
           name: gesturerecognition
           ports:
             - containerPort: 80
