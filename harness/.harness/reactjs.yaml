@@ -218,6 +218,7 @@ pipeline:
                                 timeout: 10m
                                 spec:
                                     skipDryRun: false
+                  serviceDependencies: []
               tags: {}
               failureStrategies:
                   - onFailure:
