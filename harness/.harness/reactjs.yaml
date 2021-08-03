@@ -210,14 +210,7 @@ pipeline:
                                         - mansong-cogenial-octo-funicular-sasyuu-0
                                 timeout: 10m
                                 failureStrategies: []
-                      rollbackSteps:
-                          - step:
-                                name: Swap primary with stage service
-                                identifier: rollbackBgSwapServices
-                                type: K8sBGSwapServices
-                                timeout: 10m
-                                spec:
-                                    skipDryRun: false
+                      rollbackSteps: []
                   serviceDependencies: []
               tags: {}
               failureStrategies:
