@@ -85,8 +85,8 @@ kind: Service
 metadata:
     name: gesturerecognition-svc
 spec:
-  type: LoadBalancer
-  selector: 
+  type: {{ .Values.serviceType }}
+  selector:
     app: gesturerecognition
   ports:
     - protocol: TCP

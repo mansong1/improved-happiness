@@ -1,0 +1,32 @@
+name: payment-service-<+pipeline.variables.seusername>
+replicas: 1
+
+image: <+artifact.image>
+
+createNamespace: true
+namespace: <+infra.namespace>
+
+# Service Type allow you to specify what kind of service you want.
+# Possible values for ServiceType are:
+# ClusterIP | NodePort | LoadBalancer | ExternalName
+serviceType: LoadBalancer
+
+# A Service can map an incoming port to any targetPort.
+# targetPort is where application is listening on inside the container.
+servicePort: 8080
+serviceTargetPort: 8080
+
+# Specify all environment variables to be added to the container.
+# The following two maps, config and secrets, are put into a ConfigMap
+# and a Secret, respectively.
+# Both are added to the container environment in podSpec as envFrom source.
+sename: <+pipeline.variables.seusername>
+
+env:
+  config:
+    HARNESS_FF_KEY: <+pipeline.variables.ffsdkkeyprod>
+    HARNESS_SE: <+pipeline.variables.seusername>
+    HARNESS_BUILD: <+pipeline.sequenceId>
+    
+  secrets:
+    key2: value2
