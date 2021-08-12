@@ -28,20 +28,7 @@ spec:
           name: gesturerecognition
           ports:
             - containerPort: 3000
-          #volumeMounts:
-            # - mountPath: /etc/nginx/conf.d
-            #   name: nginx-conf
-            #   readOnly: true
-          # livenessProbe:
-          #   httpGet:
-          #     path: /health
-          #     port: 80
-            # initialDelaySeconds: 30
-            # timeoutSeconds: 5
-            # periodSeconds: 10
           env:
-            - name: HTTPS
-              value: "true"
             - name: REACT_APP_API_KEY
               valueFrom:
                 secretKeyRef:
