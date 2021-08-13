@@ -13,9 +13,9 @@ import * as customgestures from "./gestures";
 import { initialize, Event } from '@harnessio/ff-javascript-client-sdk';
 
 function App() {
-
+  
   const [featureFlags, setFeatureFlags] = useState({})
-
+  
   const apiKey = process.env.REACT_APP_API_KEY;
   
   const { detect } = require('detect-browser');
