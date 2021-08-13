@@ -45,6 +45,8 @@ pipeline:
                                             memory: 512Mi
                                             cpu: "0.5"
                                 failureStrategies: []
+                                when:
+                                    stageStatus: Success
                           - parallel:
                                 - step:
                                       type: Run
@@ -182,6 +184,7 @@ pipeline:
                                                     paths:
                                                         - manifests/dev/configmap.yaml
                                                         - manifests/dev/resources.yaml
+                                                        - manifests/dev/ingress.yaml
                                                     repoName: improved-happiness
                                                     branch: main
                                             skipResourceVersioning: false
