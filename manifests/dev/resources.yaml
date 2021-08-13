@@ -43,13 +43,8 @@ spec:
             initialDelaySeconds: 10
             periodSeconds: 5
           env:
-            - name: HTTPS
-              value: "true"
             - name: REACT_APP_API_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: gesturerecognition-secrets
-                  key: api.key
+              value: "d3544727-c59b-4e90-8fa2-c39c926b6124"
             - name: REACT_APP_HARNESS_IDENTIFIER
               valueFrom:
                 configMapKeyRef:
@@ -70,13 +65,6 @@ spec:
                 configMapKeyRef:
                   name: gesturerecognition-conf
                   key: harness.debug
-      # volumes:
-      # - name: nginx-conf
-      #   configMap:
-      #     name: gesturerecognition-conf
-      #     items:
-      #       - key: default.conf
-      #         path: default.conf
 
 ---
 
