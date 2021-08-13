@@ -1,0 +1,41 @@
+trigger:
+    name: GithubTrigger
+    identifier: GithubTrigger
+    enabled: true
+    orgIdentifier: default
+    projectIdentifier: mansongff
+    pipelineIdentifier: reactjs
+    source:
+        type: Webhook
+        spec:
+            type: Github
+            spec:
+                type: Push
+                spec:
+                    connectorRef: mansonggithub
+                    autoAbortPreviousExecutions: true
+                    repoName: improved-happiness
+    inputYaml: |
+        pipeline:
+            identifier: reactjs
+            properties:
+                ci:
+                    codebase:
+                        build:
+                            type: branch
+                            spec:
+                                branch: <+trigger.branch>
+            stages:
+                - stage:
+                      identifier: Deploy_To_Development
+                      type: Deployment
+                      spec:
+                          serviceConfig:
+                              serviceDefinition:
+                                  type: Kubernetes
+                                  spec:
+                                      artifacts:
+                                          primary:
+                                              type: DockerRegistry
+                                              spec:
+                                                  tagRegex: latest
