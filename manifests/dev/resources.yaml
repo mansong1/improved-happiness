@@ -73,7 +73,7 @@ kind: Service
 metadata:
     name: gesturerecognition-svc
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   selector:
     app: gesturerecognition
   ports:
