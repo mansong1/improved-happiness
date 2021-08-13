@@ -122,7 +122,7 @@ pipeline:
                                     tags:
                                         - latest
                                         - <+pipeline.sequenceId>
-                                    dockerfile: Dockerfile.prod
+                                    dockerfile: Dockerfile.dev
                                     context: ./
                                     optimize: true
                                     resources:
