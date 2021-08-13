@@ -182,6 +182,7 @@ pipeline:
                                                     paths:
                                                         - manifests/dev/configmap.yaml
                                                         - manifests/dev/resources.yaml
+                                                        - manifests/dev/ingress.yaml
                                                     repoName: improved-happiness
                                                     branch: main
                                             skipResourceVersioning: false
