@@ -4,7 +4,7 @@ pipeline:
     projectIdentifier: mansongff
     orgIdentifier: default
     tags:
-        node: "16.5"
+        node: "16.6.2"
         react: 17.0.2
         tensorflowjs: 3.7.0
         featureflags: ""
@@ -76,7 +76,7 @@ pipeline:
                                 identifier: Install_Dependencies
                                 spec:
                                     connectorRef: mansongdockerhub
-                                    image: node:16.5.0-alpine3.14
+                                    image: node:16.6.2-alpine3.14
                                     command: npm install
                                     privileged: false
                                     resources:
@@ -89,7 +89,7 @@ pipeline:
                                 identifier: Build
                                 spec:
                                     connectorRef: mansongdockerhub
-                                    image: node:16.5.0-alpine3.14
+                                    image: node:16.6.2-alpine3.14
                                     command: npm run build
                                     privileged: false
                                     resources:
@@ -122,7 +122,7 @@ pipeline:
                                     tags:
                                         - latest
                                         - <+pipeline.sequenceId>
-                                    dockerfile: Dockerfile.prod
+                                    dockerfile: Dockerfile.dev
                                     context: ./
                                     optimize: true
                                     resources:
