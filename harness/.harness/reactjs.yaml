@@ -45,6 +45,8 @@ pipeline:
                                             memory: 512Mi
                                             cpu: "0.5"
                                 failureStrategies: []
+                                when:
+                                    stageStatus: Success
                           - parallel:
                                 - step:
                                       type: Run
