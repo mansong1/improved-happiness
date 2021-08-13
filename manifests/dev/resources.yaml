@@ -43,8 +43,6 @@ spec:
             initialDelaySeconds: 10
             periodSeconds: 5
           env:
-            - name: "HTTPS"
-              value: "true"
             - name: REACT_APP_API_KEY
               value: "d3544727-c59b-4e90-8fa2-c39c926b6124"
             - name: REACT_APP_HARNESS_IDENTIFIER
