@@ -10,7 +10,6 @@ metadata:
     nginx.ingress.kubernetes.io/cors-allow-credentials: "true"
     nginx.ingress.kubernetes.io/cors-allow-origin: "https://mansong.ff-demo.co.uk"
     nginx.ingress.kubernetes.io/cors-allow-headers: "Content-Type,Authorization"
-    nginx.ingress.kubernetes.io/cors-expose-headers: "*"
   name: mansong-ingress-resource
   namespace: staging
 spec:
