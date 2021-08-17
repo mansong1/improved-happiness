@@ -223,6 +223,27 @@ pipeline:
                         action:
                             type: StageRollback
         - stage:
+              name: FeatureFlags
+              identifier: FeatureFlags
+              description: ""
+              type: FeatureFlag
+              spec:
+                  execution:
+                      steps:
+                          - step:
+                                type: FlagConfiguration
+                                name: FeatureFlag_DarkMode
+                                identifier: FeatureFlag_DarkMode
+                                spec:
+                                    feature: Dark_Mode
+                                    environment: dev
+                                    instructions:
+                                        - identifier: SetFeatureFlagStateIdentifier
+                                          type: SetFeatureFlagState
+                                          spec:
+                                              state: "on"
+                                timeout: 10m
+        - stage:
               name: Approval
               identifier: Approval
               description: ""
