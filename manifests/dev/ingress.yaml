@@ -6,10 +6,14 @@ metadata:
     cert-manager.io/cluster-issuer: "mansong-letsencrypt-staging"
     nginx.ingress.kubernetes.io/enable-cors: "true"
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
-    nginx.ingress.kubernetes.io/cors-allow-methods: "GET, PUT, POST, DELETE, HEAD, OPTIONS"
     nginx.ingress.kubernetes.io/cors-allow-credentials: "true"
-    nginx.ingress.kubernetes.io/cors-allow-origin: "https://mansong.ff-demo.co.uk"
-    nginx.ingress.kubernetes.io/cors-allow-headers: "Origin,Content-Type,Accept,Cache-Control,Authorization,api-key"
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      if ($http_origin ~* "https.?:\/\/(.*\.)?(mansong|ff-demo\.co\.uk).*$") {
+        add_header "Access-Control-Allow-Origin" "$http_origin" always;
+        add_header "Access-Control-Allow-Methods" "GET, PUT, POST, OPTIONS" always;
+        add_header "Access-Control-Allow-Headers" "DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization" always;
+        add_header "Access-Control-Expose-Headers" "Content-Length,Content-Range" always;
+      }
   name: mansong-ingress-resource
   namespace: staging
 spec:
