@@ -225,14 +225,14 @@ pipeline:
         - stage:
               name: FeatureFlags
               identifier: FeatureFlags
-              description: ""
+              description: Enable Dev Feature Flags
               type: FeatureFlag
               spec:
                   execution:
                       steps:
                           - step:
                                 type: FlagConfiguration
-                                name: FeatureFlag_DarkMode
+                                name: DarkMode
                                 identifier: FeatureFlag_DarkMode
                                 spec:
                                     feature: Dark_Mode
