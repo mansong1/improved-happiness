@@ -41,7 +41,7 @@ spec:
               path: /health
               port: 80
             initialDelaySeconds: 10
-            periodSeconds: 5
+            periodSeconds: 300
           env:
             - name: REACT_APP_API_KEY
               value: "d3544727-c59b-4e90-8fa2-c39c926b6124"
