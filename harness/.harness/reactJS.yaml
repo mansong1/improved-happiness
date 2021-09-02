@@ -189,3 +189,130 @@ pipeline:
                             - AllErrors
                         action:
                             type: StageRollback
+        - stage:
+              name: Approval
+              identifier: Approval
+              description: ""
+              type: Approval
+              spec:
+                  execution:
+                      steps:
+                          - step:
+                                name: Approval
+                                identifier: approval
+                                type: HarnessApproval
+                                timeout: 1d
+                                spec:
+                                    approvalMessage: |-
+                                        Please review the following information
+                                        and approve the pipeline progression
+                                    includePipelineExecutionHistory: true
+                                    approvers:
+                                        minimumCount: 1
+                                        disallowPipelineExecutor: false
+                                        userGroups:
+                                            - account.Sales
+                                    approverInputs: []
+                                failureStrategies: []
+              tags: {}
+        - stage:
+              name: Production
+              identifier: Production
+              description: ""
+              type: Deployment
+              spec:
+                  serviceConfig:
+                      useFromStage:
+                          stage: Staging
+                      stageOverrides:
+                          artifacts:
+                              sidecars: []
+                          manifests:
+                              - manifest:
+                                    identifier: prod
+                                    type: K8sManifest
+                                    spec:
+                                        store:
+                                            type: Github
+                                            spec:
+                                                connectorRef: mansonggithub
+                                                gitFetchType: Branch
+                                                paths:
+                                                    - manifests/prod/configmap.yaml
+                                                    - manifests/prod/resources.yaml
+                                                repoName: improved-happiness
+                                                branch: main
+                                        skipResourceVersioning: false
+                          variables: []
+                  infrastructure:
+                      environmentRef: prod
+                      infrastructureDefinition:
+                          type: KubernetesDirect
+                          spec:
+                              connectorRef: mansonggke
+                              namespace: production
+                              releaseName: release-<+INFRA_KEY>
+                      allowSimultaneousDeployments: true
+                  execution:
+                      steps:
+                          - stepGroup:
+                                name: Canary Deployment
+                                identifier: canaryDepoyment
+                                steps:
+                                    - step:
+                                          name: Canary Deployment
+                                          identifier: canaryDeployment
+                                          type: K8sCanaryDeploy
+                                          timeout: 10m
+                                          spec:
+                                              instanceSelection:
+                                                  type: Count
+                                                  spec:
+                                                      count: 1
+                                              skipDryRun: false
+                                    - step:
+                                          name: Canary Delete
+                                          identifier: canaryDelete
+                                          type: K8sCanaryDelete
+                                          timeout: 10m
+                                          spec: {}
+                                rollbackSteps:
+                                    - step:
+                                          name: Canary Delete
+                                          identifier: rollbackCanaryDelete
+                                          type: K8sCanaryDelete
+                                          timeout: 10m
+                                          spec: {}
+                          - stepGroup:
+                                name: Primary Deployment
+                                identifier: primaryDepoyment
+                                steps:
+                                    - step:
+                                          name: Rolling Deployment
+                                          identifier: rollingDeployment
+                                          type: K8sRollingDeploy
+                                          timeout: 10m
+                                          spec:
+                                              skipDryRun: false
+                                rollbackSteps:
+                                    - step:
+                                          name: Rolling Rollback
+                                          identifier: rollingRollback
+                                          type: K8sRollingRollback
+                                          timeout: 10m
+                                          spec: {}
+                      rollbackSteps:
+                          - step:
+                                type: K8sRollingRollback
+                                name: RollBack
+                                identifier: RollBack
+                                spec:
+                                    skipDryRun: false
+                                timeout: 10m
+              tags: {}
+              failureStrategies:
+                  - onFailure:
+                        errors:
+                            - AllErrors
+                        action:
+                            type: StageRollback
