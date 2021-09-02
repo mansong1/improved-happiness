@@ -127,8 +127,8 @@ pipeline:
                                     privileged: false
               variables: []
         - stage:
-              name: Deploy To Dev
-              identifier: Deploy_To_Dev
+              name: Staging
+              identifier: Staging
               description: ""
               type: Deployment
               spec:
