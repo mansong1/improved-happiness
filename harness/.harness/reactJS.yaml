@@ -74,4 +74,55 @@ pipeline:
                                         limits:
                                             memory: 1Gi
                                             cpu: "1"
+                          - step:
+                                type: Run
+                                name: Build
+                                identifier: Build
+                                spec:
+                                    connectorRef: mansongdockerhub
+                                    image: node:16.5.0-alpine3.14
+                                    command: npm run build
+                                    privileged: false
+                                    resources:
+                                        limits:
+                                            memory: 2Gi
+                                            cpu: "1"
+                          - step:
+                                type: SaveCacheS3
+                                name: Rebuild Cache
+                                identifier: Rebuild_Cache
+                                spec:
+                                    connectorRef: mansongaws
+                                    region: eu-west-2
+                                    bucket: mansong-npm
+                                    key: gesturerecognition
+                                    sourcePaths:
+                                        - node_modules
+                                    archiveFormat: Tar
+                          - step:
+                                type: BuildAndPushDockerRegistry
+                                name: Push Docker Image
+                                identifier: Push_Docker_Image
+                                spec:
+                                    connectorRef: mansongdockerhub
+                                    repo: mansong/gesturerecognition
+                                    tags:
+                                        - <+pipeline.sequenceId>
+                                        - latest
+                                    dockerfile: Dockerfile.prod
+                                    context: ./
+                                    optimize: true
+                                    resources:
+                                        limits:
+                                            memory: 2Gi
+                                            cpu: "1"
+                          - step:
+                                type: Run
+                                name: Scan Docker Image
+                                identifier: Scan_Docker_Image
+                                spec:
+                                    connectorRef: mansongdockerhub
+                                    image: bitnami/trivy:latest
+                                    command: trivy image mansong/gesturerecognition:<+pipeline.sequenceId>
+                                    privileged: false
               variables: []
