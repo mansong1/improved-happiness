@@ -40,4 +40,25 @@ pipeline:
                                     key: gesturerecognition
                                     archiveFormat: Tar
                                 failureStrategies: []
+                          - parallel:
+                                - step:
+                                      type: Run
+                                      name: DockerLint
+                                      identifier: DockerLint
+                                      spec:
+                                          connectorRef: mansongdockerhub
+                                          image: hadolint/hadolint:latest-alpine
+                                          command: |-
+                                              hadolint Dockerfile.prod
+                                              hadolint Dockerfile.dev
+                                          privileged: false
+                                - step:
+                                      type: Run
+                                      name: ESLint
+                                      identifier: ESLint
+                                      spec:
+                                          connectorRef: mansongdockerhub
+                                          image: pipelinecomponents/eslint
+                                          command: eslint .
+                                          privileged: false
               variables: []
