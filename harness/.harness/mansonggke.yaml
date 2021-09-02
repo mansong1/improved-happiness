@@ -1,0 +1,13 @@
+connector:
+  name: mansong-gke
+  identifier: mansonggke
+  description:
+  orgIdentifier: default
+  projectIdentifier: GestureRecognition
+  type: K8sCluster
+  spec:
+    credential:
+      type: InheritFromDelegate
+    delegateSelectors:
+    - mansong-cogenial-octo-funicular-sasyuu-0
+    - mansong-cogenial-octo-funicular
