@@ -1,0 +1,13 @@
+connector:
+  name: mansong-aws
+  identifier: mansongaws
+  description:
+  orgIdentifier: default
+  projectIdentifier: GestureRecognition
+  type: Aws
+  spec:
+    credential:
+      type: ManualConfig
+      spec:
+        accessKey: AKIA3B4U6ZRO5LTWMVOQ
+        secretKeyRef: access_key
