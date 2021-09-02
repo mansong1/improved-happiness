@@ -211,7 +211,7 @@ pipeline:
                                         minimumCount: 1
                                         disallowPipelineExecutor: false
                                         userGroups:
-                                            - account.Sales
+                                            - Approvers
                                     approverInputs: []
                                 failureStrategies: []
               tags: {}
