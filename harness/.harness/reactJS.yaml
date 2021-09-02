@@ -1,0 +1,43 @@
+pipeline:
+    name: reactJS
+    identifier: reactJS
+    projectIdentifier: GestureRecognition
+    orgIdentifier: default
+    tags:
+        node: "16.5"
+        react: 17.0.2
+        tensorflowjs: 3.7.0
+        featureflags: ""
+    properties:
+        ci:
+            codebase:
+                connectorRef: mansonggithub
+                repoName: improved-happiness
+                build: <+input>
+    stages:
+        - stage:
+              name: Build and Publish
+              identifier: Build_and_Publish
+              description: ""
+              type: CI
+              spec:
+                  cloneCodebase: true
+                  infrastructure:
+                      type: KubernetesDirect
+                      spec:
+                          connectorRef: mansonggke
+                          namespace: harness-delegate
+                  execution:
+                      steps:
+                          - step:
+                                type: RestoreCacheS3
+                                name: Restore Cache
+                                identifier: Restore_Cache
+                                spec:
+                                    connectorRef: mansongaws
+                                    region: eu-west-2
+                                    bucket: mansong-npm
+                                    key: gesturerecognition
+                                    archiveFormat: Tar
+                                failureStrategies: []
+              variables: []
