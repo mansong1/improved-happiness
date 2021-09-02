@@ -1,0 +1,15 @@
+connector:
+  name: mansong-dockerhub
+  identifier: mansongdockerhub
+  description:
+  orgIdentifier: default
+  projectIdentifier: GestureRecognition
+  type: DockerRegistry
+  spec:
+    dockerRegistryUrl: https://index.docker.io/v2/
+    providerType: DockerHub
+    auth:
+      type: UsernamePassword
+      spec:
+        username: mansong
+        passwordRef: mansongdockerhub
