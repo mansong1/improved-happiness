@@ -1,0 +1,1 @@
+import { Background, GlobalStyle } from "./styles";
