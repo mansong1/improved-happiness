@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faEnvelope } from "@fortawesome/free-solid-svg-icons";
 
@@ -14,7 +14,14 @@ import {
   SubmitButton,
 } from "./styles";
 
-const Home = () => {
+function Home(){
+  
+  const history = useHistory();
+
+  const handleClick = () => {
+    history.push('/gesture-recognition');
+  };
+
   return (
     <React.Fragment>
       <GlobalStyle />
@@ -34,7 +41,7 @@ const Home = () => {
             <Input placeholder="Email" />
           </InputsWrapperItem>
           <InputsWrapperItem noUnderline={true}>
-            <SubmitButton>
+            <SubmitButton onClick={handleClick}>
               Submit
               </SubmitButton>
           </InputsWrapperItem>
