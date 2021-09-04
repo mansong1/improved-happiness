@@ -1,6 +1,6 @@
 import { html } from 'common-tags';
 import styled, { createGlobalStyle, css, CSSProp } from 'styled-components';
-import bgImage from '../assets/bg.jpg';
+import bgImage from './images/bg.png';
 
 const GlobalStyle = createGlobalStyle`
     html, body {
@@ -118,5 +118,6 @@ export { GlobalStyle,
     Form, 
     InputsWrapper, 
     InputsWrapperItem, 
-    Submit 
+    Submit,
+    Input
 };
