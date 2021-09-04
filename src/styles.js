@@ -105,19 +105,26 @@ const Input = styled.input`
     padding-left: 0.5em;
     padding-bottom: .5em;
     font-size: 1.25em;
-    color: black;
+    color: #3c354e;
+    font-size: 1rem;
+    font-weight: bold;
     transition: color ${transitionTime};
 
     @media (min-width: 48.0em) {
         color: black;
     }
 
+    &:focus {
+        backdrop-filter: blur(12rem);
+      }
+
     &::placeholder {
-        color: rgba(0,0,0,.8)
+        color: #b9abe099;
+        font-size: 1rem;
         transition: color ${transitionTime};
 
         @media (min-width: 48.0em) {
-            color: lightgray;
+            color: #b9abe099;
         }
     }
 `;
