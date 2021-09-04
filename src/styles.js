@@ -36,18 +36,29 @@ const Background = styled.div`
 `;
 
 const Form = styled.form`
-    width: 90%;
-    height: 80%;
+    width: 50vw;
+    height: 80vh;
     position: absolute;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 8px 32px 0 rgba(31,38,135,0.37);
     transition: height ${transitionTime};
+    text-transform: uppercase;
+    letter-spacing: 0.4rem;
 
-    @media (min-width: 48.0em) {
-        height: 50%;
-    }
+    @media only screen and (max-width: 320px) {
+        width: 80vw;
+        height: 90vh;
+        hr {
+          margin-bottom: 0.3rem;
+        }
+        h4 {
+          font-size: small;
+        }
+      }
 
     &::after {
         content: '';
@@ -65,10 +76,17 @@ const Form = styled.form`
     }
 `;
 
+const FormTitle = styled.h2`
+    margin: 3rem 0 2rem 0;
+`;
+
 const InputsWrapper = styled.div`
-    width: 70%;
+    width: 80%;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 20%;
     z-index: 1;
 `;
 
@@ -76,7 +94,7 @@ const InputsWrapperItem = styled.div`
     width: 60%;
     display: flex;
     border-bottom: ${props => props.noUnderline ? `none` : `0.0625em solid black`};
-    padding-top: 1.5em;
+    padding-top: 2.5em;
 `;
 
 const Input = styled.input`
@@ -91,7 +109,7 @@ const Input = styled.input`
     transition: color ${transitionTime};
 
     @media (min-width: 48.0em) {
-        color: white;
+        color: black;
     }
 
     &::placeholder {
@@ -104,20 +122,33 @@ const Input = styled.input`
     }
 `;
 
-const Submit = styled(Input)`
-    margin-left: .5em;
+const SubmitButton = styled.button`
+    background: linear-gradient(to right, #14163c 0%, #03217b 79%);
+    text-transform: uppercase;
+    letter-spacing: 0.2rem;
     transition: transform 200ms ease-in-out;
+    width: 50%;
+    height: 3rem;
+    border: none;
+    color: white;
+    border-radius: 2rem;
+    justify-content: center;
+    position: relative;
+    left: 50%;
+
     &:hover {
         cursor: pointer;
-        transform: scale(1.2);
+        transform: scale(1.05);
     }
-`
+
+`;
 
 export { GlobalStyle, 
     Background, 
-    Form, 
+    Form,
+    FormTitle,
     InputsWrapper, 
     InputsWrapperItem, 
-    Submit,
+    SubmitButton,
     Input
 };
