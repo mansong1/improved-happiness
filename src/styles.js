@@ -102,7 +102,7 @@ const Input = styled.input`
     background: none;
     border: none;
     outline: none;
-    padding-left: 0.5em;
+    padding-left: 0.85em;
     padding-bottom: .5em;
     font-size: 1.25em;
     color: #3c354e;
@@ -113,10 +113,6 @@ const Input = styled.input`
     @media (min-width: 48.0em) {
         color: black;
     }
-
-    &:focus {
-        backdrop-filter: blur(12rem);
-      }
 
     &::placeholder {
         color: #b9abe099;
