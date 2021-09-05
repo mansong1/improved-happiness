@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import { useLocalStorage } from './useLocalStorage';
 
 import {
     GlobalStyle,
@@ -20,13 +21,9 @@ function Home() {
 
   let history = useHistory();
 
-  const [first_name, setFirstName] = React.useState('');
-  const [last_name, setLastName] = React.useState('');
-  const [email, setEmail] = React.useState('');
-
-  localStorage.setItem('first_name', JSON.stringify(first_name), [first_name]);
-  localStorage.setItem('last_name', JSON.stringify(last_name), [last_name]);
-  localStorage.setItem('email', JSON.stringify(email), [email]);
+  const [first_name, setFirstName] = useLocalStorage('first_name', '');
+  const [last_name, setLastName] = useLocalStorage('last_name', '');
+  const [email, setEmail] =  useLocalStorage('email', '');
 
   function handleSubmit() {
     history.push('/gesture-recognition');
