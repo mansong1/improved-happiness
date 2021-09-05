@@ -8,7 +8,6 @@ import Webcam from "react-webcam";
 import './App.css';
 import { drawHand } from "./utilities";
 import * as customgestures from "./gestures";
-import { useLocalStorage } from "./useLocalStorage";
 
 //Import Harness Feature Flag Client SDK
 import { initialize, Event } from '@harnessio/ff-javascript-client-sdk';
@@ -16,8 +15,6 @@ import { initialize, Event } from '@harnessio/ff-javascript-client-sdk';
 const GestureRecognition = () => {
   
   const [featureFlags, setFeatureFlags] = useState({})
-  
-  const apiKey = '9e007f95-a6a1-4ee9-a52c-561302e18590' || process.env.REACT_APP_API_KEY;
   
   const { detect } = require('detect-browser');
   const browser = detect();
@@ -28,10 +25,10 @@ const GestureRecognition = () => {
   var email = JSON.parse(localStorage.getItem('email'));
 
   useEffect(() => {
-    const cf = initialize(apiKey, {
-      identifier: lastName,  //'Harness',
-      name: name,           //'Harness',
-      attributes: {                                         // Optional target attributes
+    const cf = initialize(window.REACT_APP_API_KEY, {
+      identifier: lastName,                 //'Harness',
+      name: name,                           //'Harness',
+      attributes: {                         // Optional target attributes
         lastUpdated: date.toUTCString(),
         host: window.location.hostname,
         email: email,
