@@ -1,8 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: gesturerecognition-conf
-data:
-  harness.debug: 'true'
-  config.js: |
-    window.REACT_APP_API_KEY='ad65462d-f330-4ae2-89f3-3b969736a53a'
