@@ -149,7 +149,6 @@ pipeline:
                                                     connectorRef: mansonggithub
                                                     gitFetchType: Branch
                                                     paths:
-                                                        - manifests/dev/configmap.yaml
                                                         - manifests/dev/resources.yaml
                                                         - manifests/dev/ingress.yaml
                                                         - manifests/dev/cert.yaml
