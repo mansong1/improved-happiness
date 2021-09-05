@@ -8,6 +8,7 @@ import Webcam from "react-webcam";
 import './App.css';
 import { drawHand } from "./utilities";
 import * as customgestures from "./gestures";
+import { useLocalStorage } from "./useLocalStorage";
 
 //Import Harness Feature Flag Client SDK
 import { initialize, Event } from '@harnessio/ff-javascript-client-sdk';
@@ -16,20 +17,24 @@ const GestureRecognition = () => {
   
   const [featureFlags, setFeatureFlags] = useState({})
   
-  const apiKey = process.env.REACT_APP_API_KEY;
+  const apiKey = '9e007f95-a6a1-4ee9-a52c-561302e18590' || process.env.REACT_APP_API_KEY;
   
   const { detect } = require('detect-browser');
   const browser = detect();
   const date = new Date();
+  
+  var name = JSON.parse(localStorage.getItem('first_name'));
+  var lastName = JSON.parse(localStorage.getItem('last_name'));
+  var email = JSON.parse(localStorage.getItem('email'));
 
   useEffect(() => {
     const cf = initialize(apiKey, {
-      identifier: process.env.REACT_APP_HARNESS_IDENTIFIER, //'Harness',
-      name: process.env.REACT_APP_HARNESS_TARGET_NAME,      //'Harness',
+      identifier: lastName,  //'Harness',
+      name: name,           //'Harness',
       attributes: {                                         // Optional target attributes
         lastUpdated: date.toUTCString(),
         host: window.location.hostname,
-        email: process.env.REACT_APP_HARNESS_EMAIL_ATTR,    // Email attribute
+        email: email,
         browserName: browser.name,
         browserVersion: browser.version,
         os: browser.os.name,
