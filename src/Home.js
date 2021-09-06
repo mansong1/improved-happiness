@@ -37,15 +37,15 @@ function Home() {
             <InputsWrapper>
             <InputsWrapperItem>
                 <FontAwesomeIcon icon={faUser} />
-                <Input type="text" required placeholder="First Name" onChange={(e) => setFirstName(e.target.value)} />
+                <Input type="text" required placeholder="First Name" value={first_name} onChange={(e) => setFirstName(e.target.value)} />
             </InputsWrapperItem>
             <InputsWrapperItem>
                 <FontAwesomeIcon icon={faUser} />
-                <Input type="text" required placeholder="Last Name" onChange={(e) => setLastName(e.target.value)}/>
+                <Input type="text" required placeholder="Last Name" value={last_name} onChange={(e) => setLastName(e.target.value)}/>
             </InputsWrapperItem>
             <InputsWrapperItem>
                 <FontAwesomeIcon icon={faEnvelope} />
-                <Input type="email" required placeholder="Email" onChange={(e) => setEmail(e.target.value)}/>
+                <Input type="email" required placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}/>
             </InputsWrapperItem>
             <InputsWrapperItem noUnderline={true}>
                 <SubmitButton type="submit" >
