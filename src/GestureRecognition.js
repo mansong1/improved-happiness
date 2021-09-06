@@ -20,9 +20,9 @@ const GestureRecognition = () => {
   const browser = detect();
   const date = new Date();
   
-  var name = JSON.parse(sessionStorage.getItem('first_name'));
-  var lastName = JSON.parse(sessionStorage.getItem('last_name'));
-  var email = JSON.parse(sessionStorage.getItem('email'));
+  var name = JSON.parse(localStorage.getItem('first_name'));
+  var lastName = JSON.parse(localStorage.getItem('last_name'));
+  var email = JSON.parse(localStorage.getItem('email'));
 
   useEffect(() => {
     const cf = initialize(window.REACT_APP_API_KEY, {
