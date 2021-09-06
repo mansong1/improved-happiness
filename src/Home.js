@@ -27,7 +27,7 @@ function Home() {
   const handleSubmit= e => {
     e.preventDefault();
     history.push('/gesture-recognition');
-  }
+  };
 
   return (
     <React.Fragment>
