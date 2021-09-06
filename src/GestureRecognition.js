@@ -66,7 +66,7 @@ const GestureRecognition = () => {
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
   const config = {
-    video: { width: 960, height: 720 }
+    video: { width: 840, height: 600 }
   };
 
   const videoConstraints = {
@@ -160,7 +160,7 @@ const GestureRecognition = () => {
             left: 0,
             right: 0,
             textAlign: "center",
-            zindex: 9,
+            zindex: 5,
             width: config.video.width,
             height: config.video.height,
             border: "2px solid #111",
@@ -178,7 +178,7 @@ const GestureRecognition = () => {
             left: 0,
             right: 0,
             textAlign: "center",
-            zindex: 9,
+            zindex: 5,
             width: config.video.width,
             height: config.video.height,
             border: "2px solid #111",
@@ -194,8 +194,8 @@ const GestureRecognition = () => {
               position: "absolute",
               marginLeft: "auto",
               marginRight: "auto",
-              left: 750,
-              bottom: 650,
+              left: 650,
+              bottom: 500,
               right: 0,
               textAlign: "center",
               height: 100,
