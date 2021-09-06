@@ -1,0 +1,8 @@
+connector:
+  name: congenial_prometheus
+  identifier: congenial_prometheus
+  orgIdentifier: default
+  projectIdentifier: GestureRecognition
+  type: Prometheus
+  spec:
+    url: http://35.234.146.73:8080/
