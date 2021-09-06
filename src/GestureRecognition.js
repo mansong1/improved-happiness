@@ -72,7 +72,7 @@ const GestureRecognition = () => {
   const videoConstraints = {
     width: config.video.width,
     height: config.video.height,
-    facingMode: "user"
+    facingMode: { exact: "environment" }
   };
 
   const [emoji, setEmoji] = useState(null);
