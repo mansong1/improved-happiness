@@ -1,5 +1,4 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faEnvelope } from "@fortawesome/free-solid-svg-icons";
@@ -25,7 +24,8 @@ function Home() {
   const [last_name, setLastName] = useLocalStorage('last_name', '');
   const [email, setEmail] =  useLocalStorage('email', '');
 
-  function handleSubmit() {
+  function handleSubmit(e) {
+    e.preventDefault();
     history.push('/gesture-recognition');
   }
 
@@ -33,22 +33,22 @@ function Home() {
     <React.Fragment>
     <GlobalStyle />
     <Background>
-        <Form>
+        <Form onSubmit={handleSubmit}>
             <InputsWrapper>
             <InputsWrapperItem>
                 <FontAwesomeIcon icon={faUser} />
-                <Input type="text" required placeholder="First Name" onChange={ (e) => setFirstName(e.target.value) } />
+                <Input type="text" required placeholder="First Name" onChange={(e) => setFirstName(e.target.value)} />
             </InputsWrapperItem>
             <InputsWrapperItem>
                 <FontAwesomeIcon icon={faUser} />
-                <Input type="text" required placeholder="Last Name" onChange={ (e) => setLastName(e.target.value) }/>
+                <Input type="text" required placeholder="Last Name" onChange={(e) => setLastName(e.target.value)}/>
             </InputsWrapperItem>
             <InputsWrapperItem>
                 <FontAwesomeIcon icon={faEnvelope} />
-                <Input type="email" required placeholder="Email" onChange={ (e) => setEmail(e.target.value) }/>
+                <Input type="email" required placeholder="Email" onChange={(e) => setEmail(e.target.value)}/>
             </InputsWrapperItem>
             <InputsWrapperItem noUnderline={true}>
-                <SubmitButton type="submit" onClick={handleSubmit} >
+                <SubmitButton type="submit" >
                 Submit
                 </SubmitButton>
             </InputsWrapperItem>
