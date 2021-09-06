@@ -5,7 +5,7 @@ metadata:
 data:
   harness.debug: 'true'
   config.js: |
-    window.REACT_APP_API_KEY='ad65462d-f330-4ae2-89f3-3b969736a53a';
+    window.REACT_APP_API_KEY='2ebbed7c-5a01-4e00-af22-f3e57cf4396c';
 
 ---
 
