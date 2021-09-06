@@ -156,7 +156,7 @@ pipeline:
                                                     branch: main
                                             skipResourceVersioning: false
                   infrastructure:
-                      environmentRef: dev
+                      environmentRef: Development
                       infrastructureDefinition:
                           type: KubernetesDirect
                           spec:
