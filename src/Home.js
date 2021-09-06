@@ -24,7 +24,7 @@ function Home() {
   const [last_name, setLastName] = useLocalStorage('last_name', '');
   const [email, setEmail] =  useLocalStorage('email', '');
 
-  function handleSubmit(e) {
+  const handleSubmit= e => {
     e.preventDefault();
     history.push('/gesture-recognition');
   }
