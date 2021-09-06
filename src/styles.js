@@ -126,7 +126,7 @@ const Input = styled.input`
 `;
 
 const SubmitButton = styled.button`
-    background: linear-gradient(to right, #8f6806 0%, #fabb09 79%);
+    background: linear-gradient(to right, #12c2e9 0%, #c471ed);
     text-transform: uppercase;
     letter-spacing: 0.2rem;
     transition: transform 200ms ease-in-out;
