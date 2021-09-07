@@ -127,6 +127,33 @@ pipeline:
                                     privileged: false
               variables: []
         - stage:
+              name: Approval
+              identifier: Approval
+              description: ""
+              type: Approval
+              spec:
+                  execution:
+                      steps:
+                          - step:
+                                name: Approval
+                                identifier: approval
+                                type: HarnessApproval
+                                timeout: 1d
+                                spec:
+                                    approvalMessage: |-
+                                        Please review the following information
+                                        and approve the pipeline progression
+                                    includePipelineExecutionHistory: true
+                                    approvers:
+                                        minimumCount: 1
+                                        disallowPipelineExecutor: false
+                                        userGroups:
+                                            - account.Demo_Group
+                                            - account.Sales
+                                            - account.Read_Only
+                                    approverInputs: []
+              tags: {}
+        - stage:
               name: Staging
               identifier: Staging
               description: ""
