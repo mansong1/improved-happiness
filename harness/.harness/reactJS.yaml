@@ -182,7 +182,7 @@ pipeline:
                                     method: GET
                                     headers: []
                                     outputVariables: []
-                                    assertion: "200"
+                                    assertion: ""
                                     delegateSelectors:
                                         - mansong-cogenial-octo-funicular
                                         - mansong-cogenial-octo-funicular-sasyuu-0
