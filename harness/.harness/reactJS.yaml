@@ -173,6 +173,21 @@ pipeline:
                                 timeout: 10m
                                 spec:
                                     skipDryRun: false
+                          - step:
+                                type: Http
+                                name: Verify
+                                identifier: Verify
+                                spec:
+                                    url: https://mansong.ff-demo.co.uk
+                                    method: GET
+                                    headers: []
+                                    outputVariables: []
+                                    assertion: "200"
+                                    delegateSelectors:
+                                        - mansong-cogenial-octo-funicular
+                                        - mansong-cogenial-octo-funicular-sasyuu-0
+                                timeout: 10s
+                                failureStrategies: []
                       rollbackSteps:
                           - step:
                                 name: Rollback Rollout Deployment
