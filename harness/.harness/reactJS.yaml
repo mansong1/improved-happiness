@@ -125,6 +125,15 @@ pipeline:
                                     image: bitnami/trivy:latest
                                     command: trivy image mansong/gesturerecognition:<+pipeline.sequenceId>
                                     privileged: false
+                          - step:
+                                type: Run
+                                name: Test
+                                identifier: Test
+                                spec:
+                                    connectorRef: mansongdockerhub
+                                    image: busybox
+                                    command: echo Test
+                                    privileged: false
               variables: []
         - stage:
               name: Staging
