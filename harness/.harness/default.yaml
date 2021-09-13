@@ -1,0 +1,14 @@
+inputSet:
+  identifier: "default"
+  pipeline:
+    identifier: "reactJS"
+    properties:
+      ci:
+        codebase:
+          build:
+            type: "branch"
+            spec:
+              branch: "main"
+  name: "default"
+  orgIdentifier: "default"
+  projectIdentifier: "GestureRecognition"
