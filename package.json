@@ -44,7 +44,8 @@
     "verbose": true,
     "coverageReporters": [
       "text",
-      "json"
+      "json",
+      "cobertura"
     ],
     "reporters": [
       "default",
