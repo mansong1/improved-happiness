@@ -196,22 +196,6 @@ pipeline:
                                     outputVariables: []
                                 timeout: 10s
                           - step:
-                                type: ShellScript
-                                name: Health
-                                identifier: Ping
-                                spec:
-                                    shell: Bash
-                                    onDelegate: true
-                                    source:
-                                        type: Inline
-                                        spec:
-                                            script: curl -sL -w "%{http_code}\n" "https://mansong.ff-demo.co.uk/health" -o /dev/null
-                                    environmentVariables: []
-                                    outputVariables: []
-                                    executionTarget: {}
-                                timeout: 10m
-                                failureStrategies: []
-                          - step:
                                 type: Verify
                                 name: Verify
                                 identifier: Verify
