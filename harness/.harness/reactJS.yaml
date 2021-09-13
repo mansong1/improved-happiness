@@ -167,6 +167,13 @@ pipeline:
                                                     repoName: improved-happiness
                                                     branch: main
                                             skipResourceVersioning: false
+                              artifacts:
+                                  primary:
+                                      type: DockerRegistry
+                                      spec:
+                                          connectorRef: mansongdockerhub
+                                          imagePath: mansong/gesturerecognition
+                                          tagRegex: latest
                   infrastructure:
                       environmentRef: Development
                       infrastructureDefinition:
