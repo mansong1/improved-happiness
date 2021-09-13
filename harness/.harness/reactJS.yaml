@@ -186,8 +186,18 @@ pipeline:
                                 spec:
                                     skipDryRun: false
                           - step:
+                                type: Http
+                                name: HealthCheck
+                                identifier: HealthCheck
+                                spec:
+                                    url: https://mansong.ff-demo.co.uk/health
+                                    method: GET
+                                    headers: []
+                                    outputVariables: []
+                                timeout: 10s
+                          - step:
                                 type: ShellScript
-                                name: Ping
+                                name: Health
                                 identifier: Ping
                                 spec:
                                     shell: Bash
@@ -195,11 +205,12 @@ pipeline:
                                     source:
                                         type: Inline
                                         spec:
-                                            script: ping https://mansong.ff-demo.co.uk
+                                            script: curl -sL -w "%{http_code}\n" "https://mansong.ff-demo.co.uk/health" -o /dev/null
                                     environmentVariables: []
                                     outputVariables: []
                                     executionTarget: {}
                                 timeout: 10m
+                                failureStrategies: []
                           - step:
                                 type: Verify
                                 name: Verify
