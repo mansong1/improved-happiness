@@ -67,7 +67,7 @@ pipeline:
                                 identifier: Install_Dependencies
                                 spec:
                                     connectorRef: mansongdockerhub
-                                    image: node:16.5.0-alpine3.14
+                                    image: <+Build_and_Publish.variables.node_version>
                                     command: npm install
                                     privileged: false
                                     resources:
@@ -76,11 +76,20 @@ pipeline:
                                             cpu: "1"
                           - step:
                                 type: Run
+                                name: Run Tests
+                                identifier: Run_Tests
+                                spec:
+                                    connectorRef: mansongdockerhub
+                                    image: <+Build_and_Publish.variables.node_version>
+                                    command: npm test
+                                    privileged: false
+                          - step:
+                                type: Run
                                 name: Build
                                 identifier: Build
                                 spec:
                                     connectorRef: mansongdockerhub
-                                    image: node:16.5.0-alpine3.14
+                                    image: <+Build_and_Publish.variables.node_version>
                                     command: npm run build
                                     privileged: false
                                     resources:
@@ -125,7 +134,10 @@ pipeline:
                                     image: bitnami/trivy:latest
                                     command: trivy image mansong/gesturerecognition:<+pipeline.sequenceId>
                                     privileged: false
-              variables: []
+              variables:
+                  - name: node_version
+                    type: String
+                    value: node:16.5.0-alpine3.14
         - stage:
               name: Staging
               identifier: Staging
