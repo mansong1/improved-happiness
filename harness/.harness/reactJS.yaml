@@ -30,6 +30,18 @@ pipeline:
                   execution:
                       steps:
                           - step:
+                                type: Plugin
+                                name: SemVer
+                                identifier: SemVer
+                                spec:
+                                    connectorRef: mansongdockerhub
+                                    image: cedrichopf/drone-semver
+                                    privileged: false
+                                    settings:
+                                        initial_version: 1.0.0
+                                        autoincrement: "true"
+                                        file: CHANGELOG.md
+                          - step:
                                 type: RestoreCacheS3
                                 name: Restore Cache
                                 identifier: Restore_Cache
