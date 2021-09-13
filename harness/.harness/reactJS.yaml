@@ -185,6 +185,39 @@ pipeline:
                                 timeout: 10m
                                 spec:
                                     skipDryRun: false
+                          - step:
+                                type: Verify
+                                name: Verify
+                                identifier: Verify
+                                spec:
+                                    type: Rolling
+                                    spec:
+                                        sensitivity: LOW
+                                        duration: 5m
+                                        trafficsplit: 5
+                                        deploymentTag: <+serviceConfig.artifacts.primary.tag>
+                                timeout: 2h
+                                failureStrategies:
+                                    - onFailure:
+                                          errors:
+                                              - Verification
+                                          action:
+                                              type: ManualIntervention
+                                              spec:
+                                                  timeout: 2h
+                                                  onTimeout:
+                                                      action:
+                                                          type: StageRollback
+                                    - onFailure:
+                                          errors:
+                                              - Unknown
+                                          action:
+                                              type: ManualIntervention
+                                              spec:
+                                                  timeout: 2h
+                                                  onTimeout:
+                                                      action:
+                                                          type: Ignore
                       rollbackSteps:
                           - step:
                                 name: Rollback Rollout Deployment
