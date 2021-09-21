@@ -163,7 +163,6 @@ const GestureRecognition = () => {
             zindex: 5,
             width: config.video.width,
             height: config.video.height,
-            border: "2px solid #111",
             borderRadius: "10px",
             filter: "drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.6))",
           }}
@@ -181,7 +180,6 @@ const GestureRecognition = () => {
             zindex: 5,
             width: config.video.width,
             height: config.video.height,
-            border: "2px solid #111",
             borderRadius: "10px",
             filter: "drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.6))",
           }}
