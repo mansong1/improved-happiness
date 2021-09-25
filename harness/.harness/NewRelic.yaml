@@ -1,0 +1,10 @@
+connector:
+  name: NewRelic
+  identifier: NewRelic
+  orgIdentifier: default
+  projectIdentifier: GestureRecognition
+  type: NewRelic
+  spec:
+    newRelicAccountId: 3295531
+    url: https://insights-api.eu.newrelic.com/
+    apiKeyRef: mansongNewRelic
