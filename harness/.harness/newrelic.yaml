@@ -6,7 +6,7 @@ connector:
   type: NewRelic
   spec:
     newRelicAccountId: 3295531
-    url: https://api.eu.newrelic.com/graphql
+    url: https://api.newrelic.com/graphql
     apiKeyRef: newrelicApiKey
     delegateSelectors:
     - mansong-gke
