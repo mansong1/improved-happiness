@@ -198,16 +198,49 @@ pipeline:
                                 timeout: 10m
                                 spec:
                                     skipDryRun: false
-                          - step:
-                                type: Http
-                                name: HealthCheck
-                                identifier: HealthCheck
-                                spec:
-                                    url: https://mansong.ff-demo.co.uk/health
-                                    method: GET
-                                    headers: []
-                                    outputVariables: []
-                                timeout: 10s
+                          - parallel:
+                                - step:
+                                      type: Http
+                                      name: HealthCheck
+                                      identifier: HealthCheck
+                                      spec:
+                                          url: https://mansong.ff-demo.co.uk/health
+                                          method: GET
+                                          headers: []
+                                          outputVariables: []
+                                      timeout: 10s
+                                - step:
+                                      type: Verify
+                                      name: Verify
+                                      identifier: Verify
+                                      spec:
+                                          type: Rolling
+                                          spec:
+                                              sensitivity: MEDIUM
+                                              duration: 5m
+                                              deploymentTag: <+serviceConfig.artifacts.primary.tag>
+                                      timeout: 2h
+                                      failureStrategies:
+                                          - onFailure:
+                                                errors:
+                                                    - Verification
+                                                action:
+                                                    type: ManualIntervention
+                                                    spec:
+                                                        timeout: 2h
+                                                        onTimeout:
+                                                            action:
+                                                                type: StageRollback
+                                          - onFailure:
+                                                errors:
+                                                    - Unknown
+                                                action:
+                                                    type: ManualIntervention
+                                                    spec:
+                                                        timeout: 2h
+                                                        onTimeout:
+                                                            action:
+                                                                type: Ignore
                       rollbackSteps:
                           - step:
                                 name: Rollback Rollout Deployment
