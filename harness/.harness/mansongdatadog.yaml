@@ -6,6 +6,6 @@ connector:
   projectIdentifier: GestureRecognition
   type: Datadog
   spec:
-    url: https://app.datadoghq.com/api/v1/
+    url: https://app.datadoghq.eu/api/v2/
     applicationKeyRef: ddappkey
     apiKeyRef: ddapikey
