@@ -198,16 +198,34 @@ pipeline:
                                 timeout: 10m
                                 spec:
                                     skipDryRun: false
-                          - step:
-                                type: Http
-                                name: HealthCheck
-                                identifier: HealthCheck
-                                spec:
-                                    url: https://mansong.ff-demo.co.uk/health
-                                    method: GET
-                                    headers: []
-                                    outputVariables: []
-                                timeout: 10s
+                          - parallel:
+                                - step:
+                                      type: Http
+                                      name: HealthCheck
+                                      identifier: HealthCheck
+                                      spec:
+                                          url: https://mansong.ff-demo.co.uk/health
+                                          method: GET
+                                          headers: []
+                                          outputVariables: []
+                                      timeout: 10s
+                                - step:
+                                      type: ShellScript
+                                      name: Selenium
+                                      identifier: Selenium
+                                      spec:
+                                          shell: Bash
+                                          onDelegate: true
+                                          source:
+                                              type: Inline
+                                              spec:
+                                                  script: |-
+                                                      #python3 loginTest.py
+                                                      echo "Running Selenium Tests"
+                                          environmentVariables: []
+                                          outputVariables: []
+                                          executionTarget: {}
+                                      timeout: 10m
                       rollbackSteps:
                           - step:
                                 name: Rollback Rollout Deployment
