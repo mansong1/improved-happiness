@@ -208,6 +208,38 @@ pipeline:
                                     headers: []
                                     outputVariables: []
                                 timeout: 10s
+                          - step:
+                                type: Verify
+                                name: Continuous Verification
+                                identifier: Continuous_Verification
+                                spec:
+                                    type: Rolling
+                                    spec:
+                                        sensitivity: HIGH
+                                        duration: 5m
+                                        deploymentTag: latest
+                                timeout: 2h
+                                failureStrategies:
+                                    - onFailure:
+                                          errors:
+                                              - Verification
+                                          action:
+                                              type: ManualIntervention
+                                              spec:
+                                                  timeout: 2h
+                                                  onTimeout:
+                                                      action:
+                                                          type: StageRollback
+                                    - onFailure:
+                                          errors:
+                                              - Unknown
+                                          action:
+                                              type: ManualIntervention
+                                              spec:
+                                                  timeout: 2h
+                                                  onTimeout:
+                                                      action:
+                                                          type: Ignore
                       rollbackSteps:
                           - step:
                                 name: Rollback Rollout Deployment
