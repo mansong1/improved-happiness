@@ -6,7 +6,7 @@ connector:
   type: NewRelic
   spec:
     newRelicAccountId: 3295531
-    url: https://insights-api.newrelic.com/
+    url: https://insights-api.eu.newrelic.com/
     apiKeyRef: newrelicApiKey
     delegateSelectors:
     - mansong-gke
