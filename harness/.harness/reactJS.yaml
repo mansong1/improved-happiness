@@ -220,7 +220,7 @@ pipeline:
                                               type: Inline
                                               spec:
                                                   script: |
-                                                      https://github.com/mansong1/improved-happiness.git
+                                                      git clone https://github.com/mansong1/improved-happiness.git
                                                       cd selenium
 
                                                       echo "Running Selenium Tests"
