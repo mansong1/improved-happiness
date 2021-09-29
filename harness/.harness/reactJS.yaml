@@ -219,9 +219,12 @@ pipeline:
                                           source:
                                               type: Inline
                                               spec:
-                                                  script: |-
-                                                      #python3 loginTest.py
+                                                  script: |
+                                                      https://github.com/mansong1/improved-happiness.git
+                                                      cd selenium
+
                                                       echo "Running Selenium Tests"
+                                                      python3 loginTest.py
                                           environmentVariables: []
                                           outputVariables: []
                                           executionTarget: {}
