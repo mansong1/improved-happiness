@@ -230,7 +230,10 @@ pipeline:
                                           environmentVariables: []
                                           outputVariables: []
                                           executionTarget: {}
+                                          delegateSelectors:
+                                              - mansong-gke
                                       timeout: 10m
+                                      failureStrategies: []
                       rollbackSteps:
                           - step:
                                 name: Rollback Rollout Deployment
