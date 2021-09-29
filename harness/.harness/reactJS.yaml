@@ -239,7 +239,7 @@ pipeline:
                                           type: Rolling
                                           spec:
                                               sensitivity: HIGH
-                                              duration: 5m
+                                              duration: 10m
                                               deploymentTag: latest
                                       timeout: 2h
                                       failureStrategies:
