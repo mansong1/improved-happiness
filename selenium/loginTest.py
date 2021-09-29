@@ -10,7 +10,7 @@ class LoginTest(unittest.TestCase):
         self.desired_capabilities = DesiredCapabilities.FIREFOX
         self.desired_capabilities['marionette'] = True
         self.options = webdriver.FirefoxOptions()
-        #self.options.add_argument("--headless")
+        self.options.add_argument("--headless")
         self.options.add_argument("--disable-gpu")
         self.options.add_argument("--use-fake-ui-for-media-stream")
         self.options.add_argument("--use-fake-device-for-media-stream")
