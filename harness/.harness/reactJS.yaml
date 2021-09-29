@@ -220,9 +220,6 @@ pipeline:
                                               type: Inline
                                               spec:
                                                   script: |
-                                                      sudo Xvfb :10 -ac
-                                                      export DISPLAY=:5
-
                                                       https://github.com/mansong1/improved-happiness.git
                                                       cd selenium
 
