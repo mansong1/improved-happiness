@@ -220,6 +220,8 @@ pipeline:
                                               type: Inline
                                               spec:
                                                   script: |
+                                                      export DISPLAY=:5
+
                                                       https://github.com/mansong1/improved-happiness.git
                                                       cd selenium
 
