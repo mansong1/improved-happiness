@@ -28,7 +28,7 @@ const Background = styled.div`
     justify-content: center;
     width: 100vw;
     height: 100vh;
-    trastition: background-position ${transitionTime};
+    transition: background-position ${transitionTime};
 
     @media (min-width: 48.0em) {
         background-position: center;
