@@ -61,6 +61,21 @@ pipeline:
                                           image: pipelinecomponents/eslint
                                           command: eslint .
                                           privileged: false
+                                - step:
+                                      type: Plugin
+                                      name: SonarQube
+                                      identifier: SonarQube
+                                      spec:
+                                          connectorRef: mansongdockerhub
+                                          image: aosapps/drone-sonar-plugin
+                                          privileged: true
+                                          settings:
+                                              sonar_token: a15e5b6b5fa07e06e5297330e7891c12323a4e05
+                                              sonar_host: http://35.189.72.203:9000
+                                              sources: "."
+                                              showProfiling: "true"
+                                              level: DEBUG
+                                              usingProperties: "false"
                           - step:
                                 type: Run
                                 name: Install Dependencies
