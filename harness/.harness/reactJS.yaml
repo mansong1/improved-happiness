@@ -72,7 +72,7 @@ pipeline:
                                           settings:
                                               sonar_token: a15e5b6b5fa07e06e5297330e7891c12323a4e05
                                               sonar_host: http://35.189.72.203:9000
-                                              sources: "."
+                                              sources: src/
                                               showProfiling: "true"
                                               level: DEBUG
                                               usingProperties: "true"
