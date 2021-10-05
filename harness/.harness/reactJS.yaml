@@ -75,7 +75,7 @@ pipeline:
                                               sources: "."
                                               showProfiling: "true"
                                               level: DEBUG
-                                              usingProperties: "false"
+                                              usingProperties: "true"
                           - step:
                                 type: Run
                                 name: Install Dependencies
