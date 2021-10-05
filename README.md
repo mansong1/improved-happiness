@@ -1,5 +1,7 @@
 # Gesture Recognition React Application
 
+[![Quality Gate Status](http://35.189.72.203:9000/api/project_badges/measure?project=GestureRecognition&metric=alert_status)](http://35.189.72.203:9000/dashboard?id=GestureRecognition)
+
 ### `npm start`
 
 Runs the app in the development mode.\
