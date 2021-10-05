@@ -76,6 +76,10 @@ pipeline:
                                               showProfiling: "true"
                                               level: DEBUG
                                               usingProperties: "true"
+                                          resources:
+                                              limits:
+                                                  memory: 1Gi
+                                                  cpu: "1.0"
                           - step:
                                 type: Run
                                 name: Install Dependencies
