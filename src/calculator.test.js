@@ -69,5 +69,5 @@ test('Find the square of a number using the square method', () => {
     expect(calculator.square(y)).toBe(25)
 });
 test('Find the tangent of a number in degrees using the tangent method', () => {
-    expect(calculator.getTanFromDegrees(x)).toBe(0.087488663525924)
+    expect(calculator.getTanFromDegrees(x)).toBe(0.23086819112556312)
 });
