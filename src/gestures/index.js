@@ -1,7 +1,7 @@
-import ThumbsDownGesture from './ThumbsDown';
-import HelloGesture from './Hello';
-import IndexFingerUpGesture from './IndexFingerUp';
-import OkayGesture from './Okay';
+import ThumbsDownGesture from './thumbsDownGesture';
+import HelloGesture from './helloGesture';
+import IndexFingerUpGesture from './indexFingerUpGesture';
+import OkayGesture from './okayGesture';
 
 
 export {
