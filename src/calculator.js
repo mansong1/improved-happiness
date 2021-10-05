@@ -40,8 +40,8 @@ function sin(a) {
 function cos(a) {
     return Math.cos(a);
 }
-function tan(a) {
-    return Math.tan(a);
+function getTanFromDegrees(a) {
+    return Math.tan(a * Math.PI / 180);
 }
 function asin(a) {
     return Math.asin(a);
@@ -155,7 +155,7 @@ module.exports.cube = cube;
 module.exports.cubeRoot = cubeRoot;
 module.exports.sin = sin;
 module.exports.cos = cos;
-module.exports.tan = tan;
+module.exports.getTanFromDegrees = getTanFromDegrees;
 module.exports.asin = asin;
 module.exports.acos = acos;
 module.exports.sinh = sinh;
