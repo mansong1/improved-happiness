@@ -13,13 +13,13 @@ import * as customgestures from "./gestures";
 import { initialize, Event } from '@harnessio/ff-javascript-client-sdk';
 
 const GestureRecognition = () => {
-  
+
   const [featureFlags, setFeatureFlags] = useState({})
-  
+
   const { detect } = require('detect-browser');
   const browser = detect();
   const date = new Date();
-  
+
   var name = JSON.parse(localStorage.getItem('first_name'));
   var lastName = JSON.parse(localStorage.getItem('last_name'));
   var email = JSON.parse(localStorage.getItem('email'));
@@ -86,11 +86,11 @@ const GestureRecognition = () => {
       detectHands(net);
     }, 10)
   };
-  
+
   const detectHands = async (net) => {
     if (
-        typeof webcamRef.current !== "undefined" && 
-        webcamRef.current !== null && 
+        typeof webcamRef.current !== "undefined" &&
+        webcamRef.current !== null &&
         webcamRef.current.video.readyState === 4  // Check we are receiving data
       ){
           // Get video properties
@@ -108,7 +108,6 @@ const GestureRecognition = () => {
 
         // Make Hand Detections
         const hand = await net.estimateHands(video);
-        //console.log(hand);
 
         if(hand.length > 0){
           const GE = new fp.GestureEstimator([
@@ -119,7 +118,7 @@ const GestureRecognition = () => {
             customgestures.HelloGesture,
             customgestures.IndexFingerUpGesture,
           ]);
-          
+
           // using a minimum confidence of 7.5 (out of 10)
           const gesture = await GE.estimate(hand[0].landmarks, 7.5);
           console.log(gesture.gestures);
@@ -148,7 +147,7 @@ const GestureRecognition = () => {
 
   return (
     <div className="gesturerecognition">
-      <header className="App-header" data-theme={featureFlags.Dark_Mode ? "dark" : "light"}> 
+      <header className="App-header" data-theme={featureFlags.Dark_Mode ? "dark" : "light"}>
         <Webcam
           audio={false}
           videoConstraints={videoConstraints}

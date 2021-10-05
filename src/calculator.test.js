@@ -68,3 +68,6 @@ test('Find the square root of a number using the squareRoot method', () => {
 test('Find the square of a number using the square method', () => {
     expect(calculator.square(y)).toBe(25)
 });
+test('Find the tangent of a number in degrees using the tangent method', () => {
+    expect(calculator.getTanFromDegrees(x)).toBe(0.087488663525924)
+});

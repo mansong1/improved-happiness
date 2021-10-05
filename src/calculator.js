@@ -40,8 +40,8 @@ function sin(a) {
 function cos(a) {
     return Math.cos(a);
 }
-function tan(a) {
-    return Math.tan(a);
+function getTanFromDegrees(a) {
+    return Math.tan(a * Math.PI / 180);
 }
 function asin(a) {
     return Math.asin(a);
@@ -106,18 +106,6 @@ function round(a) {
 function floor(a) {
     return Math.floor(a);
 }
-function random(a, b) {
-    return Math.random() * (b - a) + a;
-}
-function randomInt(a, b) {
-    return Math.floor(Math.random() * (b - a + 1)) + a;
-}
-function randomBool() {
-    return Math.random() > 0.5;
-}
-function randomSign(a, b) {
-    return Math.random() > (b - a) / (b - a) ? 1 : -1;
-}
 function ceiling(a) {
     return Math.ceil(a);
 }
@@ -127,7 +115,7 @@ function median(a, b) {
 function mode(a, b) {
     return a > b ? a : b;
 }
-function range(a, b) { 
+function range(a, b) {
     return b - a;
 }
 function standardDeviation (a, b) {
@@ -167,7 +155,7 @@ module.exports.cube = cube;
 module.exports.cubeRoot = cubeRoot;
 module.exports.sin = sin;
 module.exports.cos = cos;
-module.exports.tan = tan;
+module.exports.getTanFromDegrees = getTanFromDegrees;
 module.exports.asin = asin;
 module.exports.acos = acos;
 module.exports.sinh = sinh;
@@ -179,13 +167,8 @@ module.exports.atan = atan;
 module.exports.atanh = atanh;
 module.exports.factorial = factorial;
 module.exports.exponent = exponent;
-module.exports.randomBool = randomBool;
-module.exports.randomSign = randomSign;
-module.exports.randomSign = randomSign;
 module.exports.floor = floor;
 module.exports.round = round;
-module.exports.random = random;
-module.exports.randomInt = randomInt;
 module.exports.max = max;
 module.exports.min = min;
 module.exports.absolute = absolute;

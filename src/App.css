@@ -1,5 +1,5 @@
 :root {
-  --bg-image: url("./images/light.png"); 
+  --bg-image: url("./images/light.png");
   --bg-color: #fff;
   --text-color: #000;
 }
@@ -22,7 +22,6 @@
   width: 100vw;
   height: 100vh;
   margin: 0;
-  display: flex;
   display: flex;
   align-items: center;
   justify-content: center;

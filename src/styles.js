@@ -1,5 +1,4 @@
-import { html } from 'common-tags';
-import styled, { createGlobalStyle, css, CSSProp } from 'styled-components';
+import styled, { createGlobalStyle, css } from 'styled-components';
 import bgImage from './images/bg.png';
 
 const GlobalStyle = createGlobalStyle`
@@ -68,11 +67,11 @@ const Form = styled.form`
         height: 100vh;
         filter: blur(0.8125em);
         trastition: background-position ${transitionTime};
-        
+
         @media (min-width: 48.0em) {
             background-position: center;
         }
-        
+
     }
 `;
 
@@ -146,12 +145,12 @@ const SubmitButton = styled.button`
 
 `;
 
-export { GlobalStyle, 
-    Background, 
+export { GlobalStyle,
+    Background,
     Form,
     FormTitle,
-    InputsWrapper, 
-    InputsWrapperItem, 
+    InputsWrapper,
+    InputsWrapperItem,
     SubmitButton,
     Input
 };
