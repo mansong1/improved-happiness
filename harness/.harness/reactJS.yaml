@@ -72,7 +72,7 @@ pipeline:
                                           settings:
                                               sonar_token: a15e5b6b5fa07e06e5297330e7891c12323a4e05
                                               sonar_host: http://35.189.72.203:9000
-                                              sources: src/
+                                              sources: src
                                               showProfiling: "true"
                                               level: DEBUG
                                               usingProperties: "true"
@@ -121,36 +121,35 @@ pipeline:
                                         limits:
                                             memory: 2Gi
                                             cpu: "1"
-                          - parallel:
-                                - step:
-                                      type: SaveCacheS3
-                                      name: Rebuild Cache
-                                      identifier: Rebuild_Cache
-                                      spec:
-                                          connectorRef: mansongaws
-                                          region: eu-west-2
-                                          bucket: mansong-npm
-                                          key: gesturerecognition
-                                          sourcePaths:
-                                              - node_modules
-                                          archiveFormat: Tar
-                                - step:
-                                      type: BuildAndPushDockerRegistry
-                                      name: Push Docker Image
-                                      identifier: Push_Docker_Image
-                                      spec:
-                                          connectorRef: mansongdockerhub
-                                          repo: mansong/gesturerecognition
-                                          tags:
-                                              - <+pipeline.sequenceId>
-                                              - latest
-                                          dockerfile: Dockerfile.prod
-                                          context: ./
-                                          optimize: true
-                                          resources:
-                                              limits:
-                                                  memory: 2Gi
-                                                  cpu: "1"
+                          - step:
+                                type: SaveCacheS3
+                                name: Rebuild Cache
+                                identifier: Rebuild_Cache
+                                spec:
+                                    connectorRef: mansongaws
+                                    region: eu-west-2
+                                    bucket: mansong-npm
+                                    key: gesturerecognition
+                                    sourcePaths:
+                                        - node_modules
+                                    archiveFormat: Tar
+                          - step:
+                                type: BuildAndPushDockerRegistry
+                                name: Push Docker Image
+                                identifier: Push_Docker_Image
+                                spec:
+                                    connectorRef: mansongdockerhub
+                                    repo: mansong/gesturerecognition
+                                    tags:
+                                        - <+pipeline.sequenceId>
+                                        - latest
+                                    dockerfile: Dockerfile.prod
+                                    context: ./
+                                    optimize: true
+                                    resources:
+                                        limits:
+                                            memory: 2Gi
+                                            cpu: "1"
                           - step:
                                 type: Run
                                 name: Scan Docker Image
@@ -160,6 +159,12 @@ pipeline:
                                     image: bitnami/trivy:latest
                                     command: trivy image mansong/gesturerecognition:<+pipeline.sequenceId>
                                     privileged: false
+                  serviceConfig:
+                      serviceRef: ""
+                      serviceDefinition:
+                          type: Kubernetes
+                          spec:
+                              variables: []
               variables:
                   - name: node_version
                     type: String
