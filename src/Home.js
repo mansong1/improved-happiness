@@ -8,7 +8,6 @@ import {
     GlobalStyle,
     Background,
     Form,
-    FormTitle,
     InputsWrapper,
     InputsWrapperItem,
     Input,
