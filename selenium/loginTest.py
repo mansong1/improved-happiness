@@ -49,17 +49,16 @@ class LoginTest(unittest.TestCase):
         # Check that the webcam is visible
         self.assertTrue(self.is_element_present(By.XPATH, "//*[@id='root']/div/header/video"))
 
-    
     def is_element_present(self, how, what):
         try: self.driver.find_element(by=how, value=what)
         except NoSuchElementException as e: return False
         return True
-    
+
     def is_alert_present(self):
         try: self.driver.switch_to_alert()
         except NoAlertPresentException as e: return False
         return True
-    
+
     def close_alert_and_get_its_text(self):
         try:
             alert = self.driver.switch_to_alert()
