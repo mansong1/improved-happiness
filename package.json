@@ -6,7 +6,7 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
     "@fortawesome/react-fontawesome": "^0.1.15",
-    "@harnessio/ff-javascript-client-sdk": "^1.4.8",
+    "@harnessio/ff-javascript-client-sdk": "^1.4.9",
     "@tensorflow-models/handpose": "^0.0.7",
     "@tensorflow/tfjs": "^3.8.0",
     "@testing-library/jest-dom": "^5.14.1",
