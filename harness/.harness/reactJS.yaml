@@ -16,9 +16,8 @@ pipeline:
                 build: <+input>
     stages:
         - stage:
-              name: Build and Publish
+              name: Build Publish
               identifier: Build_and_Publish
-              description: ""
               type: CI
               spec:
                   cloneCodebase: true
@@ -160,6 +159,7 @@ pipeline:
                                     image: bitnami/trivy:latest
                                     command: trivy image mansong/gesturerecognition:<+pipeline.sequenceId>
                                     privileged: false
+                      rollbackSteps: []
                   serviceConfig:
                       serviceRef: ""
                       serviceDefinition:
@@ -248,7 +248,7 @@ pipeline:
                                 type: K8sRollingDeploy
                                 timeout: 10m
                                 spec:
-                                    skipDryRun: false
+                                    skipDryRun: true
                           - parallel:
                                 - step:
                                       type: Http
