@@ -165,7 +165,7 @@ pipeline:
                                 spec:
                                     connectorRef: mansongdockerhub
                                     image: bitnami/trivy:latest
-                                    command: trivy image --format template --template "@contrib/junit.tpl" -o junit-report.xml mansong/gesturerecognition:<+pipeline.sequenceId>
+                                    command: trivy image mansong/gesturerecognition:<+pipeline.sequenceId>
                                     privileged: true
                                     reports:
                                         type: JUnit
