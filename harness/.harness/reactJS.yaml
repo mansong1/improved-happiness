@@ -237,10 +237,10 @@ pipeline:
                                                 secretManagerRef: org.harnessSecretManager
                                                 environmentVariables:
                                                     - name: AWS_ACCESS_KEY_ID
-                                                      value: <+infrastructure.infrastructureDefinition.provisioner.steps.Plan.spec.configuration.environmentVariables.AWS_ACCESS_KEY_ID>
+                                                      value: <+stage.variables.AWS_ACCESS_KEY_ID>
                                                       type: String
                                                     - name: AWS_SECRET_ACCESS_KEY
-                                                      value: <+infrastructure.infrastructureDefinition.provisioner.steps.Plan.spec.configuration.environmentVariables.AWS_SECRET_ACCESS_KEY>
+                                                      value: <+stage.variables.AWS_SECRET_ACCESS_KEY>
                                                       type: String
                                   - step:
                                         type: HarnessApproval
@@ -373,3 +373,10 @@ pipeline:
                             - AllErrors
                         action:
                             type: StageRollback
+              variables:
+                  - name: AWS_ACCESS_KEY_ID
+                    type: Secret
+                    value: aws_key_id
+                  - name: AWS_SECRET_ACCESS_KEY
+                    type: Secret
+                    value: aws_secret_key
