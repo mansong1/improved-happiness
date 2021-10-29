@@ -235,6 +235,13 @@ pipeline:
                                                             folderPath: "."
                                                         type: Github
                                                 secretManagerRef: org.harnessSecretManager
+                                                environmentVariables:
+                                                    - name: AWS_ACCESS_KEY_ID
+                                                      value: "''"
+                                                      type: String
+                                                    - name: AWS_SECRET_ACCESS_KEY
+                                                      value: "''"
+                                                      type: String
                                   - step:
                                         type: HarnessApproval
                                         name: Approval
