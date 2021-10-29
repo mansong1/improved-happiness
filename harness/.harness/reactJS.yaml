@@ -160,13 +160,22 @@ pipeline:
                                                   cpu: "1"
                           - step:
                                 type: Run
-                                name: Scan Docker Image
+                                name: Scan Image
                                 identifier: Scan_Docker_Image
                                 spec:
                                     connectorRef: mansongdockerhub
                                     image: bitnami/trivy:latest
-                                    command: trivy image mansong/gesturerecognition:<+pipeline.sequenceId>
-                                    privileged: false
+                                    command: trivy image --format template --template "@contrib/junit.tpl" -o junit-report.xml mansong/gesturerecognition:<+pipeline.sequenceId>
+                                    privileged: true
+                                    reports:
+                                        type: JUnit
+                                        spec:
+                                            paths:
+                                                - junit-report.xml
+                                    resources:
+                                        limits:
+                                            memory: 1Gi
+                                            cpu: "1.0"
                       rollbackSteps: []
                   serviceConfig:
                       serviceRef: ""
