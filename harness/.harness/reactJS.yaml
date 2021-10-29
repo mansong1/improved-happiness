@@ -214,6 +214,58 @@ pipeline:
                               connectorRef: mansonggke
                               namespace: staging
                               releaseName: release-<+INFRA_KEY>
+                          provisioner:
+                              steps:
+                                  - step:
+                                        type: TerraformPlan
+                                        name: Plan
+                                        identifier: Plan
+                                        timeout: 10m
+                                        spec:
+                                            provisionerIdentifier: staging_s3
+                                            configuration:
+                                                command: Apply
+                                                configFiles:
+                                                    store:
+                                                        spec:
+                                                            connectorRef: mansonggithub
+                                                            repoName: laughing-octo-train
+                                                            gitFetchType: Branch
+                                                            branch: main
+                                                            folderPath: "."
+                                                        type: Github
+                                                secretManagerRef: org.harnessSecretManager
+                                  - step:
+                                        type: HarnessApproval
+                                        name: Approval
+                                        identifier: Approval
+                                        timeout: 1d
+                                        spec:
+                                            approvalMessage: Approve Terraform IaC
+                                            includePipelineExecutionHistory: true
+                                            approvers:
+                                                userGroups:
+                                                    - Approvers
+                                                minimumCount: 1
+                                                disallowPipelineExecutor: true
+                                            approverInputs: []
+                                  - step:
+                                        type: TerraformApply
+                                        name: Apply
+                                        identifier: Apply
+                                        timeout: 10m
+                                        spec:
+                                            provisionerIdentifier: staging_s3
+                                            configuration:
+                                                type: InheritFromPlan
+                              rollbackSteps:
+                                  - step:
+                                        type: TerraformRollback
+                                        name: Rollback
+                                        identifier: Rollback
+                                        timeout: 10m
+                                        spec:
+                                            provisionerIdentifier: staging_s3
                       allowSimultaneousDeployments: true
                   execution:
                       steps:
