@@ -237,10 +237,10 @@ pipeline:
                                                 secretManagerRef: org.harnessSecretManager
                                                 environmentVariables:
                                                     - name: AWS_ACCESS_KEY_ID
-                                                      value: "''"
+                                                      value: <+infrastructure.infrastructureDefinition.provisioner.steps.Plan.spec.configuration.environmentVariables.AWS_ACCESS_KEY_ID>
                                                       type: String
                                                     - name: AWS_SECRET_ACCESS_KEY
-                                                      value: "''"
+                                                      value: <+infrastructure.infrastructureDefinition.provisioner.steps.Plan.spec.configuration.environmentVariables.AWS_SECRET_ACCESS_KEY>
                                                       type: String
                                   - step:
                                         type: HarnessApproval
