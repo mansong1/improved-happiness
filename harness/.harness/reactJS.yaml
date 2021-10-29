@@ -356,8 +356,9 @@ pipeline:
                                 spec:
                                     provisionerIdentifier: staging_s3
                                     configuration:
-                                        type: InheritFromApply
+                                        type: InheritFromPlan
                                 timeout: 10m
+                                failureStrategies: []
                       rollbackSteps:
                           - step:
                                 name: Rollback Rollout Deployment
