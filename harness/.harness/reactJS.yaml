@@ -38,6 +38,10 @@ pipeline:
                                     bucket: mansong-npm
                                     key: gesturerecognition
                                     archiveFormat: Tar
+                                    resources:
+                                        limits:
+                                            memory: 1Gi
+                                            cpu: "1.0"
                                 failureStrategies: []
                           - parallel:
                                 - step:
@@ -133,6 +137,10 @@ pipeline:
                                           sourcePaths:
                                               - node_modules
                                           archiveFormat: Tar
+                                          resources:
+                                              limits:
+                                                  memory: 1.0Gi
+                                                  cpu: "1.0"
                                 - step:
                                       type: BuildAndPushDockerRegistry
                                       name: Push Docker Image
