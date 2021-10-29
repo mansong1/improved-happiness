@@ -42,4 +42,4 @@ Harness can either communicate directly via the manger to the Git source or via 
 
 App is at https://mansong.ff-demo.co.uk
 
-Test
+Demo
