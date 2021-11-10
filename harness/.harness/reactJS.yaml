@@ -273,6 +273,10 @@ pipeline:
                                                 minimumCount: 1
                                                 disallowPipelineExecutor: true
                                             approverInputs: []
+                                        when:
+                                            stageStatus: Success
+                                            condition: <+trigger.type> != "cron"
+                                        failureStrategies: []
                                   - step:
                                         type: TerraformApply
                                         name: Apply
