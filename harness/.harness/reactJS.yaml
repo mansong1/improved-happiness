@@ -275,7 +275,6 @@ pipeline:
                                             approverInputs: []
                                         when:
                                             stageStatus: Success
-                                            condition: <+trigger.type> != "cron"
                                         failureStrategies: []
                                   - step:
                                         type: TerraformApply
