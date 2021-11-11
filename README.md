@@ -2,6 +2,8 @@
 
 [![Quality Gate Status](http://35.189.72.203:9000/api/project_badges/measure?project=GestureRecognition&metric=alert_status)](http://35.189.72.203:9000/dashboard?id=GestureRecognition)
 
+App is at https://mansong.ff-demo.co.uk
+
 ### `npm start`
 
 Runs the app in the development mode.\
@@ -39,7 +41,3 @@ Harness folder allows to save the Harness configurations like pipelines, connect
 Harness can either communicate directly via the manger to the Git source or via a delegate.
 
 ### Deployment
-
-App is at https://mansong.ff-demo.co.uk
-
-Demo
