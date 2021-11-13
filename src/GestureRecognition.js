@@ -119,20 +119,21 @@ const GestureRecognition = () => {
             customgestures.IndexFingerUpGesture,
           ]);
 
-          // using a minimum confidence of 7.5 (out of 10)
-          const gesture = await GE.estimate(hand[0].landmarks, 7.5);
+          // using a minimum score of 8.5 (out of 10)
+          const gesture = await GE.estimate(hand[0].landmarks, 8.5);
           console.log(gesture.gestures);
 
           if(gesture.gestures !== undefined && gesture.gestures.length > 0){
-            const confidence = gesture.gestures.map(
-              (prediction)=>prediction.confidence
+            const score = gesture.gestures.map(
+              (prediction)=>prediction.score
             );
-            const maxConfidence = confidence.indexOf(
-              Math.max.apply(null, confidence)
+            const maxScore = score.indexOf(
+              Math.max.apply(null, score)
             );
 
-            setEmoji(gesture.gestures[maxConfidence].name);
-            console.log(emoji);
+            setEmoji(gesture.gestures[maxScore].name);
+            console.log(gesture.gestures[maxScore].name);
+            //console.log(emoji);
           }
         }
 
