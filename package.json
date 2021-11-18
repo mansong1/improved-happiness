@@ -8,7 +8,7 @@
     "@fortawesome/react-fontawesome": "^0.1.16",
     "@harnessio/ff-javascript-client-sdk": "^1.4.9",
     "@tensorflow-models/handpose": "^0.0.7",
-    "@tensorflow/tfjs": "^3.8.0",
+    "@tensorflow/tfjs": "^3.11.0",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
