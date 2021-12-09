@@ -19,7 +19,7 @@ pipeline:
                                 identifier: DarkMode
                                 spec:
                                     feature: Dark_Mode
-                                    environment: Development
+                                    environment: Production
                                     instructions:
                                         - identifier: SetFeatureFlagStateIdentifier
                                           type: SetFeatureFlagState
