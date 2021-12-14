@@ -260,23 +260,6 @@ pipeline:
                                                       value: <+stage.variables.AWS_SECRET_ACCESS_KEY>
                                                       type: String
                                   - step:
-                                        type: HarnessApproval
-                                        name: Approval
-                                        identifier: Approval
-                                        timeout: 1d
-                                        spec:
-                                            approvalMessage: Approve Terraform IaC
-                                            includePipelineExecutionHistory: true
-                                            approvers:
-                                                userGroups:
-                                                    - Approvers
-                                                minimumCount: 1
-                                                disallowPipelineExecutor: true
-                                            approverInputs: []
-                                        when:
-                                            stageStatus: Success
-                                        failureStrategies: []
-                                  - step:
                                         type: TerraformApply
                                         name: Apply
                                         identifier: Apply
