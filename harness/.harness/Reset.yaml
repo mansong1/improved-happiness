@@ -84,7 +84,7 @@ pipeline:
                                 name: ThumbsUp
                                 identifier: ThumbsUp
                                 spec:
-                                    feature: ThumbsUp_Gesture
+                                    feature: Thumbs_Up_Gesture
                                     environment: Production
                                     instructions:
                                         - identifier: SetFeatureFlagStateIdentifier
@@ -97,7 +97,7 @@ pipeline:
                                 name: ThumbsDown
                                 identifier: ThumbsDown
                                 spec:
-                                    feature: ThumbsDown_Gesture
+                                    feature: Thumbs_Down_Gesture
                                     environment: Production
                                     instructions:
                                         - identifier: SetFeatureFlagStateIdentifier
