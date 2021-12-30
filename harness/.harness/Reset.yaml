@@ -3,7 +3,7 @@ pipeline:
     identifier: Reset
     projectIdentifier: GestureRecognition
     orgIdentifier: default
-    description: Reset all Production FF
+    description: Reset all Production FFs
     tags: {}
     stages:
         - stage:
