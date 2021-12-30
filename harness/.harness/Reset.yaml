@@ -105,3 +105,14 @@ pipeline:
                                           spec:
                                               state: "off"
                                 timeout: 10m
+                          - step:
+                                type: Http
+                                name: GET
+                                identifier: GET
+                                spec:
+                                    url: https://mansong.ff-demo.co.uk
+                                    method: GET
+                                    headers: []
+                                    outputVariables: []
+                                timeout: 10s
+                  serviceDependencies: []
