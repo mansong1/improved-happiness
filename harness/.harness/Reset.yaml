@@ -1,0 +1,29 @@
+pipeline:
+    name: Reset
+    identifier: Reset
+    projectIdentifier: GestureRecognition
+    orgIdentifier: default
+    description: Reset all Production FF
+    tags: {}
+    stages:
+        - stage:
+              name: Reset
+              identifier: Reset
+              description: ""
+              type: FeatureFlag
+              spec:
+                  execution:
+                      steps:
+                          - step:
+                                type: FlagConfiguration
+                                name: DarkMode
+                                identifier: DarkMode
+                                spec:
+                                    feature: Dark_Mode
+                                    environment: Production
+                                    instructions:
+                                        - identifier: SetFeatureFlagStateIdentifier
+                                          type: SetFeatureFlagState
+                                          spec:
+                                              state: "off"
+                                timeout: 10m
