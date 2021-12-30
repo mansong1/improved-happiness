@@ -27,3 +27,16 @@ pipeline:
                                           spec:
                                               state: "off"
                                 timeout: 10m
+                          - step:
+                                type: FlagConfiguration
+                                name: Wave
+                                identifier: Wave
+                                spec:
+                                    feature: Wave_Gesture
+                                    environment: Production
+                                    instructions:
+                                        - identifier: SetFeatureFlagStateIdentifier
+                                          type: SetFeatureFlagState
+                                          spec:
+                                              state: "off"
+                                timeout: 10m
