@@ -114,5 +114,6 @@ pipeline:
                                     method: GET
                                     headers: []
                                     outputVariables: []
+                                    assertion: <+httpResponseCode> == 200
                                 timeout: 10s
                   serviceDependencies: []
