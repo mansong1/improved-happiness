@@ -384,24 +384,3 @@ pipeline:
                   - name: AWS_SECRET_ACCESS_KEY
                     type: Secret
                     value: aws_secret_key
-        - stage:
-              name: FF
-              identifier: FF
-              description: ""
-              type: FeatureFlag
-              spec:
-                  execution:
-                      steps:
-                          - step:
-                                type: FlagConfiguration
-                                name: DarkMode
-                                identifier: DarkMode
-                                spec:
-                                    feature: Dark_Mode
-                                    environment: Development
-                                    instructions:
-                                        - identifier: SetFeatureFlagStateIdentifier
-                                          type: SetFeatureFlagState
-                                          spec:
-                                              state: "on"
-                                timeout: 10m
