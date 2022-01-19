@@ -41,3 +41,8 @@ Harness folder allows to save the Harness configurations like pipelines, connect
 Harness can either communicate directly via the manger to the Git source or via a delegate.
 
 ### Deployment
+
+
+### Update Packages
+
+Run `npm run update:packages` to update the packages.
