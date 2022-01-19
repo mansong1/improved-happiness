@@ -1,0 +1,28 @@
+pipeline:
+    name: DarkMode
+    identifier: DarkMode
+    projectIdentifier: GestureRecognition
+    orgIdentifier: default
+    tags: {}
+    stages:
+        - stage:
+              name: DarkMode
+              identifier: DarkMode
+              description: ""
+              type: FeatureFlag
+              spec:
+                  execution:
+                      steps:
+                          - step:
+                                type: FlagConfiguration
+                                name: DarkMode
+                                identifier: DarkMode
+                                spec:
+                                    feature: Dark_Mode
+                                    environment: Production
+                                    instructions:
+                                        - identifier: SetFeatureFlagStateIdentifier
+                                          type: SetFeatureFlagState
+                                          spec:
+                                              state: "on"
+                                timeout: 10m

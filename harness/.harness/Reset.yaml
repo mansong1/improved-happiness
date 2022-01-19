@@ -1,0 +1,119 @@
+pipeline:
+    name: Reset
+    identifier: Reset
+    projectIdentifier: GestureRecognition
+    orgIdentifier: default
+    description: Reset all Production FFs
+    tags: {}
+    stages:
+        - stage:
+              name: Reset
+              identifier: Reset
+              description: ""
+              type: FeatureFlag
+              spec:
+                  execution:
+                      steps:
+                          - step:
+                                type: FlagConfiguration
+                                name: DarkMode
+                                identifier: DarkMode
+                                spec:
+                                    feature: Dark_Mode
+                                    environment: Production
+                                    instructions:
+                                        - identifier: SetFeatureFlagStateIdentifier
+                                          type: SetFeatureFlagState
+                                          spec:
+                                              state: "off"
+                                timeout: 10m
+                          - step:
+                                type: FlagConfiguration
+                                name: Wave
+                                identifier: Wave
+                                spec:
+                                    feature: Wave_Gesture
+                                    environment: Production
+                                    instructions:
+                                        - identifier: SetFeatureFlagStateIdentifier
+                                          type: SetFeatureFlagState
+                                          spec:
+                                              state: "off"
+                                timeout: 10m
+                          - step:
+                                type: FlagConfiguration
+                                name: Index
+                                identifier: Index
+                                spec:
+                                    feature: Index_Gesture
+                                    environment: Production
+                                    instructions:
+                                        - identifier: SetFeatureFlagStateIdentifier
+                                          type: SetFeatureFlagState
+                                          spec:
+                                              state: "off"
+                                timeout: 10m
+                          - step:
+                                type: FlagConfiguration
+                                name: Victory
+                                identifier: Victory
+                                spec:
+                                    feature: Victory_Gesture
+                                    environment: Production
+                                    instructions:
+                                        - identifier: SetFeatureFlagStateIdentifier
+                                          type: SetFeatureFlagState
+                                          spec:
+                                              state: "off"
+                                timeout: 10m
+                          - step:
+                                type: FlagConfiguration
+                                name: Okay
+                                identifier: Okay
+                                spec:
+                                    feature: Okay_Gesture
+                                    environment: Production
+                                    instructions:
+                                        - identifier: SetFeatureFlagStateIdentifier
+                                          type: SetFeatureFlagState
+                                          spec:
+                                              state: "off"
+                                timeout: 10m
+                          - step:
+                                type: FlagConfiguration
+                                name: ThumbsUp
+                                identifier: ThumbsUp
+                                spec:
+                                    feature: Thumbs_Up_Gesture
+                                    environment: Production
+                                    instructions:
+                                        - identifier: SetFeatureFlagStateIdentifier
+                                          type: SetFeatureFlagState
+                                          spec:
+                                              state: "off"
+                                timeout: 10m
+                          - step:
+                                type: FlagConfiguration
+                                name: ThumbsDown
+                                identifier: ThumbsDown
+                                spec:
+                                    feature: Thumbs_Down_Gesture
+                                    environment: Production
+                                    instructions:
+                                        - identifier: SetFeatureFlagStateIdentifier
+                                          type: SetFeatureFlagState
+                                          spec:
+                                              state: "off"
+                                timeout: 10m
+                          - step:
+                                type: Http
+                                name: GET
+                                identifier: GET
+                                spec:
+                                    url: https://mansong.ff-demo.co.uk
+                                    method: GET
+                                    headers: []
+                                    outputVariables: []
+                                    assertion: <+httpResponseCode> == 200
+                                timeout: 10s
+                  serviceDependencies: []
