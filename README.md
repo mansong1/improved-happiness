@@ -57,7 +57,7 @@ We use the following manifests to create the certificate and ingress controllers
 - Certifcate: manifests/dev/certificate.yaml
 - ClusterIssue: manifest/dev/issuer.yaml
 
-```
+```text
 
   (  +-----------------+  )
   (  | Ingress (NGINX) |  )
