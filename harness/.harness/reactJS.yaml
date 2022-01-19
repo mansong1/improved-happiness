@@ -43,6 +43,9 @@ pipeline:
                                             memory: 1Gi
                                             cpu: "1.0"
                                 failureStrategies: []
+                                when:
+                                    stageStatus: Success
+                                    condition: "false"
                           - parallel:
                                 - step:
                                       type: Run
