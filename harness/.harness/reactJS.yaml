@@ -59,15 +59,6 @@ pipeline:
                                               hadolint Dockerfile.dev
                                           privileged: false
                                 - step:
-                                      type: Run
-                                      name: ESLint
-                                      identifier: ESLint
-                                      spec:
-                                          connectorRef: mansongdockerhub
-                                          image: pipelinecomponents/eslint
-                                          command: eslint .
-                                          privileged: false
-                                - step:
                                       type: Plugin
                                       name: SonarQube
                                       identifier: SonarQube
@@ -179,7 +170,6 @@ pipeline:
                                         limits:
                                             memory: 1Gi
                                             cpu: "1.0"
-                      rollbackSteps: []
                   serviceConfig:
                       serviceRef: ""
                       serviceDefinition:
