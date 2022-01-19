@@ -203,9 +203,10 @@ pipeline:
                                                     connectorRef: mansonggithub
                                                     gitFetchType: Branch
                                                     paths:
-                                                        - manifests/dev/resources.yaml
+                                                        - manifests/dev/issuer.yaml
+                                                        - manifests/dev/certificate.yaml
                                                         - manifests/dev/ingress.yaml
-                                                        - manifests/dev/cert.yaml
+                                                        - manifests/dev/resources.yaml
                                                     repoName: improved-happiness
                                                     branch: main
                                             skipResourceVersioning: false
