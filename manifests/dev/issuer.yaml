@@ -5,8 +5,8 @@ metadata:
   namespace: staging
 spec:
   acme:
-    server: https://acme-v02.api.letsencrypt.org/directory
     email: martin.ansong@protonmail.com
+    server: https://acme-v02.api.letsencrypt.org/directory
     privateKeySecretRef:
       name: letsencrypt-staging
     solvers:
