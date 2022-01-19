@@ -1,5 +1,5 @@
 import React from 'react';
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { useLocalStorage } from './useLocalStorage';
@@ -17,7 +17,7 @@ import {
 
 function Home() {
 
-  let history = useHistory();
+  let navigate = useNavigate();
 
   const [first_name, setFirstName] = useLocalStorage('first_name', '');
   const [last_name, setLastName] = useLocalStorage('last_name', '');
@@ -25,7 +25,7 @@ function Home() {
 
   const handleSubmit= e => {
     e.preventDefault();
-    history.push('/gesture-recognition');
+    navigate('/gesture-recognition');
   };
 
   return (

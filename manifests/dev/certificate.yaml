@@ -1,13 +1,13 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: mansong.ff-demo.co.uk-tls
+  name: mansong-letsencrypt-staging
   namespace: staging
 spec:
-  secretName: mansong-staging-cert
   dnsNames:
     - mansong.ff-demo.co.uk
   commonName: "mansong.ff-demo.co.uk"
+  secretName: mansong-staging-cert
   issuerRef:
-    name: letsencrypt-staging
+    name: mansong-letsencrypt-staging
     kind: ClusterIssuer

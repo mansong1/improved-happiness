@@ -6,7 +6,7 @@ const fingerJoints = {
     ringFinger: [0, 13, 14, 15, 16],
     pinky: [0, 17, 18, 19, 20],
   };
-  
+
   // Infinity Gauntlet Style
   const style = {
     0: { color: "yellow", size: 15 },
@@ -31,7 +31,7 @@ const fingerJoints = {
     19: { color: "gold", size: 6 },
     20: { color: "gold", size: 6 },
   };
-  
+
   // Drawing function
   export const drawHand = (predictions, ctx) => {
     // Check if we have predictions
@@ -40,7 +40,7 @@ const fingerJoints = {
       predictions.forEach((prediction) => {
         // Grab landmarks
         const landmarks = prediction.landmarks;
-  
+
         // Loop through fingers
         for (let j = 0; j < Object.keys(fingerJoints).length; j++) {
           let finger = Object.keys(fingerJoints)[j];
@@ -65,7 +65,7 @@ const fingerJoints = {
             ctx.stroke();
           }
         }
-  
+
         // Loop through landmarks and draw em
         for (let i = 0; i < landmarks.length; i++) {
           // Get x point
@@ -75,7 +75,6 @@ const fingerJoints = {
           // Start drawing
           ctx.beginPath();
           ctx.arc(x, y, style[i]["size"], 0, 3 * Math.PI);
-  
           // Set line color
           ctx.fillStyle = style[i]["color"];
           ctx.fill();

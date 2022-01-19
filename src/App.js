@@ -1,15 +1,15 @@
 import Home from './Home';
 import GestureRecognition from './GestureRecognition';
 
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {
   return (
     <Router>
-      <Switch>
-        <Route exact path="/"  component={Home} />
-        <Route exact path="/gesture-recognition" component={GestureRecognition} />
-      </Switch>
+      <Routes>
+        <Route exact path="/"  element={<Home/>} />
+        <Route exact path="/gesture-recognition" element={<GestureRecognition/>} />
+      </Routes>
     </Router>
   );
 }
