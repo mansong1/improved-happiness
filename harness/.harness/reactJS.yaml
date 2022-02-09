@@ -78,10 +78,6 @@ pipeline:
                                     image: <+Build_and_Publish.variables.node_version>
                                     command: npm install
                                     privileged: false
-                                    resources:
-                                        limits:
-                                            memory: 1Gi
-                                            cpu: "1"
                           - step:
                                 type: Run
                                 name: Run Tests
@@ -106,10 +102,6 @@ pipeline:
                                     image: <+Build_and_Publish.variables.node_version>
                                     command: npm run build
                                     privileged: false
-                                    resources:
-                                        limits:
-                                            memory: 1Gi
-                                            cpu: "1"
                           - parallel:
                                 - step:
                                       type: SaveCacheS3
@@ -123,10 +115,6 @@ pipeline:
                                           sourcePaths:
                                               - node_modules
                                           archiveFormat: Tar
-                                          resources:
-                                              limits:
-                                                  memory: 1.0Gi
-                                                  cpu: "1.0"
                                 - step:
                                       type: BuildAndPushDockerRegistry
                                       name: Push Docker Image
