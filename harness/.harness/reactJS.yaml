@@ -151,7 +151,7 @@ pipeline:
                                           resources:
                                               limits:
                                                   memory: 1Gi
-                                                  cpu: "1"
+                                                  cpu: "0.5"
                           - step:
                                 type: Run
                                 name: Scan Image
