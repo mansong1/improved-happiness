@@ -121,7 +121,6 @@ const GestureRecognition = () => {
 
           // using a minimum score of 8.5 (out of 10)
           const gesture = await GE.estimate(hand[0].landmarks, 8.5);
-          console.log(gesture.gestures);
 
           if(gesture.gestures !== undefined && gesture.gestures.length > 0){
             const score = gesture.gestures.map(
@@ -132,8 +131,6 @@ const GestureRecognition = () => {
             );
 
             setEmoji(gesture.gestures[maxScore].name);
-            console.log(gesture.gestures[maxScore].name);
-            //console.log(emoji);
           }
         }
 
