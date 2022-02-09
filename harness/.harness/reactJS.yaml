@@ -38,10 +38,6 @@ pipeline:
                                     bucket: mansong-npm
                                     key: gesturerecognition
                                     archiveFormat: Tar
-                                    resources:
-                                        limits:
-                                            memory: 1Gi
-                                            cpu: "1.0"
                                 failureStrategies: []
                                 when:
                                     stageStatus: Success
@@ -73,10 +69,6 @@ pipeline:
                                               showProfiling: "true"
                                               level: DEBUG
                                               usingProperties: "true"
-                                          resources:
-                                              limits:
-                                                  memory: 1Gi
-                                                  cpu: "1.0"
                           - step:
                                 type: Run
                                 name: Install Dependencies
@@ -116,7 +108,7 @@ pipeline:
                                     privileged: false
                                     resources:
                                         limits:
-                                            memory: 2Gi
+                                            memory: 1Gi
                                             cpu: "1"
                           - parallel:
                                 - step:
@@ -161,15 +153,6 @@ pipeline:
                                     image: bitnami/trivy:latest
                                     command: trivy image mansong/gesturerecognition:<+pipeline.sequenceId>
                                     privileged: true
-                                    reports:
-                                        type: JUnit
-                                        spec:
-                                            paths:
-                                                - junit-report.xml
-                                    resources:
-                                        limits:
-                                            memory: 1Gi
-                                            cpu: "1.0"
                   serviceConfig:
                       serviceRef: ""
                       serviceDefinition:
