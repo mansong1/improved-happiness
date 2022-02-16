@@ -9,5 +9,5 @@ connector:
     credential:
       type: ManualConfig
       spec:
-        accessKey: AKIA3B4U6ZRO5LTWMVOQ
+        accessKey: AKIA3B4U6ZROWXWLQYVH
         secretKeyRef: access_key
