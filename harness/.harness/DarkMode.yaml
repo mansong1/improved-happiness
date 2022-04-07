@@ -26,3 +26,18 @@ pipeline:
                                           spec:
                                               state: "on"
                                 timeout: 10m
+                          - step:
+                                type: ShellScript
+                                name: Selenium
+                                identifier: Selenium
+                                spec:
+                                    shell: Bash
+                                    onDelegate: true
+                                    source:
+                                        type: Inline
+                                        spec:
+                                            script: echo "Running Selenium Tests..."
+                                    environmentVariables: []
+                                    outputVariables: []
+                                    executionTarget: {}
+                                timeout: 10m
