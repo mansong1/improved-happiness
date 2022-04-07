@@ -41,7 +41,6 @@ pipeline:
                                 failureStrategies: []
                                 when:
                                     stageStatus: Success
-                                    condition: "false"
                           - parallel:
                                 - step:
                                       type: Run
@@ -76,6 +75,7 @@ pipeline:
                                 spec:
                                     connectorRef: mansongdockerhub
                                     image: <+Build_and_Publish.variables.node_version>
+                                    shell: Sh
                                     command: npm install
                                     privileged: false
                           - step:
