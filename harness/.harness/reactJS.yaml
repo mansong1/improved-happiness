@@ -77,6 +77,9 @@ pipeline:
                                     image: <+Build_and_Publish.variables.node_version>
                                     shell: Sh
                                     command: |-
+                                        rm -rf node_modules
+                                        rm -rf package-lock.json
+
                                         npm install
                                         ls -larht
                                     privileged: false
