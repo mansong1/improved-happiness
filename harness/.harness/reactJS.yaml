@@ -78,7 +78,7 @@ pipeline:
                                     shell: Sh
                                     command: |-
                                         npm install
-                                        la -larht
+                                        ls -larht
                                     privileged: false
                           - step:
                                 type: Run
