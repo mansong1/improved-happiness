@@ -111,6 +111,7 @@ pipeline:
                                         rm -rf node_modules
                                         rm -rf package-lock.json
                                         npm install
+                                        npm i react-scripts
                                         npm run build
                                     privileged: false
                                     resources:
