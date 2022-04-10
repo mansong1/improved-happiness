@@ -49,8 +49,8 @@ const Form = styled.form`
 	letter-spacing: 0.4rem;
 
 	@media only screen and (max-width: 620px) {
-		width: 80vw;
-		height: 60vh;
+		width: 85vw;
+		height: 70vh;
 		hr {
 			margin-bottom: 0.3rem;
 		}
