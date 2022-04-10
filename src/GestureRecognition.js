@@ -45,52 +45,55 @@ const GestureRecognition = () => {
 			}
 		);
 
-    cf.on(Event.READY, flags => {
-      console.log('Harness Server communication is established');
-      setFeatureFlags(flags);
-    })
+		cf.on(Event.READY, (flags) => {
+			console.log('Harness Server communication is established');
+			setFeatureFlags(flags);
+		});
 
-    cf.on(Event.CHANGED, flagInfo => {
-      if (flagInfo.deleted) {
-        setFeatureFlags(currentFeatureFlags => {
-          delete currentFeatureFlags[flagInfo.flag]
-          return { ...currentFeatureFlags }
-        })
-      } else {
-        setFeatureFlags(currentFeatureFlags => ({ ...currentFeatureFlags, [flagInfo.flag]: flagInfo.value }))
-      }
-    })
+		cf.on(Event.CHANGED, (flagInfo) => {
+			if (flagInfo.deleted) {
+				setFeatureFlags((currentFeatureFlags) => {
+					delete currentFeatureFlags[flagInfo.flag];
+					return { ...currentFeatureFlags };
+				});
+			} else {
+				setFeatureFlags((currentFeatureFlags) => ({
+					...currentFeatureFlags,
+					[flagInfo.flag]: flagInfo.value,
+				}));
+			}
+		});
 
-    return () => {
-      cf.close()
-    }   // eslint-disable-next-line
-  }, [])
+		return () => {
+			cf.close();
+		}; // eslint-disable-next-line
+	}, []);
 
   console.log(featureFlags);
 
-  const webcamRef = useRef(null);
-  const canvasRef = useRef(null);
-  const config = {
-    video: { width: 840, height: 600 }
-  };
+	const webcamRef = useRef(null);
+	const canvasRef = useRef(null);
+	const config = {
+		video: { width: 840, height: 600 },
+	};
 
-  const videoConstraints = {
-    width: config.video.width,
-    height: config.video.height,
-    facingMode: "user"
-  };
+	const videoConstraints = {
+		width: config.video.width,
+		height: config.video.height,
+		facingMode: "user",
+	};
 
-  const [emoji, setEmoji] = useState(null);
+	const [emoji, setEmoji] = useState(null);
 
-  const loadHandpose = async () => {
-    const net = await handpose.load();
-    console.log('Handpose model loaded.');
+	const loadHandpose = async () => {
+		const net = await handpose.load();
+		console.log('Handpose model loaded.');
 
-    // Loop and detect hands
-    setInterval(() => {
-      detectHands(net);
-    }, 10)
-  };
+		// Loop and detect hands
+		setInterval(() => {
+			detectHands(net);
+		}, 10);
+	};
 
   const detectHands = async (net) => {
     if (
@@ -127,13 +130,9 @@ const GestureRecognition = () => {
           // using a minimum score of 8.5 (out of 10)
           const gesture = await GE.estimate(hand[0].landmarks, 8.5);
 
-          if(gesture.gestures !== undefined && gesture.gestures.length > 0){
-            const score = gesture.gestures.map(
-              (prediction)=>prediction.score
-            );
-            const maxScore = score.indexOf(
-              Math.max.apply(null, score)
-            );
+				if (gesture.gestures !== undefined && gesture.gestures.length > 0) {
+					const score = gesture.gestures.map((prediction) => prediction.score);
+					const maxScore = score.indexOf(Math.max.apply(null, score));
 
             setEmoji(gesture.gestures[maxScore].name);
           }
@@ -145,69 +144,75 @@ const GestureRecognition = () => {
       }
   };
 
-  // eslint-disable-next-line
-  useEffect(() => {loadHandpose()}, []);
+	// eslint-disable-next-line
+	useEffect(() => {
+		loadHandpose();
+	}, []);
 
-  return (
-    <div className="gesturerecognition">
-      <header className="App-header" data-theme={featureFlags.Dark_Mode ? "dark" : "light"}>
-        <Webcam
-          audio={false}
-          videoConstraints={videoConstraints}
-          ref={webcamRef}
-          style={{
+	return (
+		<div className="gesturerecognition">
+			<header
+				className="App-header"
+				data-theme={featureFlags.Dark_Mode ? "dark" : "light"}
+			>
+				<Webcam
+					audio={false}
+					videoConstraints={videoConstraints}
+					ref={webcamRef}
+					style={{
+						position: "absolute",
+						marginLeft: "auto",
+						marginRight: "auto",
+						left: 0,
+						right: 0,
+						textAlign: "center",
+						zindex: 5,
+						width: "80%",
+						height: config.video.height,
+
+						borderRadius: "10px",
+						filter: "drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.6))",
+					}}
+				/>
+
+				<canvas
+					ref={canvasRef}
+					style={{
             position: "absolute",
-            marginLeft: "auto",
-            marginRight: "auto",
+						marginLeft: "auto",
+						marginRight: "auto",
             left: 0,
             right: 0,
-            textAlign: "center",
-            zindex: 5,
-            width: config.video.width,
-            height: config.video.height,
-            borderRadius: "10px",
-            filter: "drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.6))",
-          }}
-        />
-
-        <canvas
-          ref={canvasRef}
-          style={{
-            position: "absolute",
-            marginLeft: "auto",
-            marginRight: "auto",
-            left: 0,
-            right: 0,
-            textAlign: "center",
-            zindex: 5,
-            width: config.video.width,
-            height: config.video.height,
-            borderRadius: "10px",
-            filter: "drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.6))",
-          }}
-        />
-        {emoji !== null && Object.values(featureFlags).includes(emoji) ? (
-          <img
-            src={`/assets/${emoji}.png`}
-            alt=""
-            style={{
+						textAlign: "center",
+						zindex: 5,
+						width: config.video.width,
+						height: config.video.height,
+						overflowX: "hidden",
+						borderRadius: "10px",
+						filter: "drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.6))",
+					}}
+				/>
+				{emoji !== null && Object.values(featureFlags).includes(emoji) ? (
+					<img
+						src={`/assets/${emoji}.png`}
+						alt=""
+						style={{
               position: "absolute",
-              marginLeft: "auto",
-              marginRight: "auto",
+							marginLeft: "auto",
+							marginRight: "auto",
               left: 650,
               bottom: 500,
               right: 0,
-              textAlign: "center",
+							textAlign: "center",
               height: 100,
-            }}
-          />
-        ) : (
-          ""
-        )}
-
-      </header>
-    </div>
-  );
-}
+						}}
+					/>
+				) : (
+					""
+				)}
+			</header>
+		</div>
+	);
+};
 
 export default GestureRecognition;
