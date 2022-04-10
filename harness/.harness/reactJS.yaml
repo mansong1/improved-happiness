@@ -104,12 +104,7 @@ pipeline:
                                     connectorRef: mansongdockerhub
                                     image: <+Build_and_Publish.variables.node_version>
                                     shell: Sh
-                                    command: |-
-                                        rm -rf node_modules
-                                        rm -rf package-lock.json
-                                        npm install
-                                        npm i react-scripts
-                                        npm run build
+                                    command: npm run build
                                     privileged: false
                                     resources:
                                         limits:
