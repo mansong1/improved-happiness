@@ -50,7 +50,7 @@ const Form = styled.form`
 
 	@media only screen and (max-width: 620px) {
 		width: 80vw;
-		height: 90vh;
+		height: 60vh;
 		hr {
 			margin-bottom: 0.3rem;
 		}
@@ -59,8 +59,9 @@ const Form = styled.form`
 		}
 	}
 	@media only screen and (max-width: 350px) {
-		width: 90vw;
-		height: 90vh;
+		width: 50vw;
+		height: 50vh;
+		display: flex;
 		hr {
 			margin-bottom: 0.3rem;
 		}
