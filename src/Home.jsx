@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope, faUserLarge } from '@fortawesome/free-solid-svg-icons';
 import { useLocalStorage } from './useLocalStorage';
 import { useEffect, useState } from 'react';
 import QRCode from 'qrcode';
@@ -45,7 +45,7 @@ function Home({ url }) {
 					<Gridbox>
 						<InputsWrapper>
 							<InputsWrapperItem>
-								<FontAwesomeIcon icon={faUser} />
+								<FontAwesomeIcon icon={faUserLarge} />
 								<Input
 									type='text'
 									required
@@ -55,7 +55,7 @@ function Home({ url }) {
 								/>
 							</InputsWrapperItem>
 							<InputsWrapperItem>
-								<FontAwesomeIcon icon={faUser} />
+								<FontAwesomeIcon icon={faUserLarge} />
 								<Input
 									type='text'
 									required
