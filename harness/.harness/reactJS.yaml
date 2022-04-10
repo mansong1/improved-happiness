@@ -50,8 +50,9 @@ pipeline:
                                       spec:
                                           connectorRef: mansongdockerhub
                                           image: hadolint/hadolint:latest-alpine
+                                          shell: Sh
                                           command: |-
-                                              hadolint Dockerfile.prod
+                                              hadolint Dockerfile
                                               hadolint Dockerfile.dev
                                           privileged: false
                                 - step:
