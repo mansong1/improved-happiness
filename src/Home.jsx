@@ -5,6 +5,7 @@ import { faUser, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { useLocalStorage } from './useLocalStorage';
 import { useEffect, useState } from 'react';
 import QRCode from 'qrcode';
+import { isMobile } from 'react-device-detect';
 
 import {
 	GlobalStyle,
@@ -20,11 +21,13 @@ import {
 function Home({ url }) {
 	let navigate = useNavigate();
 	const [src, setSrc] = useState('');
-	useEffect(() => {
-		QRCode.toDataURL(url).then((data) => {
-			setSrc(data);
-		});
-	}, []);
+	if ( !isMobile ) {
+		useEffect(() => {
+			QRCode.toDataURL(url).then((data) => {
+				setSrc(data);
+			});
+		}, []);
+	}
 	const [first_name, setFirstName] = useLocalStorage('first_name', '');
 	const [last_name, setLastName] = useLocalStorage('last_name', '');
 	const [email, setEmail] = useLocalStorage('email', '');
