@@ -46,7 +46,7 @@ function Home() {
                 <FontAwesomeIcon icon={faEnvelope} />
                 <Input type="email" required placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}/>
             </InputsWrapperItem>
-            <InputsWrapperItem noUnderline={true}>
+            <InputsWrapperItem noUnderline>
                 <SubmitButton type="submit" >
                 Submit
                 </SubmitButton>
