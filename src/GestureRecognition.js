@@ -69,7 +69,7 @@ const GestureRecognition = () => {
 		}; // eslint-disable-next-line
 	}, []);
 
-  console.log(featureFlags);
+	console.log(featureFlags);
 
 	const webcamRef = useRef(null);
 	const canvasRef = useRef(null);
@@ -85,6 +85,55 @@ const GestureRecognition = () => {
 
 	const [emoji, setEmoji] = useState(null);
 
+	const detectHands = async (net) => {
+		if (
+			typeof webcamRef.current !== "undefined" &&
+			webcamRef.current !== null &&
+			webcamRef.current.video.readyState === 4  // Check we are receiving data
+		){
+			// Get video properties
+			const video = webcamRef.current.video;
+			const videoWidth = video.videoWidth;
+			const videoHeight = video.videoHeight;
+
+			// Set video height and width
+			video.width = videoWidth;
+			video.height = videoHeight;
+
+			// Set canvas height and width
+			canvasRef.current.width = videoWidth;
+			canvasRef.current.height = videoHeight;
+
+			// Make Hand Detections
+			const hand = await net.estimateHands(video);
+
+			if(hand.length > 0){
+			const GE = new fp.GestureEstimator([
+				fp.Gestures.VictoryGesture,
+				fp.Gestures.ThumbsUpGesture,
+				customgestures.ThumbsDownGesture,
+				customgestures.OkayGesture,
+				customgestures.HelloGesture,
+				customgestures.IndexFingerUpGesture,
+			]);
+
+			// using a minimum score of 8.5 (out of 10)
+			const gesture = await GE.estimate(hand[0].landmarks, 8.5);
+
+					if (gesture.gestures !== undefined && gesture.gestures.length > 0) {
+						const score = gesture.gestures.map((prediction) => prediction.score);
+						const maxScore = score.indexOf(Math.max.apply(null, score));
+
+				setEmoji(gesture.gestures[maxScore].name);
+			}
+			}
+
+			// Draw mesh
+			const ctx = canvasRef.current.getContext("2d");
+			drawHand(hand, ctx);
+		}
+	};
+
 	const loadHandpose = async () => {
 		const net = await handpose.load();
 		// console.log('Handpose model loaded.');
@@ -94,55 +143,6 @@ const GestureRecognition = () => {
 			detectHands(net);
 		}, 10);
 	};
-
-  const detectHands = async (net) => {
-    if (
-        typeof webcamRef.current !== "undefined" &&
-        webcamRef.current !== null &&
-        webcamRef.current.video.readyState === 4  // Check we are receiving data
-      ){
-          // Get video properties
-         const video = webcamRef.current.video;
-         const videoWidth = video.videoWidth;
-         const videoHeight = video.videoHeight;
-
-         // Set video height and width
-         video.width = videoWidth;
-         video.height = videoHeight;
-
-        // Set canvas height and width
-        canvasRef.current.width = videoWidth;
-        canvasRef.current.height = videoHeight;
-
-        // Make Hand Detections
-        const hand = await net.estimateHands(video);
-
-        if(hand.length > 0){
-          const GE = new fp.GestureEstimator([
-            fp.Gestures.VictoryGesture,
-            fp.Gestures.ThumbsUpGesture,
-            customgestures.ThumbsDownGesture,
-            customgestures.OkayGesture,
-            customgestures.HelloGesture,
-            customgestures.IndexFingerUpGesture,
-          ]);
-
-          // using a minimum score of 8.5 (out of 10)
-          const gesture = await GE.estimate(hand[0].landmarks, 8.5);
-
-				if (gesture.gestures !== undefined && gesture.gestures.length > 0) {
-					const score = gesture.gestures.map((prediction) => prediction.score);
-					const maxScore = score.indexOf(Math.max.apply(null, score));
-
-            setEmoji(gesture.gestures[maxScore].name);
-          }
-        }
-
-        // Draw mesh
-        const ctx = canvasRef.current.getContext("2d");
-        drawHand(hand, ctx);
-      }
-  };
 
 	// eslint-disable-next-line
 	useEffect(() => {
