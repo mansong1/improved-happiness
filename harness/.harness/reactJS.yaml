@@ -133,7 +133,7 @@ pipeline:
                                           archiveFormat: Tar
                                 - step:
                                       type: BuildAndPushDockerRegistry
-                                      name: Push Docker Image
+                                      name: Build and Push Docker Image
                                       identifier: Push_Docker_Image
                                       spec:
                                           connectorRef: mansongdockerhub
@@ -141,7 +141,7 @@ pipeline:
                                           tags:
                                               - <+pipeline.sequenceId>
                                               - latest
-                                          dockerfile: Dockerfile.prod
+                                          dockerfile: Dockerfile
                                           context: ./
                                           optimize: true
                                           resources:
