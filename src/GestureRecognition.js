@@ -108,24 +108,25 @@ const GestureRecognition = () => {
 			const hand = await net.estimateHands(video);
 
 			if(hand.length > 0){
-			const GE = new fp.GestureEstimator([
-				fp.Gestures.VictoryGesture,
-				fp.Gestures.ThumbsUpGesture,
-				customgestures.ThumbsDownGesture,
-				customgestures.OkayGesture,
-				customgestures.HelloGesture,
-				customgestures.IndexFingerUpGesture,
-			]);
+				const GE = new fp.GestureEstimator([
+					fp.Gestures.VictoryGesture,
+					fp.Gestures.ThumbsUpGesture,
+					customgestures.ThumbsDownGesture,
+					customgestures.OkayGesture,
+					customgestures.HelloGesture,
+					customgestures.IndexFingerUpGesture,
+				]);
 
-			// using a minimum score of 8.5 (out of 10)
-			const gesture = await GE.estimate(hand[0].landmarks, 8.5);
+				// using a minimum score of 8.5 (out of 10)
+				const gesture = await GE.estimate(hand[0].landmarks, 8.5);
 
-					if (gesture.gestures !== undefined && gesture.gestures.length > 0) {
-						const score = gesture.gestures.map((prediction) => prediction.score);
-						const maxScore = score.indexOf(Math.max.apply(null, score));
+				if (gesture.gestures !== "undefined" && gesture.gestures.length > 0)
+				{
+					const score = gesture.gestures.map((prediction) => prediction.score);
+					const maxScore = score.indexOf(Math.max.apply(null, score));
 
-				setEmoji(gesture.gestures[maxScore].name);
-			}
+					setEmoji(gesture.gestures[maxScore].name);
+				}
 			}
 
 			// Draw mesh
