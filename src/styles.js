@@ -46,7 +46,7 @@ const Form = styled.form`
 	box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
 	transition: height ${transitionTime};
 	text-transform: uppercase;
-	letter-spacing: 0.5rem;
+	letter-spacing: 0.4rem;
 
 	@media only screen and (max-width: 620px) {
 		width: 80vw;
