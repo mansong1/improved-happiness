@@ -33,6 +33,8 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 `npm install fingerpose`
 
+`npm install styled-components`
+
 ## What is a Harness Folder?
 
 Harness folder allows to save the Harness configurations like pipelines, connectors, delegates, trigger, etc alongside with the code in your git repository.
