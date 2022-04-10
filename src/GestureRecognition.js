@@ -8,6 +8,10 @@ import Webcam from "react-webcam";
 import './App.css';
 import { drawHand } from "./utilities";
 import * as customgestures from "./gestures";
+import { detect, detectOS } from 'detect-browser';
+import jstz from 'jstz';
+import { isMobile } from 'react-device-detect';
+
 
 //Import Harness Feature Flag Client SDK
 import { initialize, Event } from '@harnessio/ff-javascript-client-sdk';
@@ -15,13 +19,12 @@ import { initialize, Event } from '@harnessio/ff-javascript-client-sdk';
 const GestureRecognition = () => {
 	const [featureFlags, setFeatureFlags] = useState({});
 
-  const { detect } = require('detect-browser');
-  const browser = detect();
-  const date = new Date();
+	const date = new Date();
 
-  let name = JSON.parse(localStorage.getItem('first_name'));
-  let lastName = JSON.parse(localStorage.getItem('last_name'));
-  let email = JSON.parse(localStorage.getItem('email'));
+	let name = JSON.parse(localStorage.getItem('first_name'));
+	let lastName = JSON.parse(localStorage.getItem('last_name'));
+	let email = JSON.parse(localStorage.getItem('email'));
+	const timezone = jstz.determine().name();
 
 	useEffect(() => {
 		const cf = initialize(
@@ -31,13 +34,14 @@ const GestureRecognition = () => {
 				name: name, //'Harness',
 				attributes: {
 					// Optional target attributes
-					lastUpdated: date.toUTCString(),
-					host: window.location.hostname,
+					LastUpdated: date.toUTCString(),
 					email: email,
-					browserName: browser.name,
-					browserVersion: browser.version,
-					os: browser.os.name,
-          			language: navigator.language,
+					BrowserName: detect().name,
+					BrowserVersion: detect().version,
+					OS: detect().os,
+          			Language: navigator.language,
+					DeviceType: isMobile ? 'Mobile' : 'Desktop',
+					TimeZone: timezone
 				},
 			},
 			{
