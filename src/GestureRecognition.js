@@ -46,7 +46,7 @@ const GestureRecognition = () => {
 		);
 
 		cf.on(Event.READY, (flags) => {
-			console.log('Harness Server communication is established');
+			// console.log('Harness Server communication is established');
 			setFeatureFlags(flags);
 		});
 
@@ -87,7 +87,7 @@ const GestureRecognition = () => {
 
 	const loadHandpose = async () => {
 		const net = await handpose.load();
-		console.log('Handpose model loaded.');
+		// console.log('Handpose model loaded.');
 
 		// Loop and detect hands
 		setInterval(() => {
