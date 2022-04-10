@@ -37,7 +37,7 @@ const GestureRecognition = () => {
 					browserName: browser.name,
 					browserVersion: browser.version,
 					os: browser.os.name,
-          language: navigator.language,
+          			language: navigator.language,
 				},
 			},
 			{

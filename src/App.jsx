@@ -10,7 +10,9 @@ function App() {
 				<Route
 					exact
 					path="/"
-					element={<Home />}
+					element={
+						<Home url="https://mansong.ff-demo.co.uk" />
+					}
 				/>
 				<Route
 					exact
