@@ -89,8 +89,8 @@ const InputsWrapper = styled.div`
     z-index: 1;
 `;
 
-let boarderProp = '0.0625em solid black';
-let setNone = 'none';
+const boarderProp = '0.0625em solid black';
+const setNone = 'none';
 
 const InputsWrapperItem = styled.div`
     width: 60%;
