@@ -5,6 +5,8 @@ from selenium.common.exceptions import NoSuchElementException
 import unittest
 
 class LoginTest(unittest.TestCase):
+
+
     def setUp(self):
         self.desired_capabilities = DesiredCapabilities.FIREFOX
         self.desired_capabilities['marionette'] = True
@@ -73,6 +75,7 @@ class LoginTest(unittest.TestCase):
     def tearDown(self):
         self.driver.quit()
         self.assertEqual([], self.verificationErrors)
+
 
 if __name__ == "__main__":
     unittest.main()

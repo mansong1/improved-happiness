@@ -12,52 +12,63 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const bg_css = css`
-    background-image: url(${bgImage});
-    background-size: cover;
-    background-position: left;
-    background-repeat: no-repeat;
+	background-image: url(${bgImage});
+	background-size: cover;
+	background-position: left;
+	background-repeat: no-repeat;
 `;
 
 const transitionTime = `500ms`;
 
 const Background = styled.div`
-    ${bg_css}
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100vw;
-    height: 100vh;
-    transition: background-position ${transitionTime};
+	${bg_css}
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100vw;
+	height: 100vh;
+	transition: background-position ${transitionTime};
 
-    @media (min-width: 48.0em) {
-        background-position: center;
-    }
+	@media (min-width: 48em) {
+		background-position: center;
+	}
 `;
 
 const Form = styled.form`
-    width: 50vw;
-    height: 80vh;
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    border-radius: 10px;
-    box-shadow: 0 8px 32px 0 rgba(31,38,135,0.37);
-    transition: height ${transitionTime};
-    text-transform: uppercase;
-    letter-spacing: 0.4rem;
+	width: 50vw;
+	height: 80vh;
+	position: absolute;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	overflow: hidden;
+	border-radius: 10px;
+	box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+	transition: height ${transitionTime};
+	text-transform: uppercase;
+	letter-spacing: 0.4rem;
 
-    @media only screen and (max-width: 320px) {
-        width: 80vw;
-        height: 90vh;
-        hr {
-          margin-bottom: 0.3rem;
-        }
-        h4 {
-          font-size: small;
-        }
-      }
+	@media only screen and (max-width: 620px) {
+		width: 80vw;
+		height: 60vh;
+		hr {
+			margin-bottom: 0.3rem;
+		}
+		h4 {
+			font-size: small;
+		}
+	}
+	@media only screen and (max-width: 350px) {
+		width: 50vw;
+		height: 50vh;
+		display: flex;
+		hr {
+			margin-bottom: 0.3rem;
+		}
+		h4 {
+			font-size: small;
+		}
+	}
 
     &::after {
         content: '';
@@ -68,92 +79,101 @@ const Form = styled.form`
         filter: blur(0.8125em);
         trastition: background-position ${transitionTime};
 
-        @media (min-width: 48.0em) {
-            background-position: center;
-        }
-
-    }
+		@media (min-width: 48em) {
+			background-position: center;
+		}
+	}
 `;
 
 const FormTitle = styled.h2`
     margin: 3rem 0 2rem 0;
 `;
-
+const Gridbox = styled.div`
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-gap: 40px;
+	align-items: center;
+	@media (max-width: 1190px) {
+		grid-template-columns: 1fr;
+	}
+`;
 const InputsWrapper = styled.div`
-    width: 80%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 20%;
-    z-index: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+
+	z-index: 1;
 `;
 
 const boarderProp = '0.0625em solid black';
 const setNone = 'none';
 
 const InputsWrapperItem = styled.div`
-    width: 60%;
     display: flex;
-    border-bottom: ${props => props.noUnderline ? `${setNone}` : `${boarderProp}`};
+    border-bottom: ${props =>
+		props.noUnderline ? `${setNone}` : `${boarderProp}`};
     padding-top: 2.5em;
 `;
 
 const Input = styled.input`
-    text-decoration: none;
-    background: none;
-    border: none;
-    outline: none;
-    padding-left: 0.85em;
-    padding-bottom: .5em;
-    font-size: 1.25em;
-    color: #3c354e;
-    font-size: 1rem;
-    font-weight: bold;
-    transition: color ${transitionTime};
+	text-decoration: none;
+	background: none;
+	border: none;
+	outline: none;
+	padding-left: 0.85em;
+	padding-bottom: 0.5em;
+	font-size: 1.25em;
+	color: #3c354e;
+	font-size: 1rem;
+	font-weight: bold;
+	transition: color ${transitionTime};
 
-    @media (min-width: 48.0em) {
-        color: black;
-    }
+	@media (min-width: 48em) {
+		color: black;
+	}
 
-    &::placeholder {
-        color: #b9abe099;
-        font-size: 1rem;
-        transition: color ${transitionTime};
+	&::placeholder {
+		color: #b9abe099;
+		font-size: 1rem;
+		transition: color ${transitionTime};
 
-        @media (min-width: 48.0em) {
-            color: #b9abe099;
-        }
-    }
+		@media (min-width: 48em) {
+			color: #b9abe099;
+		}
+
+		@media (max-width: 600px) {
+			width: 100%;
+		}
+	}
 `;
 
 const SubmitButton = styled.button`
-    background: linear-gradient(to right, #12c2e9 0%, #c471ed);
-    text-transform: uppercase;
-    letter-spacing: 0.2rem;
-    transition: transform 200ms ease-in-out;
-    width: 50%;
-    height: 3rem;
-    border: none;
-    color: white;
-    border-radius: 2rem;
-    justify-content: center;
-    position: relative;
-    left: 50%;
+	background: linear-gradient(to right, #12c2e9 0%, #c471ed);
+	text-transform: uppercase;
+	letter-spacing: 0.2rem;
+	transition: transform 200ms ease-in-out;
 
-    &:hover {
-        cursor: pointer;
-        transform: scale(1.05);
-    }
+	padding: 16px 25px;
+	border: none;
+	color: white;
+	border-radius: 2rem;
+	justify-content: center;
 
+	&:hover {
+		cursor: pointer;
+		transform: scale(1.05);
+	}
 `;
 
-export { GlobalStyle,
-    Background,
-    Form,
-    FormTitle,
-    InputsWrapper,
-    InputsWrapperItem,
-    SubmitButton,
-    Input
+export {
+	GlobalStyle,
+	Background,
+	Form,
+	FormTitle,
+	InputsWrapper,
+	InputsWrapperItem,
+	SubmitButton,
+	Input,
+	Gridbox,
 };
