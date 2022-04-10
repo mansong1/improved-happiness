@@ -89,10 +89,13 @@ const InputsWrapper = styled.div`
     z-index: 1;
 `;
 
+let boarderProp = '0.0625em solid black';
+let setNone = 'none';
+
 const InputsWrapperItem = styled.div`
     width: 60%;
     display: flex;
-    border-bottom: ${props => props.noUnderline ? `none` : `0.0625em solid black`};
+    border-bottom: ${props => props.noUnderline ? `${setNone}` : `${boarderProp}`};
     padding-top: 2.5em;
 `;
 
