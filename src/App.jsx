@@ -10,9 +10,7 @@ function App() {
 				<Route
 					exact
 					path="/"
-					element={
-						<Home url="https://mansong.ff-demo.co.uk/gesture-recognition" />
-					}
+					element={<Home />}
 				/>
 				<Route
 					exact
