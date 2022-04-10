@@ -154,8 +154,7 @@ const GestureRecognition = () => {
 		<div className="gesturerecognition">
 			<header
 				className="App-header"
-				data-theme={featureFlags.Dark_Mode ? "dark" : "light"}
-			>
+				data-theme={featureFlags.Dark_Mode ? "dark" : "light"}>
 				<Webcam
 					audio={false}
 					videoConstraints={videoConstraints}
@@ -170,7 +169,6 @@ const GestureRecognition = () => {
 						zindex: 5,
 						width: "80%",
 						height: config.video.height,
-
 						borderRadius: "10px",
 						filter: "drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.6))",
 					}}
@@ -179,11 +177,11 @@ const GestureRecognition = () => {
 				<canvas
 					ref={canvasRef}
 					style={{
-            position: "absolute",
+            			position: "absolute",
 						marginLeft: "auto",
 						marginRight: "auto",
-            left: 0,
-            right: 0,
+						left: 0,
+						right: 0,
 						textAlign: "center",
 						zindex: 5,
 						width: config.video.width,
@@ -198,14 +196,14 @@ const GestureRecognition = () => {
 						src={`/assets/${emoji}.png`}
 						alt=""
 						style={{
-              position: "absolute",
+              				position: "absolute",
 							marginLeft: "auto",
 							marginRight: "auto",
-              left: 650,
-              bottom: 500,
-              right: 0,
+							left: 650,
+							bottom: 500,
+							right: 0,
 							textAlign: "center",
-              height: 100,
+							height: 100,
 						}}
 					/>
 				) : (
