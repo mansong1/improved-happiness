@@ -5,6 +5,8 @@ from selenium.common.exceptions import NoSuchElementException
 import unittest
 
 class LoginTest(unittest.TestCase):
+
+
     def setUp(self):
         self.desired_capabilities = DesiredCapabilities.FIREFOX
         self.desired_capabilities['marionette'] = True
