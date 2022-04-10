@@ -13,8 +13,7 @@ import * as customgestures from "./gestures";
 import { initialize, Event } from '@harnessio/ff-javascript-client-sdk';
 
 const GestureRecognition = () => {
-
-  const [featureFlags, setFeatureFlags] = useState({})
+	const [featureFlags, setFeatureFlags] = useState({});
 
   const { detect } = require('detect-browser');
   const browser = detect();
@@ -24,21 +23,27 @@ const GestureRecognition = () => {
   var lastName = JSON.parse(localStorage.getItem('last_name'));
   var email = JSON.parse(localStorage.getItem('email'));
 
-  useEffect(() => {
-    const cf = initialize(window.REACT_APP_API_KEY, {
-      identifier: lastName,                 //'Harness',
-      name: name,                           //'Harness',
-      attributes: {                         // Optional target attributes
-        lastUpdated: date.toUTCString(),
-        host: window.location.hostname,
-        email: email,
-        browserName: browser.name,
-        browserVersion: browser.version,
-        os: browser.os.name,
-      }
-    }, {
-      debug: process.env.REACT_APP_HARNESS_DEBUG, // debug mode boolean
-    });
+	useEffect(() => {
+		const cf = initialize(
+			window.REACT_APP_API_KEY,
+			{
+				identifier: lastName, //'Harness',
+				name: name, //'Harness',
+				attributes: {
+					// Optional target attributes
+					lastUpdated: date.toUTCString(),
+					host: window.location.hostname,
+					email: email,
+					browserName: browser.name,
+					browserVersion: browser.version,
+					os: browser.os.name,
+          language: navigator.language,
+				},
+			},
+			{
+				debug: process.env.REACT_APP_HARNESS_DEBUG, // debug mode boolean
+			}
+		);
 
     cf.on(Event.READY, flags => {
       console.log('Harness Server communication is established');
