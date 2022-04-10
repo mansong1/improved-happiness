@@ -69,7 +69,7 @@ const GestureRecognition = () => {
 		}; // eslint-disable-next-line
 	}, []);
 
-	console.log(featureFlags);
+	
 
 	const webcamRef = useRef(null);
 	const canvasRef = useRef(null);
