@@ -1,12 +1,12 @@
 import React from 'react';
+import QRCode from 'qrcode';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
+import { isMobile } from 'react-device-detect';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faUserLarge } from '@fortawesome/free-solid-svg-icons';
-import { useLocalStorage } from './useLocalStorage';
-import { useEffect, useState } from 'react';
-import QRCode from 'qrcode';
-import { isMobile } from 'react-device-detect';
 
+import { useLocalStorage } from './useLocalStorage';
 import {
 	GlobalStyle,
 	Background,
