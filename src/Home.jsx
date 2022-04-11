@@ -1,16 +1,23 @@
-import { faEnvelope, faUserLarge } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React from 'react';
 import QRCode from 'qrcode';
-import React, { useEffect, useState } from 'react';
-import { isMobile } from 'react-device-detect';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
-import {
-	Background,
-	Form, GlobalStyle, Gridbox, Input, InputsWrapper,
-	InputsWrapperItem, SubmitButton
-} from './styles';
+import { isMobile } from 'react-device-detect';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEnvelope, faUserLarge } from '@fortawesome/free-solid-svg-icons';
 import { useLocalStorage } from './useLocalStorage';
 
+
+import {
+	GlobalStyle,
+	Background,
+	Form,
+	InputsWrapper,
+	InputsWrapperItem,
+	Input,
+	SubmitButton,
+	Gridbox,
+} from './styles';
 
 function Home({ url }) {
 	let navigate = useNavigate();
