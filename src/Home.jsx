@@ -25,7 +25,13 @@ function Home({ url }) {
 
 	useEffect(() => {
 		if (!isMobile) {
-			QRCode.toDataURL(url).then((data) => {
+			QRCode.toDataURL(url, {
+				margin: 6,
+				color: {
+					dark: '#ffffff',
+					light: '#0c1829',
+				},
+			}).then((data) => {
 				setSrc(data);
 			});
 		}
