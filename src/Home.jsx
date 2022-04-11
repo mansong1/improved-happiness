@@ -21,13 +21,15 @@ import {
 function Home({ url }) {
 	let navigate = useNavigate();
 	const [src, setSrc] = useState('');
-	if ( !isMobile ) {
-		useEffect(() => {
+
+	useEffect(() => {
+		if ( !isMobile ) {
 			QRCode.toDataURL(url).then((data) => {
 				setSrc(data);
 			});
-		}, []);
-	}
+		}
+	}, []);
+
 	const [first_name, setFirstName] = useLocalStorage('first_name', '');
 	const [last_name, setLastName] = useLocalStorage('last_name', '');
 	const [email, setEmail] = useLocalStorage('email', '');
