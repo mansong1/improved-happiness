@@ -1,10 +1,12 @@
 import React from 'react';
-import { useNavigate } from 'react-router';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faEnvelope } from '@fortawesome/free-solid-svg-icons';
-import { useLocalStorage } from './useLocalStorage';
-import { useEffect, useState } from 'react';
 import QRCode from 'qrcode';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router';
+import { isMobile } from 'react-device-detect';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEnvelope, faUserLarge } from '@fortawesome/free-solid-svg-icons';
+import { useLocalStorage } from './useLocalStorage';
+
 
 import {
 	GlobalStyle,
@@ -20,11 +22,15 @@ import {
 function Home({ url }) {
 	let navigate = useNavigate();
 	const [src, setSrc] = useState('');
+
 	useEffect(() => {
-		QRCode.toDataURL(url).then((data) => {
-			setSrc(data);
-		});
+		if (!isMobile) {
+			QRCode.toDataURL(url).then((data) => {
+				setSrc(data);
+			});
+		}
 	}, []);
+
 	const [first_name, setFirstName] = useLocalStorage('first_name', '');
 	const [last_name, setLastName] = useLocalStorage('last_name', '');
 	const [email, setEmail] = useLocalStorage('email', '');
@@ -42,7 +48,7 @@ function Home({ url }) {
 					<Gridbox>
 						<InputsWrapper>
 							<InputsWrapperItem>
-								<FontAwesomeIcon icon={faUser} />
+								<FontAwesomeIcon icon={faUserLarge} />
 								<Input
 									type='text'
 									required
@@ -52,7 +58,7 @@ function Home({ url }) {
 								/>
 							</InputsWrapperItem>
 							<InputsWrapperItem>
-								<FontAwesomeIcon icon={faUser} />
+								<FontAwesomeIcon icon={faUserLarge} />
 								<Input
 									type='text'
 									required

@@ -201,10 +201,7 @@ const GestureRecognition = () => {
 						alt=""
 						style={{
               				position: "absolute",
-							marginLeft: "auto",
-							marginRight: "auto",
 							left: 650,
-							bottom: 500,
 							right: 0,
 							textAlign: "center",
 							height: 100,
