@@ -23,7 +23,7 @@ function Home({ url }) {
 	const [src, setSrc] = useState('');
 
 	useEffect(() => {
-		if ( !isMobile ) {
+		if (!isMobile) {
 			QRCode.toDataURL(url).then((data) => {
 				setSrc(data);
 			});
