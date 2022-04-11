@@ -77,7 +77,7 @@ function Home({ url }) {
 									onChange={(e) => setEmail(e.target.value)}
 								/>
 							</InputsWrapperItem>
-							<InputsWrapperItem noUnderline={true}>
+							<InputsWrapperItem noUnderline>
 								<SubmitButton type='submit'>Submit</SubmitButton>
 							</InputsWrapperItem>
 						</InputsWrapper>
