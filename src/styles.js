@@ -149,7 +149,7 @@ const Input = styled.input`
 `;
 
 const SubmitButton = styled.button`
-	background: linear-gradient(to right, #12c2e9 0%, #c471ed);
+	background: linear-gradient(to right, #7c3e9d 0%, #2a9dd9);
 	text-transform: uppercase;
 	letter-spacing: 0.2rem;
 	transition: transform 200ms ease-in-out;
