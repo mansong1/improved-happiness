@@ -48,7 +48,7 @@ function Home({ url }) {
 					<Gridbox>
 						<InputsWrapper>
 							<InputsWrapperItem>
-								<FontAwesomeIcon icon={faUserLarge} />
+								<FontAwesomeIcon icon={faUserLarge} style={{ backgroundColor: '', color: 'white' }} />
 								<Input
 									type='text'
 									required
@@ -58,7 +58,7 @@ function Home({ url }) {
 								/>
 							</InputsWrapperItem>
 							<InputsWrapperItem>
-								<FontAwesomeIcon icon={faUserLarge} />
+								<FontAwesomeIcon icon={faUserLarge} style={{ backgroundColor: '', color: 'white' }} />
 								<Input
 									type='text'
 									required
@@ -68,7 +68,7 @@ function Home({ url }) {
 								/>
 							</InputsWrapperItem>
 							<InputsWrapperItem>
-								<FontAwesomeIcon icon={faEnvelope} />
+								<FontAwesomeIcon icon={faEnvelope} style={{ backgroundColor: '', color: 'white' }} />
 								<Input
 									type='email'
 									required

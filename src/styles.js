@@ -130,7 +130,7 @@ const Input = styled.input`
 	transition: color ${transitionTime};
 
 	@media (min-width: 48em) {
-		color: black;
+		color: white;
 	}
 
 	&::placeholder {
