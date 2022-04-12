@@ -39,7 +39,7 @@ const GestureRecognition = () => {
 					BrowserName: detect().name,
 					BrowserVersion: detect().version,
 					OS: detect().os,
-          			Language: navigator.language,
+          				Language: navigator.language,
 					DeviceType: isMobile ? 'Mobile' : 'Desktop',
 					TimeZone: timezone
 				},
