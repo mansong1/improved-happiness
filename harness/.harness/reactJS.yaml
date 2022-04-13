@@ -106,6 +106,10 @@ pipeline:
                                     shell: Sh
                                     command: npm run build
                                     privileged: false
+                                    resources:
+                                        limits:
+                                            memory: 1Gi
+                                            cpu: "1.0"
                           - parallel:
                                 - step:
                                       type: SaveCacheS3
