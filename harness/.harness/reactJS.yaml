@@ -242,6 +242,9 @@ pipeline:
                                               - mansong-gke
                                       timeout: 10m
                                       failureStrategies: []
+                                      when:
+                                          stageStatus: Success
+                                          condition: "false"
                                 - step:
                                       type: ShellScript
                                       name: Regression
