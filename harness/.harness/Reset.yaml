@@ -28,6 +28,20 @@ pipeline:
                                               state: "off"
                                 timeout: 10m
                           - step:
+                                type: HarnessApproval
+                                name: Approval
+                                identifier: Approval
+                                spec:
+                                    approvalMessage: Please review the following information and approve the pipeline progression
+                                    includePipelineExecutionHistory: true
+                                    approvers:
+                                        userGroups:
+                                            - Approvers
+                                        minimumCount: 1
+                                        disallowPipelineExecutor: false
+                                    approverInputs: []
+                                timeout: 1d
+                          - step:
                                 type: FlagConfiguration
                                 name: Wave
                                 identifier: Wave
