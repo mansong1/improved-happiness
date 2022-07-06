@@ -156,6 +156,32 @@ pipeline:
                     type: String
                     value: node:17.3.1-alpine3.15
         - stage:
+              name: Approval
+              identifier: Approval
+              description: ""
+              type: Approval
+              spec:
+                  execution:
+                      steps:
+                          - step:
+                                name: Approval
+                                identifier: approval
+                                type: HarnessApproval
+                                timeout: 1d
+                                spec:
+                                    approvalMessage: |-
+                                        Please review the following information
+                                        and approve the pipeline progression
+                                    includePipelineExecutionHistory: true
+                                    approvers:
+                                        minimumCount: 1
+                                        disallowPipelineExecutor: false
+                                        userGroups:
+                                            - Approvers
+                                    approverInputs: []
+              tags: {}
+              failureStrategies: []
+        - stage:
               name: Staging
               identifier: Staging
               description: ""
@@ -301,50 +327,3 @@ pipeline:
                   - name: AWS_SECRET_ACCESS_KEY
                     type: Secret
                     value: aws_secret_key
-        - stage:
-              name: Approval
-              identifier: Approval
-              description: ""
-              type: Approval
-              spec:
-                  execution:
-                      steps:
-                          - step:
-                                name: Approval
-                                identifier: approval
-                                type: HarnessApproval
-                                timeout: 1d
-                                spec:
-                                    approvalMessage: |-
-                                        Please review the following information
-                                        and approve the pipeline progression
-                                    includePipelineExecutionHistory: true
-                                    approvers:
-                                        minimumCount: 1
-                                        disallowPipelineExecutor: false
-                                        userGroups:
-                                            - Approvers
-                                    approverInputs: []
-              tags: {}
-              failureStrategies: []
-        - stage:
-              name: DarkMode
-              identifier: DarkMode
-              description: ""
-              type: FeatureFlag
-              spec:
-                  execution:
-                      steps:
-                          - step:
-                                type: FlagConfiguration
-                                name: EnableDarkMode
-                                identifier: EnableDarkMode
-                                spec:
-                                    feature: Dark_Mode
-                                    environment: Development
-                                    instructions:
-                                        - identifier: SetFeatureFlagStateIdentifier
-                                          type: SetFeatureFlagState
-                                          spec:
-                                              state: "on"
-                                timeout: 10m
